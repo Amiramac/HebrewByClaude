@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFDF7;
+  --foreground: #1a1a2e;
+  --primary: #4A90D9;
+  --primary-light: #7FB3E8;
+  --accent: #FF6B6B;
+  --success: #4ECDC4;
+  --warning: #FFE66D;
+  --star-gold: #FFD700;
+  --hebrew-consonant: #2C3E7B;
+  --hebrew-nikkud: #D94F4F;
+  --card-bg: #FFFFFF;
+  --card-shadow: rgba(0, 0, 0, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-star-gold: var(--star-gold);
+  --color-hebrew-consonant: var(--hebrew-consonant);
+  --color-hebrew-nikkud: var(--hebrew-nikkud);
+  --color-card-bg: var(--card-bg);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Noto Sans Hebrew', 'Segoe UI', 'Arial', sans-serif;
+  direction: rtl;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hebrew educational text - large, clear with distinct nikkud */
+.hebrew-letter {
+  font-family: 'Noto Sans Hebrew', 'Segoe UI', 'Arial', sans-serif;
+  color: var(--hebrew-consonant);
+  line-height: 1.4;
+}
+
+.hebrew-nikkud {
+  color: var(--hebrew-nikkud);
+}
+
+/* Tap target minimum for children */
+.tap-target {
+  min-width: 64px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Disable text selection for game elements */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Smooth animations for all interactive elements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Star shimmer animation */
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-shimmer { animation: shimmer 2s ease-in-out infinite; }
+.animate-bounce-in { animation: bounce-in 0.5s ease-out; }
+.animate-float { animation: float 3s ease-in-out infinite; }
