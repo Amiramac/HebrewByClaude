@@ -33,7 +33,7 @@ if (fs.existsSync(envPath)) {
 // ── Config ──────────────────────────────────────────────────────
 const API_KEY = process.env.ELEVENLABS_API_KEY!;
 const VOICE_ID = 'Z3R5wn05IrDiVCyEkUrK'; // Arabella
-const MODEL_ID = 'eleven_v3_0';
+const MODEL_ID = 'eleven_v3';
 const BASE_URL = 'https://api.elevenlabs.io/v1/text-to-speech';
 const OUTPUT_DIR = path.join(process.cwd(), 'public', 'audio');
 
