@@ -1,6 +1,6 @@
 /**
  * Audio Generation Script for HebrewByClaude
- * Uses ElevenLabs V3 API with Liam voice to generate Hebrew audio files.
+ * Uses ElevenLabs V3 API with Arabella voice to generate Hebrew audio files.
  *
  * Usage: npx tsx scripts/generate-audio.ts
  *
@@ -32,17 +32,17 @@ if (fs.existsSync(envPath)) {
 
 // ── Config ──────────────────────────────────────────────────────
 const API_KEY = process.env.ELEVENLABS_API_KEY!;
-const VOICE_ID = process.env.ELEVENLABS_VOICE_ID || 'TX3LPaxmHKxFdv7VOQHJ';
-const MODEL_ID = process.env.ELEVENLABS_MODEL_ID || 'eleven_v3';
+const VOICE_ID = 'Z3R5wn05IrDiVCyEkUrK'; // Arabella
+const MODEL_ID = 'eleven_v3_0';
 const BASE_URL = 'https://api.elevenlabs.io/v1/text-to-speech';
 const OUTPUT_DIR = path.join(process.cwd(), 'public', 'audio');
 
-// Slow, clear speech for a 4-year-old learner
+// Clear, warm speech for a 4-year-old learner
 const VOICE_SETTINGS = {
-  stability: 0.7,
+  stability: 0.8,
   similarity_boost: 0.75,
   style: 0.0,
-  speed: 0.85, // slightly slower for clarity
+  use_speaker_boost: true,
 };
 
 // ── Audio Entries ───────────────────────────────────────────────
@@ -215,7 +215,7 @@ async function main() {
   ];
 
   console.log(`\nHebrewByClaude Audio Generator`);
-  console.log(`Voice: Liam (${VOICE_ID})`);
+  console.log(`Voice: Arabella (${VOICE_ID})`);
   console.log(`Model: ${MODEL_ID}`);
   console.log(`Language: Hebrew (he)`);
   console.log(`Total entries: ${allEntries.length}\n`);
