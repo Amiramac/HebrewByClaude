@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { Activity } from '@/types/levels';
 
 interface ActivityState {
@@ -10,6 +10,7 @@ interface ActivityState {
   isComplete: boolean;
   stars: number;
   lastAnswerCorrect: boolean | null;
+  feedbackKey: number;
 }
 
 export function useActivity(activity: Activity) {
@@ -20,50 +21,60 @@ export function useActivity(activity: Activity) {
     isComplete: false,
     stars: 0,
     lastAnswerCorrect: null,
+    feedbackKey: 0,
   });
+
+  // Ref avoids stale closure in submitAnswer
+  const stateRef = useRef(state);
+  stateRef.current = state;
 
   const currentItem = activity.items[state.currentItemIndex] || null;
   const totalItems = activity.items.length;
   const progress = totalItems > 0 ? state.currentItemIndex / totalItems : 0;
 
   const submitAnswer = useCallback((answer: string) => {
-    const item = activity.items[state.currentItemIndex];
-    if (!item || state.isComplete) return;
+    const s = stateRef.current;
+    const item = activity.items[s.currentItemIndex];
+    if (!item || s.isComplete) return;
 
     const isCorrect = answer === item.correct;
-    const newCorrectCount = isCorrect ? state.correctCount + 1 : state.correctCount;
-    const newAttempts = state.attempts + 1;
-    const isLastItem = state.currentItemIndex >= activity.items.length - 1;
+    const newCorrectCount = isCorrect ? s.correctCount + 1 : s.correctCount;
+    const newAttempts = s.attempts + 1;
+    const newFeedbackKey = s.feedbackKey + 1;
+    const isLastItem = s.currentItemIndex >= activity.items.length - 1;
 
     if (isCorrect && isLastItem) {
-      // Calculate stars: 3 for perfect, 2 for >70%, 1 for completion
       const accuracy = newCorrectCount / activity.items.length;
       const stars = accuracy >= 1 ? 3 : accuracy >= 0.7 ? 2 : 1;
 
       setState({
-        ...state,
+        currentItemIndex: s.currentItemIndex,
         correctCount: newCorrectCount,
         attempts: newAttempts,
         isComplete: true,
         stars: Math.min(stars, activity.maxStars),
         lastAnswerCorrect: true,
+        feedbackKey: newFeedbackKey,
       });
     } else if (isCorrect) {
       setState({
-        ...state,
-        currentItemIndex: state.currentItemIndex + 1,
+        currentItemIndex: s.currentItemIndex + 1,
         correctCount: newCorrectCount,
         attempts: newAttempts,
+        isComplete: false,
+        stars: 0,
         lastAnswerCorrect: true,
+        feedbackKey: newFeedbackKey,
       });
     } else {
       setState({
-        ...state,
+        ...s,
         attempts: newAttempts,
         lastAnswerCorrect: false,
+        feedbackKey: newFeedbackKey,
       });
     }
-  }, [activity, state]);
+  }, [activity]);
 
   const reset = useCallback(() => {
     setState({
@@ -73,6 +84,7 @@ export function useActivity(activity: Activity) {
       isComplete: false,
       stars: 0,
       lastAnswerCorrect: null,
+      feedbackKey: 0,
     });
   }, []);
 

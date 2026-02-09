@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Activity } from '@/types/levels';
 import { useActivity } from '@/hooks/useActivity';
@@ -23,6 +23,7 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
     isComplete,
     stars,
     lastAnswerCorrect,
+    feedbackKey,
     submitAnswer,
   } = useActivity(activity);
 
@@ -30,6 +31,7 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
   const [showEncourage, setShowEncourage] = useState(false);
   const [showStars, setShowStars] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
+  const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (currentItem) {
@@ -37,15 +39,23 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
     }
   }, [currentItem]);
 
+  // feedbackKey changes on EVERY answer, so this always fires
   useEffect(() => {
+    if (feedbackKey === 0) return; // skip initial render
+
+    if (encourageTimer.current) {
+      clearTimeout(encourageTimer.current);
+    }
+
     if (lastAnswerCorrect === true) {
+      setShowEncourage(false);
       playCorrect();
     } else if (lastAnswerCorrect === false) {
       playEncourage();
       setShowEncourage(true);
-      setTimeout(() => setShowEncourage(false), 1200);
+      encourageTimer.current = setTimeout(() => setShowEncourage(false), 1500);
     }
-  }, [lastAnswerCorrect, playCorrect, playEncourage]);
+  }, [feedbackKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (isComplete) {

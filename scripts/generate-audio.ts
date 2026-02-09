@@ -53,44 +53,44 @@ interface AudioEntry {
 }
 
 const LETTER_AUDIO: AudioEntry[] = [
-  // Level 1
-  { filename: 'letters/alef.mp3', text: 'אָלֶף', description: 'Letter Alef' },
-  { filename: 'letters/shin.mp3', text: 'שִׁין', description: 'Letter Shin' },
-  { filename: 'letters/lamed.mp3', text: 'לָמֶד', description: 'Letter Lamed' },
-  { filename: 'letters/mem.mp3', text: 'מֵם', description: 'Letter Mem' },
-  { filename: 'letters/bet.mp3', text: 'בֵּית', description: 'Letter Bet' },
+  // Level 1 — clean Hebrew, no nikkud, for natural TTS
+  { filename: 'letters/alef.mp3', text: 'אלף', description: 'Letter Alef' },
+  { filename: 'letters/shin.mp3', text: 'שין', description: 'Letter Shin' },
+  { filename: 'letters/lamed.mp3', text: 'למד', description: 'Letter Lamed' },
+  { filename: 'letters/mem.mp3', text: 'מם', description: 'Letter Mem' },
+  { filename: 'letters/bet.mp3', text: 'בית', description: 'Letter Bet' },
   // Level 2
-  { filename: 'letters/dalet.mp3', text: 'דָלֶת', description: 'Letter Dalet' },
-  { filename: 'letters/he.mp3', text: 'הֵא', description: 'Letter He' },
-  { filename: 'letters/yod.mp3', text: 'יוֹד', description: 'Letter Yod' },
-  { filename: 'letters/tav.mp3', text: 'תָּו', description: 'Letter Tav' },
-  { filename: 'letters/resh.mp3', text: 'רֵישׁ', description: 'Letter Resh' },
+  { filename: 'letters/dalet.mp3', text: 'דלת', description: 'Letter Dalet' },
+  { filename: 'letters/he.mp3', text: 'הא', description: 'Letter He' },
+  { filename: 'letters/yod.mp3', text: 'יוד', description: 'Letter Yod' },
+  { filename: 'letters/tav.mp3', text: 'תו', description: 'Letter Tav' },
+  { filename: 'letters/resh.mp3', text: 'ריש', description: 'Letter Resh' },
   // Level 4
-  { filename: 'letters/chet.mp3', text: 'חֵית', description: 'Letter Chet' },
-  { filename: 'letters/kaf.mp3', text: 'כַּף', description: 'Letter Kaf' },
-  { filename: 'letters/nun.mp3', text: 'נוּן', description: 'Letter Nun' },
-  { filename: 'letters/ayin.mp3', text: 'עַיִן', description: 'Letter Ayin' },
-  { filename: 'letters/pe.mp3', text: 'פֵּא', description: 'Letter Pe' },
-  { filename: 'letters/gimel.mp3', text: 'גִימֶל', description: 'Letter Gimel' },
-  { filename: 'letters/zayin.mp3', text: 'זַיִן', description: 'Letter Zayin' },
-  { filename: 'letters/vav.mp3', text: 'וָו', description: 'Letter Vav' },
+  { filename: 'letters/chet.mp3', text: 'חית', description: 'Letter Chet' },
+  { filename: 'letters/kaf.mp3', text: 'כף', description: 'Letter Kaf' },
+  { filename: 'letters/nun.mp3', text: 'נון', description: 'Letter Nun' },
+  { filename: 'letters/ayin.mp3', text: 'עין', description: 'Letter Ayin' },
+  { filename: 'letters/pe.mp3', text: 'פא', description: 'Letter Pe' },
+  { filename: 'letters/gimel.mp3', text: 'גימל', description: 'Letter Gimel' },
+  { filename: 'letters/zayin.mp3', text: 'זין', description: 'Letter Zayin' },
+  { filename: 'letters/vav.mp3', text: 'וו', description: 'Letter Vav' },
   // Level 6
-  { filename: 'letters/tet.mp3', text: 'טֵית', description: 'Letter Tet' },
-  { filename: 'letters/samekh.mp3', text: 'סָמֶך', description: 'Letter Samekh' },
-  { filename: 'letters/kuf.mp3', text: 'קוּף', description: 'Letter Kuf' },
-  { filename: 'letters/tsadi.mp3', text: 'צָדִי', description: 'Letter Tsadi' },
+  { filename: 'letters/tet.mp3', text: 'טית', description: 'Letter Tet' },
+  { filename: 'letters/samekh.mp3', text: 'סמך', description: 'Letter Samekh' },
+  { filename: 'letters/kuf.mp3', text: 'קוף', description: 'Letter Kuf' },
+  { filename: 'letters/tsadi.mp3', text: 'צדי', description: 'Letter Tsadi' },
 ];
 
 const VOWEL_AUDIO: AudioEntry[] = [
-  { filename: 'vowels/kamatz.mp3', text: 'קָמַץ. אָ', description: 'Vowel Kamatz' },
-  { filename: 'vowels/patach.mp3', text: 'פַּתָח. אַ', description: 'Vowel Patach' },
-  { filename: 'vowels/chirik.mp3', text: 'חִירִיק. אִי', description: 'Vowel Chirik' },
-  { filename: 'vowels/segol.mp3', text: 'סֶגוֹל. אֶ', description: 'Vowel Segol' },
-  { filename: 'vowels/tzereh.mp3', text: 'צֵרֵה. אֵ', description: 'Vowel Tzereh' },
-  { filename: 'vowels/cholam.mp3', text: 'חוֹלָם. אוֹ', description: 'Vowel Cholam' },
-  { filename: 'vowels/kubutz.mp3', text: 'קוּבּוּץ. אוּ', description: 'Vowel Kubutz' },
-  { filename: 'vowels/shuruk.mp3', text: 'שׁוּרוּק. אוּ', description: 'Vowel Shuruk' },
-  { filename: 'vowels/shva.mp3', text: 'שְׁוָא', description: 'Vowel Shva' },
+  { filename: 'vowels/kamatz.mp3', text: 'קמץ. אה.', description: 'Vowel Kamatz' },
+  { filename: 'vowels/patach.mp3', text: 'פתח. אה.', description: 'Vowel Patach' },
+  { filename: 'vowels/chirik.mp3', text: 'חיריק. אי.', description: 'Vowel Chirik' },
+  { filename: 'vowels/segol.mp3', text: 'סגול. אה.', description: 'Vowel Segol' },
+  { filename: 'vowels/tzereh.mp3', text: 'צרה. אה.', description: 'Vowel Tzereh' },
+  { filename: 'vowels/cholam.mp3', text: 'חולם. או.', description: 'Vowel Cholam' },
+  { filename: 'vowels/kubutz.mp3', text: 'קובוץ. או.', description: 'Vowel Kubutz' },
+  { filename: 'vowels/shuruk.mp3', text: 'שורוק. או.', description: 'Vowel Shuruk' },
+  { filename: 'vowels/shva.mp3', text: 'שווא', description: 'Vowel Shva' },
 ];
 
 // Syllables: consonant + kamatz (/a/ sound) for Level 3
@@ -100,9 +100,10 @@ const SYLLABLE_AUDIO: AudioEntry[] = LEVEL3_CONSONANTS.map(c => {
     'ב': 'ba', 'שׁ': 'sha', 'ל': 'la', 'מ': 'ma', 'א': 'a',
     'ד': 'da', 'ה': 'ha', 'י': 'ya', 'ת': 'ta', 'ר': 'ra',
   };
+  // Natural phonetic text — the syllable sound spoken aloud
   const syllableTexts: Record<string, string> = {
-    'ב': 'בָּ', 'שׁ': 'שָׁ', 'ל': 'לָ', 'מ': 'מָ', 'א': 'אָ',
-    'ד': 'דָ', 'ה': 'הָ', 'י': 'יָ', 'ת': 'תָּ', 'ר': 'רָ',
+    'ב': 'בא', 'שׁ': 'שא', 'ל': 'לא', 'מ': 'מא', 'א': 'אא',
+    'ד': 'דא', 'ה': 'הא', 'י': 'יא', 'ת': 'תא', 'ר': 'רא',
   };
   const name = names[c] || c;
   return {
@@ -113,38 +114,38 @@ const SYLLABLE_AUDIO: AudioEntry[] = LEVEL3_CONSONANTS.map(c => {
 });
 
 const WORD_AUDIO: AudioEntry[] = [
-  { filename: 'words/ima.mp3', text: 'אִמָּא', description: 'Word: ima (mom)' },
-  { filename: 'words/aba.mp3', text: 'אַבָּא', description: 'Word: aba (dad)' },
-  { filename: 'words/bayit.mp3', text: 'בַּיִת', description: 'Word: bayit (house)' },
-  { filename: 'words/yad.mp3', text: 'יַד', description: 'Word: yad (hand)' },
-  { filename: 'words/dag.mp3', text: 'דָג', description: 'Word: dag (fish)' },
-  { filename: 'words/shalom.mp3', text: 'שָׁלוֹם', description: 'Word: shalom' },
-  { filename: 'words/yeled.mp3', text: 'יֶלֶד', description: 'Word: yeled (boy)' },
-  { filename: 'words/yalda.mp3', text: 'יַלְדָה', description: 'Word: yalda (girl)' },
-  { filename: 'words/sefer.mp3', text: 'סֵפֶר', description: 'Word: sefer (book)' },
-  { filename: 'words/kelev.mp3', text: 'כֶּלֶב', description: 'Word: kelev (dog)' },
-  { filename: 'words/chatul.mp3', text: 'חָתוּל', description: 'Word: chatul (cat)' },
-  { filename: 'words/mayim.mp3', text: 'מַיִם', description: 'Word: mayim (water)' },
-  { filename: 'words/lechem.mp3', text: 'לֶחֶם', description: 'Word: lechem (bread)' },
-  { filename: 'words/shemesh.mp3', text: 'שֶׁמֶשׁ', description: 'Word: shemesh (sun)' },
-  { filename: 'words/yareach.mp3', text: 'יָרֵחַ', description: 'Word: yareach (moon)' },
+  { filename: 'words/ima.mp3', text: 'אימא', description: 'Word: ima (mom)' },
+  { filename: 'words/aba.mp3', text: 'אבא', description: 'Word: aba (dad)' },
+  { filename: 'words/bayit.mp3', text: 'בית', description: 'Word: bayit (house)' },
+  { filename: 'words/yad.mp3', text: 'יד', description: 'Word: yad (hand)' },
+  { filename: 'words/dag.mp3', text: 'דג', description: 'Word: dag (fish)' },
+  { filename: 'words/shalom.mp3', text: 'שלום', description: 'Word: shalom' },
+  { filename: 'words/yeled.mp3', text: 'ילד', description: 'Word: yeled (boy)' },
+  { filename: 'words/yalda.mp3', text: 'ילדה', description: 'Word: yalda (girl)' },
+  { filename: 'words/sefer.mp3', text: 'ספר', description: 'Word: sefer (book)' },
+  { filename: 'words/kelev.mp3', text: 'כלב', description: 'Word: kelev (dog)' },
+  { filename: 'words/chatul.mp3', text: 'חתול', description: 'Word: chatul (cat)' },
+  { filename: 'words/mayim.mp3', text: 'מים', description: 'Word: mayim (water)' },
+  { filename: 'words/lechem.mp3', text: 'לחם', description: 'Word: lechem (bread)' },
+  { filename: 'words/shemesh.mp3', text: 'שמש', description: 'Word: shemesh (sun)' },
+  { filename: 'words/yareach.mp3', text: 'ירח', description: 'Word: yareach (moon)' },
 ];
 
 const UI_AUDIO: AudioEntry[] = [
-  { filename: 'ui/correct.mp3', text: 'כָּל הַכָּבוֹד!', description: 'UI: correct answer' },
-  { filename: 'ui/encourage.mp3', text: 'נַסֶּה שׁוּב!', description: 'UI: try again' },
-  { filename: 'ui/celebrate.mp3', text: 'מְצוּיָן! סִיַּמְתָּ!', description: 'UI: celebration' },
-  { filename: 'ui/tap.mp3', text: 'הֵי!', description: 'UI: tap feedback' },
+  { filename: 'ui/correct.mp3', text: 'כל הכבוד!', description: 'UI: correct answer' },
+  { filename: 'ui/encourage.mp3', text: 'נסה שוב!', description: 'UI: try again' },
+  { filename: 'ui/celebrate.mp3', text: 'מצוין! סיימת!', description: 'UI: celebration' },
+  { filename: 'ui/tap.mp3', text: 'היי!', description: 'UI: tap feedback' },
 ];
 
 const NARRATION_AUDIO: AudioEntry[] = [
-  { filename: 'narration/welcome.mp3', text: 'שָׁלוֹם מַעְיָן! בּוֹאִי נִלְמַד אוֹתִיּוֹת!', description: 'Welcome Maayan' },
-  { filename: 'narration/tap-the-letter.mp3', text: 'לִחְצִי עַל הָאוֹת הַנְּכוֹנָה!', description: 'Tap the right letter' },
-  { filename: 'narration/listen-and-choose.mp3', text: 'הַקְשִׁיבִי וּבַחֲרִי!', description: 'Listen and choose' },
-  { filename: 'narration/match-pairs.mp3', text: 'מִצְאִי אֶת הַזּוּגוֹת!', description: 'Find the pairs' },
-  { filename: 'narration/first-vowel.mp3', text: 'הַיּוֹם נִלְמַד אֶת הַתְּנוּעָה הָרִאשׁוֹנָה! קָמָץ אוֹמֵר אָ!', description: 'First vowel intro' },
-  { filename: 'narration/great-job.mp3', text: 'עָשִׂית עֲבוֹדָה מְצוּיֶנֶת!', description: 'Great job' },
-  { filename: 'narration/level-complete.mp3', text: 'כָּל הַכָּבוֹד! סִיַּמְתְּ אֶת הַשָּׁלָב!', description: 'Level complete' },
+  { filename: 'narration/welcome.mp3', text: 'שלום מעיין! בואי נלמד אותיות!', description: 'Welcome Maayan' },
+  { filename: 'narration/tap-the-letter.mp3', text: 'לחצי על האות הנכונה!', description: 'Tap the right letter' },
+  { filename: 'narration/listen-and-choose.mp3', text: 'הקשיבי ובחרי!', description: 'Listen and choose' },
+  { filename: 'narration/match-pairs.mp3', text: 'מצאי את הזוגות!', description: 'Find the pairs' },
+  { filename: 'narration/first-vowel.mp3', text: 'היום נלמד את התנועה הראשונה! קמץ אומר אה!', description: 'First vowel intro' },
+  { filename: 'narration/great-job.mp3', text: 'עשית עבודה מצוינת!', description: 'Great job' },
+  { filename: 'narration/level-complete.mp3', text: 'כל הכבוד! סיימת את השלב!', description: 'Level complete' },
 ];
 
 // ── API Call ─────────────────────────────────────────────────────
