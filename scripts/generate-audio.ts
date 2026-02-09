@@ -39,7 +39,7 @@ const OUTPUT_DIR = path.join(process.cwd(), 'public', 'audio');
 
 // Clear, warm speech for a 4-year-old learner
 const VOICE_SETTINGS = {
-  stability: 0.8,
+  stability: 1.0,
   similarity_boost: 0.75,
   style: 0.0,
   use_speaker_boost: true,
