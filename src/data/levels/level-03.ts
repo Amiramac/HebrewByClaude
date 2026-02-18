@@ -23,9 +23,9 @@ const level03: Level = {
           type: 'find-the-letter',
           instruction: 'מצאו את האות עם הקמץ!',
           items: [
-            { id: 'k1', prompt: '\u05D1\u05BC\u05B8', correct: '\u05D1\u05BC\u05B8', options: ['\u05D1\u05BC\u05B8', '\u05D1', '\u05E9\u05C1', '\u05DC'] },
-            { id: 'k2', prompt: '\u05DE\u05B8', correct: '\u05DE\u05B8', options: ['\u05DE', '\u05DE\u05B8', '\u05D1', '\u05D0'] },
-            { id: 'k3', prompt: '\u05DC\u05B8', correct: '\u05DC\u05B8', options: ['\u05DC', '\u05E9\u05C1', '\u05DC\u05B8', '\u05DE'] },
+            { id: 'k1', prompt: '\u05D1\u05BC\u05B8', promptAudio: '/audio/syllables/ba.mp3', correct: '\u05D1\u05BC\u05B8', options: ['\u05D1\u05BC\u05B8', '\u05D1', '\u05E9\u05C1', '\u05DC'] },
+            { id: 'k2', prompt: '\u05DE\u05B8', promptAudio: '/audio/syllables/ma.mp3', correct: '\u05DE\u05B8', options: ['\u05DE', '\u05DE\u05B8', '\u05D1', '\u05D0'] },
+            { id: 'k3', prompt: '\u05DC\u05B8', promptAudio: '/audio/syllables/la.mp3', correct: '\u05DC\u05B8', options: ['\u05DC', '\u05E9\u05C1', '\u05DC\u05B8', '\u05DE'] },
           ],
           maxStars: 3,
         },

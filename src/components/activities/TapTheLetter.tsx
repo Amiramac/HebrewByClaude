@@ -39,15 +39,14 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
   const identifyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const itemCountRef = useRef(0);
 
-  // Resolve identify audio for the current prompt letter
-  const identifyAudio = currentItem ? getLetterIdentifyAudio(currentItem.prompt, gender) : null;
+  // Resolve audio: use explicit promptAudio (syllables), else identify audio (bare letters)
+  const promptAudio = currentItem?.promptAudio ?? getLetterIdentifyAudio(currentItem?.prompt ?? '', gender);
 
   useEffect(() => {
     if (currentItem) {
       itemCountRef.current++;
       setShuffledOptions(shuffle(currentItem.options));
-      // Auto-play the identify prompt for each new item
-      const src = getLetterIdentifyAudio(currentItem.prompt, gender);
+      const src = currentItem.promptAudio ?? getLetterIdentifyAudio(currentItem.prompt, gender);
       if (src) {
         // First item: short delay. After that: longer delay so "כל הכבוד" finishes
         const delay = itemCountRef.current > 1 ? 1800 : 400;
@@ -58,8 +57,8 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
   }, [currentItem, play, gender]);
 
   const handleReplay = () => {
-    if (identifyAudio) {
-      play(identifyAudio);
+    if (promptAudio) {
+      play(promptAudio);
     }
   };
 

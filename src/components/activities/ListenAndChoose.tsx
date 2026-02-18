@@ -92,12 +92,14 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
       >
         <p className="text-xl text-gray-600 mb-4">{activity.instruction}</p>
 
-        <Button onClick={handleReplay} variant="secondary" size="lg">
-          <span className="text-4xl">
-            {'\uD83D\uDD0A'}
-          </span>
-          <span className="mr-2">שמע שוב</span>
-        </Button>
+        {currentItem.promptAudio && (
+          <Button onClick={handleReplay} variant="secondary" size="lg">
+            <span className="text-4xl">
+              {'\uD83D\uDD0A'}
+            </span>
+            <span className="mr-2">שמע שוב</span>
+          </Button>
+        )}
       </motion.div>
 
       <motion.div

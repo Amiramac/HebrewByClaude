@@ -25,8 +25,16 @@ export function pickRandom<T>(array: T[], n: number): T[] {
 }
 
 /**
- * Map a Hebrew character to its wrong-answer feedback audio path.
- * Returns path like '/audio/feedback/alef-wrong.mp3', or null if unknown.
+ * Strip nikkud (vowel marks, dagesh, shin/sin dots) to get the base consonant.
+ * e.g. 'בָּ' → 'ב', 'שׁ' → 'שׁ' (shin-dot preserved since it's in the map)
+ */
+function stripNikkud(char: string): string {
+  // Remove vowels (U+05B0-05BD) and dagesh (U+05BC) but keep shin/sin dots (U+05C1-05C2)
+  return char.replace(/[\u05B0-\u05BD]/g, '');
+}
+
+/**
+ * Map a Hebrew character to its slug. Strips nikkud first so syllables like בָּ → ב → 'bet'.
  */
 const CHAR_TO_SLUG: Record<string, string> = {
   'א': 'alef', 'שׁ': 'shin', 'ש': 'shin', 'ל': 'lamed', 'מ': 'mem', 'ב': 'bet',
@@ -36,8 +44,16 @@ const CHAR_TO_SLUG: Record<string, string> = {
   'ט': 'tet', 'ס': 'samekh', 'ק': 'kuf', 'צ': 'tsadi',
 };
 
+function charToSlug(char: string): string | undefined {
+  return CHAR_TO_SLUG[char] ?? CHAR_TO_SLUG[stripNikkud(char)];
+}
+
+/**
+ * Map a Hebrew character to its wrong-answer feedback audio path.
+ * Returns path like '/audio/feedback/alef-wrong.mp3', or null if unknown.
+ */
 export function getLetterFeedbackAudio(char: string): string | null {
-  const slug = CHAR_TO_SLUG[char];
+  const slug = charToSlug(char);
   return slug ? `/audio/feedback/${slug}-wrong.mp3` : null;
 }
 
@@ -47,7 +63,7 @@ export function getLetterFeedbackAudio(char: string): string | null {
  * Returns path like '/audio/identify/alef.mp3' or '/audio/identify-f/alef.mp3'.
  */
 export function getLetterIdentifyAudio(char: string, gender?: 'boy' | 'girl' | null): string | null {
-  const slug = CHAR_TO_SLUG[char];
+  const slug = charToSlug(char);
   if (!slug) return null;
   const dir = gender === 'girl' ? 'identify-f' : 'identify';
   return `/audio/${dir}/${slug}.mp3`;
