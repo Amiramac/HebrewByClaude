@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'עברית עם קלוד | Hebrew by Claude',
-  description: 'A fun Hebrew reading app for Maayan — learn the Aleph-Bet step by step!',
+  title: 'עברית עם קלוד',
+  description: 'אפליקציה ללימוד קריאה בעברית',
 };
 
 export const viewport: Viewport = {

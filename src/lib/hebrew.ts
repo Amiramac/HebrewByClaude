@@ -43,9 +43,12 @@ export function getLetterFeedbackAudio(char: string): string | null {
 
 /**
  * Map a Hebrew character to its identify-prompt audio path.
- * Returns path like '/audio/identify/alef.mp3', or null if unknown.
+ * Gender determines masculine ("זהה") vs feminine ("זהי") form.
+ * Returns path like '/audio/identify/alef.mp3' or '/audio/identify-f/alef.mp3'.
  */
-export function getLetterIdentifyAudio(char: string): string | null {
+export function getLetterIdentifyAudio(char: string, gender?: 'boy' | 'girl' | null): string | null {
   const slug = CHAR_TO_SLUG[char];
-  return slug ? `/audio/identify/${slug}.mp3` : null;
+  if (!slug) return null;
+  const dir = gender === 'girl' ? 'identify-f' : 'identify';
+  return `/audio/${dir}/${slug}.mp3`;
 }

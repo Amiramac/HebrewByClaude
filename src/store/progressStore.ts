@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { UserProgress, LessonResult, DEFAULT_PROGRESS } from '@/types/progress';
+import { UserProgress, Gender, DEFAULT_PROGRESS } from '@/types/progress';
 
 interface ProgressStore extends UserProgress {
   completeLesson: (lessonId: string, stars: number) => void;
@@ -10,6 +10,7 @@ interface ProgressStore extends UserProgress {
   addVowel: (vowel: string) => void;
   addBadge: (badgeId: string) => void;
   updateStreak: () => void;
+  setGender: (gender: Gender) => void;
   resetProgress: () => void;
 }
 
@@ -75,6 +76,8 @@ export const useProgressStore = create<ProgressStore>()(
           lastPlayedDate: today,
         });
       },
+
+      setGender: (gender: Gender) => set({ gender }),
 
       resetProgress: () => set(DEFAULT_PROGRESS),
     }),

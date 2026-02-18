@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Activity } from '@/types/levels';
 import { useActivity } from '@/hooks/useActivity';
 import { useAudio } from '@/hooks/useAudio';
+import { useProgressStore } from '@/store/progressStore';
 import LetterCard from '@/components/hebrew/LetterCard';
 import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
@@ -30,6 +31,7 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
   } = useActivity(activity);
 
   const { play, playCorrect, playEncourage } = useAudio();
+  const { gender } = useProgressStore();
   const [showEncourage, setShowEncourage] = useState(false);
   const [showStars, setShowStars] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
@@ -38,14 +40,14 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
   const itemCountRef = useRef(0);
 
   // Resolve identify audio for the current prompt letter
-  const identifyAudio = currentItem ? getLetterIdentifyAudio(currentItem.prompt) : null;
+  const identifyAudio = currentItem ? getLetterIdentifyAudio(currentItem.prompt, gender) : null;
 
   useEffect(() => {
     if (currentItem) {
       itemCountRef.current++;
       setShuffledOptions(shuffle(currentItem.options));
       // Auto-play the identify prompt for each new item
-      const src = getLetterIdentifyAudio(currentItem.prompt);
+      const src = getLetterIdentifyAudio(currentItem.prompt, gender);
       if (src) {
         // First item: short delay. After that: longer delay so "כל הכבוד" finishes
         const delay = itemCountRef.current > 1 ? 1800 : 400;
@@ -53,7 +55,7 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
         identifyTimer.current = setTimeout(() => play(src), delay);
       }
     }
-  }, [currentItem, play]);
+  }, [currentItem, play, gender]);
 
   const handleReplay = () => {
     if (identifyAudio) {

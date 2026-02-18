@@ -24,9 +24,9 @@ export default function ParentGate({ onPass, onCancel }: ParentGateProps) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center" dir="ltr">
-        <h2 className="text-xl font-bold mb-2">Parent Verification</h2>
+        <h2 className="text-xl font-bold mb-2">אימות הורים</h2>
         <p className="text-gray-600 mb-6">
-          Solve this to continue:
+          :פתרו כדי להמשיך
         </p>
         <p className="text-3xl font-bold mb-4">
           {a} + {b} = ?
@@ -41,10 +41,10 @@ export default function ParentGate({ onPass, onCancel }: ParentGateProps) {
         />
         <div className="flex gap-3 justify-center mt-4">
           <Button variant="secondary" size="sm" onClick={onCancel}>
-            Cancel
+            ביטול
           </Button>
           <Button size="sm" onClick={handleSubmit}>
-            OK
+            אישור
           </Button>
         </div>
       </div>

@@ -3,10 +3,10 @@ import { Level } from '@/types/levels';
 const level01: Level = {
   id: 1,
   slug: 'meet-the-letters',
-  title: 'Meet the Letters',
+  title: 'פגישה עם האותיות',
   titleHebrew: 'פגישה עם האותיות',
-  description: 'Learn your first 5 Hebrew letters and discover right-to-left reading!',
-  icon: '🌟',
+  description: 'למדו את 5 האותיות הראשונות!',
+  icon: '\uD83C\uDF1F',
   color: '#4A90D9',
   requiredStars: 0,
   letters: ['א', 'שׁ', 'ל', 'מ', 'ב'],
@@ -14,14 +14,14 @@ const level01: Level = {
     {
       id: 'l1-intro-alef',
       type: 'letter-intro',
-      title: 'Meet Alef',
+      title: 'הכירו את אָלֶף',
       titleHebrew: 'הכירו את אָלֶף',
-      description: 'The first letter of the Aleph-Bet — the quiet leader!',
+      description: 'האות הראשונה באלף-בית!',
       activities: [
         {
           id: 'l1-alef-tap',
           type: 'tap-the-letter',
-          instruction: 'Tap the letter Alef!',
+          instruction: 'מצאו את האות אלף!',
           items: [
             { id: 'a1', prompt: 'א', correct: 'א', options: ['א', 'ב', 'ל', 'מ'] },
             { id: 'a2', prompt: 'א', correct: 'א', options: ['שׁ', 'א', 'ד', 'ר'] },
@@ -34,14 +34,14 @@ const level01: Level = {
     {
       id: 'l1-intro-shin',
       type: 'letter-intro',
-      title: 'Meet Shin',
+      title: 'הכירו את שִׁין',
       titleHebrew: 'הכירו את שִׁין',
-      description: 'Three branches like a tree!',
+      description: 'שלושה ענפים כמו עץ!',
       activities: [
         {
           id: 'l1-shin-tap',
           type: 'tap-the-letter',
-          instruction: 'Tap the letter Shin!',
+          instruction: 'מצאו את האות שין!',
           items: [
             { id: 's1', prompt: 'שׁ', correct: 'שׁ', options: ['א', 'שׁ', 'ל', 'מ'] },
             { id: 's2', prompt: 'שׁ', correct: 'שׁ', options: ['שׁ', 'ב', 'ד', 'ר'] },
@@ -54,14 +54,14 @@ const level01: Level = {
     {
       id: 'l1-intro-lamed',
       type: 'letter-intro',
-      title: 'Meet Lamed',
+      title: 'הכירו את לָמֶד',
       titleHebrew: 'הכירו את לָמֶד',
-      description: 'The tallest letter — reaching for the sky!',
+      description: 'האות הכי גבוהה!',
       activities: [
         {
           id: 'l1-lamed-tap',
           type: 'tap-the-letter',
-          instruction: 'Tap the letter Lamed!',
+          instruction: 'מצאו את האות למד!',
           items: [
             { id: 'la1', prompt: 'ל', correct: 'ל', options: ['א', 'שׁ', 'ל', 'מ'] },
             { id: 'la2', prompt: 'ל', correct: 'ל', options: ['ל', 'ב', 'ד', 'ר'] },
@@ -73,14 +73,14 @@ const level01: Level = {
     {
       id: 'l1-intro-mem',
       type: 'letter-intro',
-      title: 'Meet Mem',
+      title: 'הכירו את מֵם',
       titleHebrew: 'הכירו את מֵם',
-      description: "Maayan starts with Mem!",
+      description: 'השם מעיין מתחיל במם!',
       activities: [
         {
           id: 'l1-mem-tap',
           type: 'tap-the-letter',
-          instruction: 'Tap the letter Mem!',
+          instruction: 'מצאו את האות מם!',
           items: [
             { id: 'm1', prompt: 'מ', correct: 'מ', options: ['א', 'שׁ', 'ל', 'מ'] },
             { id: 'm2', prompt: 'מ', correct: 'מ', options: ['מ', 'ב', 'ד', 'ר'] },
@@ -92,14 +92,14 @@ const level01: Level = {
     {
       id: 'l1-intro-bet',
       type: 'letter-intro',
-      title: 'Meet Bet',
+      title: 'הכירו את בֵּית',
       titleHebrew: 'הכירו את בֵּית',
-      description: 'A little house — Bayit means house!',
+      description: 'בית קטן — בַּיִת!',
       activities: [
         {
           id: 'l1-bet-tap',
           type: 'tap-the-letter',
-          instruction: 'Tap the letter Bet!',
+          instruction: 'מצאו את האות בית!',
           items: [
             { id: 'b1', prompt: 'ב', correct: 'ב', options: ['א', 'שׁ', 'ל', 'ב'] },
             { id: 'b2', prompt: 'ב', correct: 'ב', options: ['ב', 'מ', 'ד', 'ר'] },
@@ -111,14 +111,14 @@ const level01: Level = {
     {
       id: 'l1-review-match',
       type: 'review',
-      title: 'Match the Letters!',
+      title: 'התאימו את האותיות!',
       titleHebrew: 'התאימו את האותיות!',
-      description: 'Can you find the matching pairs?',
+      description: 'מצאו את הזוגות!',
       activities: [
         {
           id: 'l1-match',
           type: 'match-pairs',
-          instruction: 'Match each letter to its twin!',
+          instruction: 'התאימו כל אות לתאומה שלה!',
           items: [
             { id: 'mp1', prompt: 'א', correct: 'א', options: ['א', 'שׁ', 'ל', 'מ', 'ב'] },
             { id: 'mp2', prompt: 'שׁ', correct: 'שׁ', options: ['א', 'שׁ', 'ל', 'מ', 'ב'] },
@@ -133,20 +133,20 @@ const level01: Level = {
     {
       id: 'l1-review-listen',
       type: 'review',
-      title: 'Listen & Choose',
+      title: 'הקשיבו ובחרו',
       titleHebrew: 'הקשיבו ובחרו',
-      description: 'Hear the letter name, tap the right one!',
+      description: 'שמעו את שם האות ולחצו עליה!',
       activities: [
         {
           id: 'l1-listen',
           type: 'listen-and-choose',
-          instruction: 'Listen and tap the right letter!',
+          instruction: 'הקשיבו ולחצו על האות הנכונה!',
           items: [
-            { id: 'lc1', prompt: 'Alef', promptAudio: '/audio/letters/alef.mp3', correct: 'א', options: ['א', 'שׁ', 'ל', 'מ'] },
-            { id: 'lc2', prompt: 'Shin', promptAudio: '/audio/letters/shin.mp3', correct: 'שׁ', options: ['א', 'שׁ', 'ב', 'מ'] },
-            { id: 'lc3', prompt: 'Lamed', promptAudio: '/audio/letters/lamed.mp3', correct: 'ל', options: ['א', 'ל', 'ב', 'מ'] },
-            { id: 'lc4', prompt: 'Mem', promptAudio: '/audio/letters/mem.mp3', correct: 'מ', options: ['שׁ', 'ל', 'ב', 'מ'] },
-            { id: 'lc5', prompt: 'Bet', promptAudio: '/audio/letters/bet.mp3', correct: 'ב', options: ['א', 'שׁ', 'ל', 'ב'] },
+            { id: 'lc1', prompt: 'אלף', promptAudio: '/audio/letters/alef.mp3', correct: 'א', options: ['א', 'שׁ', 'ל', 'מ'] },
+            { id: 'lc2', prompt: 'שין', promptAudio: '/audio/letters/shin.mp3', correct: 'שׁ', options: ['א', 'שׁ', 'ב', 'מ'] },
+            { id: 'lc3', prompt: 'למד', promptAudio: '/audio/letters/lamed.mp3', correct: 'ל', options: ['א', 'ל', 'ב', 'מ'] },
+            { id: 'lc4', prompt: 'מם', promptAudio: '/audio/letters/mem.mp3', correct: 'מ', options: ['שׁ', 'ל', 'ב', 'מ'] },
+            { id: 'lc5', prompt: 'בית', promptAudio: '/audio/letters/bet.mp3', correct: 'ב', options: ['א', 'שׁ', 'ל', 'ב'] },
           ],
           maxStars: 3,
         },

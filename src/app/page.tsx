@@ -7,6 +7,7 @@ import LessonShell from '@/components/layout/LessonShell';
 import { getLevelById } from '@/data/levels';
 import { useProgressStore } from '@/store/progressStore';
 import { Lesson } from '@/types/levels';
+import { Gender } from '@/types/progress';
 import Button from '@/components/ui/Button';
 
 type View =
@@ -14,9 +15,52 @@ type View =
   | { screen: 'level'; levelId: number }
   | { screen: 'lesson'; levelId: number; lesson: Lesson };
 
+function WelcomeScreen({ onSelectGender }: { onSelectGender: (g: Gender) => void }) {
+  return (
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-10 px-6">
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <div className="text-7xl mb-4">{'\u2728'}</div>
+        <h1 className="text-4xl font-bold mb-2">!שלום</h1>
+        <p className="text-2xl text-gray-500">?מי לומד היום</p>
+      </motion.div>
+
+      <motion.div
+        className="flex gap-8"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        <motion.button
+          className="flex flex-col items-center gap-3 bg-blue-50 rounded-3xl p-8 shadow-lg border-3 border-blue-200"
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          onClick={() => onSelectGender('boy')}
+        >
+          <span className="text-8xl">{'\uD83D\uDC66'}</span>
+          <span className="text-2xl font-bold text-blue-600">בן</span>
+        </motion.button>
+
+        <motion.button
+          className="flex flex-col items-center gap-3 bg-pink-50 rounded-3xl p-8 shadow-lg border-3 border-pink-200"
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          onClick={() => onSelectGender('girl')}
+        >
+          <span className="text-8xl">{'\uD83D\uDC67'}</span>
+          <span className="text-2xl font-bold text-pink-500">בת</span>
+        </motion.button>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [view, setView] = useState<View>({ screen: 'map' });
-  const { completeLesson, addLetter, addVowel, completedLessons } = useProgressStore();
+  const { gender, setGender, completeLesson, addLetter, addVowel, completedLessons } = useProgressStore();
 
   const handleSelectLevel = (levelId: number) => {
     setView({ screen: 'level', levelId });
@@ -40,6 +84,10 @@ export default function Home() {
 
     setView({ screen: 'level', levelId });
   };
+
+  if (!gender) {
+    return <WelcomeScreen onSelectGender={setGender} />;
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -113,7 +161,6 @@ function LevelDetail({
         </button>
         <div>
           <h1 className="text-3xl font-bold">{level.titleHebrew}</h1>
-          <p className="text-gray-500">{level.title}</p>
         </div>
         <span className="text-4xl mr-auto">{level.icon}</span>
       </div>
@@ -186,7 +233,7 @@ function LevelDetail({
       {/* Back button */}
       <div className="mt-8 text-center">
         <Button variant="secondary" onClick={onBack}>
-          {'חזרה למפה \u2192'}
+          {'\u2192 חזרה למפה'}
         </Button>
       </div>
     </div>

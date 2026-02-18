@@ -49,7 +49,7 @@ export default function LessonShell({ lesson, levelColor, onComplete, onBack }: 
           onClick={onBack}
           className="tap-target text-3xl text-gray-400 hover:text-gray-600"
         >
-          {'\u2190'}
+          {'\u2192'}
         </button>
         <div className="text-center">
           <h2 className="text-lg font-bold">{lesson.titleHebrew}</h2>
@@ -95,7 +95,7 @@ export default function LessonShell({ lesson, levelColor, onComplete, onBack }: 
               animated
             />
             <Button onClick={() => onComplete(activityStars.reduce((s, v) => s + v, 0))}>
-              {'המשך \u2190'}
+              {'המשך \u2192'}
             </Button>
           </motion.div>
         )}

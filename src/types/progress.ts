@@ -1,3 +1,5 @@
+export type Gender = 'boy' | 'girl';
+
 export interface LessonResult {
   lessonId: string;
   stars: number;
@@ -23,6 +25,7 @@ export interface UserProgress {
   knownVowels: string[];
   streakDays: number;
   lastPlayedDate: string;
+  gender: Gender | null;
 }
 
 export const DEFAULT_PROGRESS: UserProgress = {
@@ -34,4 +37,5 @@ export const DEFAULT_PROGRESS: UserProgress = {
   knownVowels: [],
   streakDays: 0,
   lastPlayedDate: '',
+  gender: null,
 };

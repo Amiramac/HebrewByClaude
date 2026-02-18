@@ -81,7 +81,6 @@ export default function LevelMap({ onSelectLevel }: LevelMapProps) {
                   </div>
                   <div className="flex-1 text-right">
                     <h3 className="text-xl font-bold">{level.titleHebrew}</h3>
-                    <p className="text-sm text-gray-500">{level.title}</p>
                     {isUnlocked && (
                       <div className="mt-1">
                         <StarRating
@@ -100,7 +99,7 @@ export default function LevelMap({ onSelectLevel }: LevelMapProps) {
                 </div>
                 {!isUnlocked && (
                   <p className="text-xs text-gray-400 mt-2">
-                    {level.requiredStars - totalStars} stars needed {'\u2605'}
+                    {'\u2605'} {level.requiredStars - totalStars} כוכבים נדרשים
                   </p>
                 )}
               </motion.button>

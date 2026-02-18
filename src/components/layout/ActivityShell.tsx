@@ -26,7 +26,7 @@ export default function ActivityShell({ activity, onComplete }: ActivityShellPro
       return (
         <div className="text-center p-8">
           <p className="text-xl text-gray-500">
-            Activity type &ldquo;{activity.type}&rdquo; coming soon!
+            !בקרוב
           </p>
         </div>
       );

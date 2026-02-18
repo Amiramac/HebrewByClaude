@@ -96,7 +96,7 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
           <span className="text-4xl">
             {'\uD83D\uDD0A'}
           </span>
-          <span className="mr-2">Listen Again</span>
+          <span className="mr-2">שמע שוב</span>
         </Button>
       </motion.div>
 
