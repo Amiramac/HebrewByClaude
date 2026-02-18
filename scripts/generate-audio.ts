@@ -53,14 +53,14 @@ interface AudioEntry {
 }
 
 const LETTER_AUDIO: AudioEntry[] = [
-  // Level 1 — clean Hebrew, no nikkud, for natural TTS
+  // Level 1 — minimal nikkud only where name is ambiguous without it
   { filename: 'letters/alef.mp3', text: 'אלף', description: 'Letter Alef' },
   { filename: 'letters/shin.mp3', text: 'שין', description: 'Letter Shin' },
-  { filename: 'letters/lamed.mp3', text: 'למד', description: 'Letter Lamed' },
+  { filename: 'letters/lamed.mp3', text: 'לָמד', description: 'Letter Lamed' },
   { filename: 'letters/mem.mp3', text: 'מם', description: 'Letter Mem' },
-  { filename: 'letters/bet.mp3', text: 'בית', description: 'Letter Bet' },
+  { filename: 'letters/bet.mp3', text: 'בֵית', description: 'Letter Bet' },
   // Level 2
-  { filename: 'letters/dalet.mp3', text: 'דלת', description: 'Letter Dalet' },
+  { filename: 'letters/dalet.mp3', text: 'דָלת', description: 'Letter Dalet' },
   { filename: 'letters/he.mp3', text: 'הא', description: 'Letter He' },
   { filename: 'letters/yod.mp3', text: 'יוד', description: 'Letter Yod' },
   { filename: 'letters/tav.mp3', text: 'תו', description: 'Letter Tav' },
@@ -76,7 +76,7 @@ const LETTER_AUDIO: AudioEntry[] = [
   { filename: 'letters/vav.mp3', text: 'וו', description: 'Letter Vav' },
   // Level 6
   { filename: 'letters/tet.mp3', text: 'טית', description: 'Letter Tet' },
-  { filename: 'letters/samekh.mp3', text: 'סמך', description: 'Letter Samekh' },
+  { filename: 'letters/samekh.mp3', text: 'סָמך', description: 'Letter Samekh' },
   { filename: 'letters/kuf.mp3', text: 'קוף', description: 'Letter Kuf' },
   { filename: 'letters/tsadi.mp3', text: 'צדי', description: 'Letter Tsadi' },
 ];
@@ -153,11 +153,11 @@ const LETTER_FEEDBACK_AUDIO: AudioEntry[] = [
   // Level 1
   { filename: 'feedback/alef-wrong.mp3', text: 'זו האות אלף, נסה שוב', description: 'Feedback: Alef' },
   { filename: 'feedback/shin-wrong.mp3', text: 'זו האות שין, נסה שוב', description: 'Feedback: Shin' },
-  { filename: 'feedback/lamed-wrong.mp3', text: 'זו האות למד, נסה שוב', description: 'Feedback: Lamed' },
+  { filename: 'feedback/lamed-wrong.mp3', text: 'זו האות לָמד, נסה שוב', description: 'Feedback: Lamed' },
   { filename: 'feedback/mem-wrong.mp3', text: 'זו האות מם, נסה שוב', description: 'Feedback: Mem' },
-  { filename: 'feedback/bet-wrong.mp3', text: 'זו האות בית, נסה שוב', description: 'Feedback: Bet' },
+  { filename: 'feedback/bet-wrong.mp3', text: 'זו האות בֵית, נסה שוב', description: 'Feedback: Bet' },
   // Level 2
-  { filename: 'feedback/dalet-wrong.mp3', text: 'זו האות דלת, נסה שוב', description: 'Feedback: Dalet' },
+  { filename: 'feedback/dalet-wrong.mp3', text: 'זו האות דָלת, נסה שוב', description: 'Feedback: Dalet' },
   { filename: 'feedback/he-wrong.mp3', text: 'זו האות הא, נסה שוב', description: 'Feedback: He' },
   { filename: 'feedback/yod-wrong.mp3', text: 'זו האות יוד, נסה שוב', description: 'Feedback: Yod' },
   { filename: 'feedback/tav-wrong.mp3', text: 'זו האות תו, נסה שוב', description: 'Feedback: Tav' },
@@ -173,7 +173,7 @@ const LETTER_FEEDBACK_AUDIO: AudioEntry[] = [
   { filename: 'feedback/vav-wrong.mp3', text: 'זו האות וו, נסה שוב', description: 'Feedback: Vav' },
   // Level 6
   { filename: 'feedback/tet-wrong.mp3', text: 'זו האות טית, נסה שוב', description: 'Feedback: Tet' },
-  { filename: 'feedback/samekh-wrong.mp3', text: 'זו האות סמך, נסה שוב', description: 'Feedback: Samekh' },
+  { filename: 'feedback/samekh-wrong.mp3', text: 'זו האות סָמך, נסה שוב', description: 'Feedback: Samekh' },
   { filename: 'feedback/kuf-wrong.mp3', text: 'זו האות קוף, נסה שוב', description: 'Feedback: Kuf' },
   { filename: 'feedback/tsadi-wrong.mp3', text: 'זו האות צדי, נסה שוב', description: 'Feedback: Tsadi' },
 ];
