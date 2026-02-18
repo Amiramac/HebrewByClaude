@@ -35,19 +35,20 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const identifyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const hasAnsweredRef = useRef(false);
+  const itemCountRef = useRef(0);
 
   // Resolve identify audio for the current prompt letter
   const identifyAudio = currentItem ? getLetterIdentifyAudio(currentItem.prompt) : null;
 
   useEffect(() => {
     if (currentItem) {
+      itemCountRef.current++;
       setShuffledOptions(shuffle(currentItem.options));
       // Auto-play the identify prompt for each new item
       const src = getLetterIdentifyAudio(currentItem.prompt);
       if (src) {
-        // After a correct answer, wait longer so "כל הכבוד" finishes first
-        const delay = hasAnsweredRef.current ? 1800 : 400;
+        // First item: short delay. After that: longer delay so "כל הכבוד" finishes
+        const delay = itemCountRef.current > 1 ? 1800 : 400;
         if (identifyTimer.current) clearTimeout(identifyTimer.current);
         identifyTimer.current = setTimeout(() => play(src), delay);
       }
@@ -70,7 +71,6 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
 
     if (lastAnswerCorrect === true) {
       setShowEncourage(false);
-      hasAnsweredRef.current = true;
       playCorrect();
     } else if (lastAnswerCorrect === false) {
       // Play "זו האות X, נסה שוב" if feedback audio exists, else generic
