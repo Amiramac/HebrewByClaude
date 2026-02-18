@@ -23,3 +23,20 @@ export function shuffle<T>(array: T[]): T[] {
 export function pickRandom<T>(array: T[], n: number): T[] {
   return shuffle(array).slice(0, n);
 }
+
+/**
+ * Map a Hebrew character to its wrong-answer feedback audio path.
+ * Returns path like '/audio/feedback/alef-wrong.mp3', or null if unknown.
+ */
+const CHAR_TO_SLUG: Record<string, string> = {
+  'א': 'alef', 'שׁ': 'shin', 'ש': 'shin', 'ל': 'lamed', 'מ': 'mem', 'ב': 'bet',
+  'ד': 'dalet', 'ה': 'he', 'י': 'yod', 'ת': 'tav', 'ר': 'resh',
+  'ח': 'chet', 'כ': 'kaf', 'נ': 'nun', 'ע': 'ayin', 'פ': 'pe',
+  'ג': 'gimel', 'ז': 'zayin', 'ו': 'vav',
+  'ט': 'tet', 'ס': 'samekh', 'ק': 'kuf', 'צ': 'tsadi',
+};
+
+export function getLetterFeedbackAudio(char: string): string | null {
+  const slug = CHAR_TO_SLUG[char];
+  return slug ? `/audio/feedback/${slug}-wrong.mp3` : null;
+}

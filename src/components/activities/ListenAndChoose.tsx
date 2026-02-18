@@ -10,7 +10,7 @@ import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
 import EncourageToast from '@/components/feedback/EncourageToast';
 import Button from '@/components/ui/Button';
-import { shuffle } from '@/lib/hebrew';
+import { shuffle, getLetterFeedbackAudio } from '@/lib/hebrew';
 
 interface ListenAndChooseProps {
   activity: Activity;
@@ -24,6 +24,7 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
     isComplete,
     stars,
     lastAnswerCorrect,
+    lastAnswer,
     feedbackKey,
     submitAnswer,
   } = useActivity(activity);
@@ -55,9 +56,14 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
       setShowEncourage(false);
       playCorrect();
     } else if (lastAnswerCorrect === false) {
-      playEncourage();
+      const feedbackSrc = lastAnswer ? getLetterFeedbackAudio(lastAnswer) : null;
+      if (feedbackSrc) {
+        play(feedbackSrc);
+      } else {
+        playEncourage();
+      }
       setShowEncourage(true);
-      encourageTimer.current = setTimeout(() => setShowEncourage(false), 1500);
+      encourageTimer.current = setTimeout(() => setShowEncourage(false), 2500);
     }
   }, [feedbackKey]); // eslint-disable-line react-hooks/exhaustive-deps
 

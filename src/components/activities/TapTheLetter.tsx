@@ -9,7 +9,7 @@ import LetterCard from '@/components/hebrew/LetterCard';
 import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
 import EncourageToast from '@/components/feedback/EncourageToast';
-import { shuffle } from '@/lib/hebrew';
+import { shuffle, getLetterFeedbackAudio } from '@/lib/hebrew';
 
 interface TapTheLetterProps {
   activity: Activity;
@@ -23,11 +23,12 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
     isComplete,
     stars,
     lastAnswerCorrect,
+    lastAnswer,
     feedbackKey,
     submitAnswer,
   } = useActivity(activity);
 
-  const { playCorrect, playEncourage } = useAudio();
+  const { play, playCorrect, playEncourage } = useAudio();
   const [showEncourage, setShowEncourage] = useState(false);
   const [showStars, setShowStars] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
@@ -51,9 +52,15 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
       setShowEncourage(false);
       playCorrect();
     } else if (lastAnswerCorrect === false) {
-      playEncourage();
+      // Play "זו האות X, נסה שוב" if feedback audio exists, else generic
+      const feedbackSrc = lastAnswer ? getLetterFeedbackAudio(lastAnswer) : null;
+      if (feedbackSrc) {
+        play(feedbackSrc);
+      } else {
+        playEncourage();
+      }
       setShowEncourage(true);
-      encourageTimer.current = setTimeout(() => setShowEncourage(false), 1500);
+      encourageTimer.current = setTimeout(() => setShowEncourage(false), 2500);
     }
   }, [feedbackKey]); // eslint-disable-line react-hooks/exhaustive-deps
 

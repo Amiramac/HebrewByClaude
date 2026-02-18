@@ -148,6 +148,36 @@ const NARRATION_AUDIO: AudioEntry[] = [
   { filename: 'narration/level-complete.mp3', text: 'כל הכבוד! סיימת את השלב!', description: 'Level complete' },
 ];
 
+// Per-letter wrong-answer feedback: "זו האות X, נסה שוב"
+const LETTER_FEEDBACK_AUDIO: AudioEntry[] = [
+  // Level 1
+  { filename: 'feedback/alef-wrong.mp3', text: 'זו האות אלף, נסה שוב', description: 'Feedback: Alef' },
+  { filename: 'feedback/shin-wrong.mp3', text: 'זו האות שין, נסה שוב', description: 'Feedback: Shin' },
+  { filename: 'feedback/lamed-wrong.mp3', text: 'זו האות למד, נסה שוב', description: 'Feedback: Lamed' },
+  { filename: 'feedback/mem-wrong.mp3', text: 'זו האות מם, נסה שוב', description: 'Feedback: Mem' },
+  { filename: 'feedback/bet-wrong.mp3', text: 'זו האות בית, נסה שוב', description: 'Feedback: Bet' },
+  // Level 2
+  { filename: 'feedback/dalet-wrong.mp3', text: 'זו האות דלת, נסה שוב', description: 'Feedback: Dalet' },
+  { filename: 'feedback/he-wrong.mp3', text: 'זו האות הא, נסה שוב', description: 'Feedback: He' },
+  { filename: 'feedback/yod-wrong.mp3', text: 'זו האות יוד, נסה שוב', description: 'Feedback: Yod' },
+  { filename: 'feedback/tav-wrong.mp3', text: 'זו האות תו, נסה שוב', description: 'Feedback: Tav' },
+  { filename: 'feedback/resh-wrong.mp3', text: 'זו האות ריש, נסה שוב', description: 'Feedback: Resh' },
+  // Level 4
+  { filename: 'feedback/chet-wrong.mp3', text: 'זו האות חית, נסה שוב', description: 'Feedback: Chet' },
+  { filename: 'feedback/kaf-wrong.mp3', text: 'זו האות כף, נסה שוב', description: 'Feedback: Kaf' },
+  { filename: 'feedback/nun-wrong.mp3', text: 'זו האות נון, נסה שוב', description: 'Feedback: Nun' },
+  { filename: 'feedback/ayin-wrong.mp3', text: 'זו האות עין, נסה שוב', description: 'Feedback: Ayin' },
+  { filename: 'feedback/pe-wrong.mp3', text: 'זו האות פא, נסה שוב', description: 'Feedback: Pe' },
+  { filename: 'feedback/gimel-wrong.mp3', text: 'זו האות גימל, נסה שוב', description: 'Feedback: Gimel' },
+  { filename: 'feedback/zayin-wrong.mp3', text: 'זו האות זין, נסה שוב', description: 'Feedback: Zayin' },
+  { filename: 'feedback/vav-wrong.mp3', text: 'זו האות וו, נסה שוב', description: 'Feedback: Vav' },
+  // Level 6
+  { filename: 'feedback/tet-wrong.mp3', text: 'זו האות טית, נסה שוב', description: 'Feedback: Tet' },
+  { filename: 'feedback/samekh-wrong.mp3', text: 'זו האות סמך, נסה שוב', description: 'Feedback: Samekh' },
+  { filename: 'feedback/kuf-wrong.mp3', text: 'זו האות קוף, נסה שוב', description: 'Feedback: Kuf' },
+  { filename: 'feedback/tsadi-wrong.mp3', text: 'זו האות צדי, נסה שוב', description: 'Feedback: Tsadi' },
+];
+
 // ── API Call ─────────────────────────────────────────────────────
 
 async function generateAudio(entry: AudioEntry): Promise<boolean> {
@@ -213,6 +243,7 @@ async function main() {
     ...WORD_AUDIO,
     ...UI_AUDIO,
     ...NARRATION_AUDIO,
+    ...LETTER_FEEDBACK_AUDIO,
   ];
 
   console.log(`\nHebrewByClaude Audio Generator`);

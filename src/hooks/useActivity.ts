@@ -10,6 +10,7 @@ interface ActivityState {
   isComplete: boolean;
   stars: number;
   lastAnswerCorrect: boolean | null;
+  lastAnswer: string | null;
   feedbackKey: number;
 }
 
@@ -21,6 +22,7 @@ export function useActivity(activity: Activity) {
     isComplete: false,
     stars: 0,
     lastAnswerCorrect: null,
+    lastAnswer: null,
     feedbackKey: 0,
   });
 
@@ -54,6 +56,7 @@ export function useActivity(activity: Activity) {
         isComplete: true,
         stars: Math.min(stars, activity.maxStars),
         lastAnswerCorrect: true,
+        lastAnswer: answer,
         feedbackKey: newFeedbackKey,
       });
     } else if (isCorrect) {
@@ -64,6 +67,7 @@ export function useActivity(activity: Activity) {
         isComplete: false,
         stars: 0,
         lastAnswerCorrect: true,
+        lastAnswer: answer,
         feedbackKey: newFeedbackKey,
       });
     } else {
@@ -71,6 +75,7 @@ export function useActivity(activity: Activity) {
         ...s,
         attempts: newAttempts,
         lastAnswerCorrect: false,
+        lastAnswer: answer,
         feedbackKey: newFeedbackKey,
       });
     }
@@ -84,6 +89,7 @@ export function useActivity(activity: Activity) {
       isComplete: false,
       stars: 0,
       lastAnswerCorrect: null,
+      lastAnswer: null,
       feedbackKey: 0,
     });
   }, []);
