@@ -22,11 +22,10 @@ export default function LetterCard({
   disabled = false,
   onSelect,
 }: LetterCardProps) {
-  const { play, playTap } = useAudio();
+  const { play } = useAudio();
 
   const handleTap = () => {
     if (disabled) return;
-    playTap();
     if (audioFile) play(audioFile);
     onSelect?.(character);
   };
