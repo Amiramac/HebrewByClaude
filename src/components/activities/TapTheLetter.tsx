@@ -9,7 +9,8 @@ import LetterCard from '@/components/hebrew/LetterCard';
 import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
 import EncourageToast from '@/components/feedback/EncourageToast';
-import { shuffle, getLetterFeedbackAudio } from '@/lib/hebrew';
+import Button from '@/components/ui/Button';
+import { shuffle, getLetterFeedbackAudio, getLetterIdentifyAudio } from '@/lib/hebrew';
 
 interface TapTheLetterProps {
   activity: Activity;
@@ -34,11 +35,25 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Resolve identify audio for the current prompt letter
+  const identifyAudio = currentItem ? getLetterIdentifyAudio(currentItem.prompt) : null;
+
   useEffect(() => {
     if (currentItem) {
       setShuffledOptions(shuffle(currentItem.options));
+      // Auto-play the identify prompt for each new item
+      const src = getLetterIdentifyAudio(currentItem.prompt);
+      if (src) {
+        setTimeout(() => play(src), 400);
+      }
     }
-  }, [currentItem]);
+  }, [currentItem, play]);
+
+  const handleReplay = () => {
+    if (identifyAudio) {
+      play(identifyAudio);
+    }
+  };
 
   // feedbackKey changes on EVERY answer, so this always fires
   useEffect(() => {
@@ -81,10 +96,12 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <p className="text-xl text-gray-600 mb-2">{activity.instruction}</p>
-        <div className="hebrew-letter text-[100px] leading-none my-4">
-          {currentItem.prompt}
-        </div>
+        <Button onClick={handleReplay} variant="secondary" size="lg">
+          <span className="text-4xl">
+            {'\uD83D\uDD0A'}
+          </span>
+          <span className="mr-2">שמע שוב</span>
+        </Button>
       </motion.div>
 
       <motion.div

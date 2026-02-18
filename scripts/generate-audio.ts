@@ -178,6 +178,36 @@ const LETTER_FEEDBACK_AUDIO: AudioEntry[] = [
   { filename: 'feedback/tsadi-wrong.mp3', text: 'זו האות צדי, נסה שוב', description: 'Feedback: Tsadi' },
 ];
 
+// Per-letter identify prompt: "זהה את האות X"
+const LETTER_IDENTIFY_AUDIO: AudioEntry[] = [
+  // Level 1
+  { filename: 'identify/alef.mp3', text: 'זהה את האות אלף', description: 'Identify: Alef' },
+  { filename: 'identify/shin.mp3', text: 'זהה את האות שין', description: 'Identify: Shin' },
+  { filename: 'identify/lamed.mp3', text: 'זהה את האות לָמד', description: 'Identify: Lamed' },
+  { filename: 'identify/mem.mp3', text: 'זהה את האות מם', description: 'Identify: Mem' },
+  { filename: 'identify/bet.mp3', text: 'זהה את האות בֵית', description: 'Identify: Bet' },
+  // Level 2
+  { filename: 'identify/dalet.mp3', text: 'זהה את האות דָלת', description: 'Identify: Dalet' },
+  { filename: 'identify/he.mp3', text: 'זהה את האות הא', description: 'Identify: He' },
+  { filename: 'identify/yod.mp3', text: 'זהה את האות יוד', description: 'Identify: Yod' },
+  { filename: 'identify/tav.mp3', text: 'זהה את האות תו', description: 'Identify: Tav' },
+  { filename: 'identify/resh.mp3', text: 'זהה את האות ריש', description: 'Identify: Resh' },
+  // Level 4
+  { filename: 'identify/chet.mp3', text: 'זהה את האות חית', description: 'Identify: Chet' },
+  { filename: 'identify/kaf.mp3', text: 'זהה את האות כף', description: 'Identify: Kaf' },
+  { filename: 'identify/nun.mp3', text: 'זהה את האות נון', description: 'Identify: Nun' },
+  { filename: 'identify/ayin.mp3', text: 'זהה את האות עין', description: 'Identify: Ayin' },
+  { filename: 'identify/pe.mp3', text: 'זהה את האות פא', description: 'Identify: Pe' },
+  { filename: 'identify/gimel.mp3', text: 'זהה את האות גימל', description: 'Identify: Gimel' },
+  { filename: 'identify/zayin.mp3', text: 'זהה את האות זין', description: 'Identify: Zayin' },
+  { filename: 'identify/vav.mp3', text: 'זהה את האות וו', description: 'Identify: Vav' },
+  // Level 6
+  { filename: 'identify/tet.mp3', text: 'זהה את האות טית', description: 'Identify: Tet' },
+  { filename: 'identify/samekh.mp3', text: 'זהה את האות סָמך', description: 'Identify: Samekh' },
+  { filename: 'identify/kuf.mp3', text: 'זהה את האות קוף', description: 'Identify: Kuf' },
+  { filename: 'identify/tsadi.mp3', text: 'זהה את האות צדי', description: 'Identify: Tsadi' },
+];
+
 // ── API Call ─────────────────────────────────────────────────────
 
 async function generateAudio(entry: AudioEntry): Promise<boolean> {
@@ -244,6 +274,7 @@ async function main() {
     ...UI_AUDIO,
     ...NARRATION_AUDIO,
     ...LETTER_FEEDBACK_AUDIO,
+    ...LETTER_IDENTIFY_AUDIO,
   ];
 
   console.log(`\nHebrewByClaude Audio Generator`);

@@ -40,3 +40,12 @@ export function getLetterFeedbackAudio(char: string): string | null {
   const slug = CHAR_TO_SLUG[char];
   return slug ? `/audio/feedback/${slug}-wrong.mp3` : null;
 }
+
+/**
+ * Map a Hebrew character to its identify-prompt audio path.
+ * Returns path like '/audio/identify/alef.mp3', or null if unknown.
+ */
+export function getLetterIdentifyAudio(char: string): string | null {
+  const slug = CHAR_TO_SLUG[char];
+  return slug ? `/audio/identify/${slug}.mp3` : null;
+}
