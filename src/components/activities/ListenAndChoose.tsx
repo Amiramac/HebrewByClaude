@@ -34,29 +34,40 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
   const [showStars, setShowStars] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const promptTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const itemCountRef = useRef(0);
+  const instructionPlayedRef = useRef(false);
+
+  // Deterministic first-item check (works in Strict Mode unlike mutable counter)
+  const firstItemId = activity.items[0]?.id;
 
   useEffect(() => {
-    if (currentItem) {
-      itemCountRef.current++;
-      setShuffledOptions(shuffle(currentItem.options));
+    if (!currentItem) return;
 
-      if (promptTimer.current) clearTimeout(promptTimer.current);
+    setShuffledOptions(shuffle(currentItem.options));
+    const isFirstItem = currentItem.id === firstItemId;
 
-      if (itemCountRef.current === 1 && activity.instructionAudio) {
-        // First item: play instruction, then prompt after instruction finishes
-        play(activity.instructionAudio);
-        if (currentItem.promptAudio) {
-          promptTimer.current = setTimeout(() => play(currentItem.promptAudio!), 2500);
-        }
-      } else if (currentItem.promptAudio) {
-        // Subsequent items: short delay (or longer after correct answer)
-        const delay = itemCountRef.current > 1 ? 1800 : 400;
-        promptTimer.current = setTimeout(() => play(currentItem.promptAudio!), delay);
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
+    if (isFirstItem && activity.instructionAudio && !instructionPlayedRef.current) {
+      // First item with instruction: play instruction, then prompt after it finishes
+      instructionPlayedRef.current = true;
+      play(activity.instructionAudio);
+      if (currentItem.promptAudio) {
+        timer = setTimeout(() => play(currentItem.promptAudio!), 2500);
       }
+    } else if (currentItem.promptAudio) {
+      // Strict Mode re-fire after instruction: keep the 2500ms delay
+      // First item without instruction: 400ms
+      // Subsequent items: 1800ms (wait for "כל הכבוד" to finish)
+      const delay = isFirstItem && instructionPlayedRef.current ? 2500
+        : isFirstItem ? 400
+        : 1800;
+      timer = setTimeout(() => play(currentItem.promptAudio!), delay);
     }
-  }, [currentItem, play, activity.instructionAudio]);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [currentItem, play, activity.instructionAudio, firstItemId]);
 
   // feedbackKey changes on EVERY answer, so this always fires
   useEffect(() => {
