@@ -95,7 +95,7 @@ const VOWEL_AUDIO: AudioEntry[] = [
 
 // Syllables: consonant + kamatz (/a/ sound) for Level 3
 const LEVEL3_CONSONANTS = ['ב', 'שׁ', 'ל', 'מ', 'א', 'ד', 'ה', 'י', 'ת', 'ר'];
-const SYLLABLE_AUDIO: AudioEntry[] = LEVEL3_CONSONANTS.map(c => {
+const SYLLABLE_A_AUDIO: AudioEntry[] = LEVEL3_CONSONANTS.map(c => {
   const names: Record<string, string> = {
     'ב': 'ba', 'שׁ': 'sha', 'ל': 'la', 'מ': 'ma', 'א': 'a',
     'ד': 'da', 'ה': 'ha', 'י': 'ya', 'ת': 'ta', 'ר': 'ra',
@@ -112,6 +112,32 @@ const SYLLABLE_AUDIO: AudioEntry[] = LEVEL3_CONSONANTS.map(c => {
     description: `Syllable ${name}`,
   };
 });
+
+// Syllables: consonant + chirik (/i/ sound) for Level 5
+const SYLLABLE_I_AUDIO: AudioEntry[] = [
+  { filename: 'syllables/bi.mp3', text: 'בי', description: 'Syllable bi' },
+  { filename: 'syllables/shi.mp3', text: 'שי', description: 'Syllable shi' },
+  { filename: 'syllables/li.mp3', text: 'לי', description: 'Syllable li' },
+  { filename: 'syllables/mi.mp3', text: 'מי', description: 'Syllable mi' },
+  { filename: 'syllables/di.mp3', text: 'די', description: 'Syllable di' },
+  { filename: 'syllables/ti.mp3', text: 'תי', description: 'Syllable ti' },
+  { filename: 'syllables/ri.mp3', text: 'רי', description: 'Syllable ri' },
+  { filename: 'syllables/hi.mp3', text: 'הי', description: 'Syllable hi' },
+];
+
+// Syllables: consonant + segol (/e/ sound) for Level 5
+const SYLLABLE_E_AUDIO: AudioEntry[] = [
+  { filename: 'syllables/be.mp3', text: 'בֶּה', description: 'Syllable be' },
+  { filename: 'syllables/me.mp3', text: 'מֶה', description: 'Syllable me' },
+  { filename: 'syllables/le.mp3', text: 'לֶה', description: 'Syllable le' },
+  { filename: 'syllables/she.mp3', text: 'שֶׁה', description: 'Syllable she' },
+  { filename: 'syllables/de.mp3', text: 'דֶה', description: 'Syllable de' },
+  { filename: 'syllables/re.mp3', text: 'רֶה', description: 'Syllable re' },
+  { filename: 'syllables/he2.mp3', text: 'הֶה', description: 'Syllable he (segol)' },
+  { filename: 'syllables/te.mp3', text: 'תֶּה', description: 'Syllable te' },
+];
+
+const SYLLABLE_AUDIO: AudioEntry[] = [...SYLLABLE_A_AUDIO, ...SYLLABLE_I_AUDIO, ...SYLLABLE_E_AUDIO];
 
 const WORD_AUDIO: AudioEntry[] = [
   { filename: 'words/ima.mp3', text: 'אימא', description: 'Word: ima (mom)' },
@@ -152,6 +178,10 @@ const NARRATION_AUDIO: AudioEntry[] = [
   { filename: 'narration/hear-find-letter.mp3', text: 'שמעו את הצליל ומצאו את האות!', description: 'Instruction: hear and find letter' },
   { filename: 'narration/build-words.mp3', text: 'שמעו ומצאו את הצירופים!', description: 'Instruction: build words' },
   { filename: 'narration/match-syllable-pairs.mp3', text: 'התאימו כל צירוף לצליל שלו!', description: 'Instruction: match syllable pairs' },
+  // Level 5 instruction audio
+  { filename: 'narration/find-with-chirik.mp3', text: 'מצאו את האות עם החיריק!', description: 'Instruction: find with chirik' },
+  { filename: 'narration/find-with-segol.mp3', text: 'מצאו את האות עם הסגול!', description: 'Instruction: find with segol' },
+  { filename: 'narration/hear-find-word.mp3', text: 'שמעו את המילה ומצאו אותה!', description: 'Instruction: hear and find word' },
 ];
 
 // Per-letter wrong-answer feedback: "זו האות X, נסה שוב"
