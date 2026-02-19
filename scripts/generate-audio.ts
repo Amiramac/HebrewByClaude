@@ -116,10 +116,10 @@ const SYLLABLE_A_AUDIO: AudioEntry[] = LEVEL3_CONSONANTS.map(c => {
 // Syllables: consonant + chirik (/i/ sound) for Level 5
 const SYLLABLE_I_AUDIO: AudioEntry[] = [
   { filename: 'syllables/bi.mp3', text: 'בי', description: 'Syllable bi' },
-  { filename: 'syllables/shi.mp3', text: 'שי', description: 'Syllable shi' },
+  { filename: 'syllables/shi.mp3', text: 'שִׁ', description: 'Syllable shi' },
   { filename: 'syllables/li.mp3', text: 'לי', description: 'Syllable li' },
   { filename: 'syllables/mi.mp3', text: 'מי', description: 'Syllable mi' },
-  { filename: 'syllables/di.mp3', text: 'די', description: 'Syllable di' },
+  { filename: 'syllables/di.mp3', text: 'דִּ', description: 'Syllable di' },
   { filename: 'syllables/ti.mp3', text: 'תי', description: 'Syllable ti' },
   { filename: 'syllables/ri.mp3', text: 'רי', description: 'Syllable ri' },
   { filename: 'syllables/hi.mp3', text: 'הי', description: 'Syllable hi' },
@@ -214,64 +214,64 @@ const LETTER_FEEDBACK_AUDIO: AudioEntry[] = [
   { filename: 'feedback/tsadi-wrong.mp3', text: 'זו האות צדי, נסה שוב', description: 'Feedback: Tsadi' },
 ];
 
-// Per-letter identify prompt: "זהֵה את האות X."
+// Per-letter identify prompt: "זַהֵה את האות X."
 const LETTER_IDENTIFY_AUDIO: AudioEntry[] = [
   // Level 1
-  { filename: 'identify/alef.mp3', text: 'זהֵה את האות אלף.', description: 'Identify: Alef' },
-  { filename: 'identify/shin.mp3', text: 'זהֵה את האות שין.', description: 'Identify: Shin' },
-  { filename: 'identify/lamed.mp3', text: 'זהֵה את האות לָמד.', description: 'Identify: Lamed' },
-  { filename: 'identify/mem.mp3', text: 'זהֵה את האות מם.', description: 'Identify: Mem' },
-  { filename: 'identify/bet.mp3', text: 'זהֵה את האות בֵית.', description: 'Identify: Bet' },
+  { filename: 'identify/alef.mp3', text: 'זַהֵה את האות אלף.', description: 'Identify: Alef' },
+  { filename: 'identify/shin.mp3', text: 'זַהֵה את האות שין.', description: 'Identify: Shin' },
+  { filename: 'identify/lamed.mp3', text: 'זַהֵה את האות לָמד.', description: 'Identify: Lamed' },
+  { filename: 'identify/mem.mp3', text: 'זַהֵה את האות מם.', description: 'Identify: Mem' },
+  { filename: 'identify/bet.mp3', text: 'זַהֵה את האות בֵית.', description: 'Identify: Bet' },
   // Level 2
-  { filename: 'identify/dalet.mp3', text: 'זהֵה את האות דָלת.', description: 'Identify: Dalet' },
-  { filename: 'identify/he.mp3', text: 'זהֵה את האות הא.', description: 'Identify: He' },
-  { filename: 'identify/yod.mp3', text: 'זהֵה את האות יוד.', description: 'Identify: Yod' },
-  { filename: 'identify/tav.mp3', text: 'זהֵה את האות תו.', description: 'Identify: Tav' },
-  { filename: 'identify/resh.mp3', text: 'זהֵה את האות ריש.', description: 'Identify: Resh' },
+  { filename: 'identify/dalet.mp3', text: 'זַהֵה את האות דָלת.', description: 'Identify: Dalet' },
+  { filename: 'identify/he.mp3', text: 'זַהֵה את האות הא.', description: 'Identify: He' },
+  { filename: 'identify/yod.mp3', text: 'זַהֵה את האות יוד.', description: 'Identify: Yod' },
+  { filename: 'identify/tav.mp3', text: 'זַהֵה את האות תו.', description: 'Identify: Tav' },
+  { filename: 'identify/resh.mp3', text: 'זַהֵה את האות ריש.', description: 'Identify: Resh' },
   // Level 4
-  { filename: 'identify/chet.mp3', text: 'זהֵה את האות חית.', description: 'Identify: Chet' },
-  { filename: 'identify/kaf.mp3', text: 'זהֵה את האות כף.', description: 'Identify: Kaf' },
-  { filename: 'identify/nun.mp3', text: 'זהֵה את האות נון.', description: 'Identify: Nun' },
-  { filename: 'identify/ayin.mp3', text: 'זהֵה את האות עין.', description: 'Identify: Ayin' },
-  { filename: 'identify/pe.mp3', text: 'זהֵה את האות פא.', description: 'Identify: Pe' },
-  { filename: 'identify/gimel.mp3', text: 'זהֵה את האות גימל.', description: 'Identify: Gimel' },
-  { filename: 'identify/zayin.mp3', text: 'זהֵה את האות זין.', description: 'Identify: Zayin' },
-  { filename: 'identify/vav.mp3', text: 'זהֵה את האות וו.', description: 'Identify: Vav' },
+  { filename: 'identify/chet.mp3', text: 'זַהֵה את האות חית.', description: 'Identify: Chet' },
+  { filename: 'identify/kaf.mp3', text: 'זַהֵה את האות כף.', description: 'Identify: Kaf' },
+  { filename: 'identify/nun.mp3', text: 'זַהֵה את האות נון.', description: 'Identify: Nun' },
+  { filename: 'identify/ayin.mp3', text: 'זַהֵה את האות עין.', description: 'Identify: Ayin' },
+  { filename: 'identify/pe.mp3', text: 'זַהֵה את האות פא.', description: 'Identify: Pe' },
+  { filename: 'identify/gimel.mp3', text: 'זַהֵה את האות גימל.', description: 'Identify: Gimel' },
+  { filename: 'identify/zayin.mp3', text: 'זַהֵה את האות זין.', description: 'Identify: Zayin' },
+  { filename: 'identify/vav.mp3', text: 'זַהֵה את האות וו.', description: 'Identify: Vav' },
   // Level 6
-  { filename: 'identify/tet.mp3', text: 'זהֵה את האות טית.', description: 'Identify: Tet' },
-  { filename: 'identify/samekh.mp3', text: 'זהֵה את האות סָמך.', description: 'Identify: Samekh' },
-  { filename: 'identify/kuf.mp3', text: 'זהֵה את האות קוף.', description: 'Identify: Kuf' },
-  { filename: 'identify/tsadi.mp3', text: 'זהֵה את האות צדי.', description: 'Identify: Tsadi' },
+  { filename: 'identify/tet.mp3', text: 'זַהֵה את האות טית.', description: 'Identify: Tet' },
+  { filename: 'identify/samekh.mp3', text: 'זַהֵה את האות סָמך.', description: 'Identify: Samekh' },
+  { filename: 'identify/kuf.mp3', text: 'זַהֵה את האות קוף.', description: 'Identify: Kuf' },
+  { filename: 'identify/tsadi.mp3', text: 'זַהֵה את האות צדי.', description: 'Identify: Tsadi' },
 ];
 
-// Per-letter identify prompt (feminine): "זהי את האות X."
+// Per-letter identify prompt (feminine): "זַהִי את האות X."
 const LETTER_IDENTIFY_F_AUDIO: AudioEntry[] = [
   // Level 1
-  { filename: 'identify-f/alef.mp3', text: 'זהי את האות אלף.', description: 'Identify-F: Alef' },
-  { filename: 'identify-f/shin.mp3', text: 'זהי את האות שין.', description: 'Identify-F: Shin' },
-  { filename: 'identify-f/lamed.mp3', text: 'זהי את האות לָמד.', description: 'Identify-F: Lamed' },
-  { filename: 'identify-f/mem.mp3', text: 'זהי את האות מם.', description: 'Identify-F: Mem' },
-  { filename: 'identify-f/bet.mp3', text: 'זהי את האות בֵית.', description: 'Identify-F: Bet' },
+  { filename: 'identify-f/alef.mp3', text: 'זַהִי את האות אלף.', description: 'Identify-F: Alef' },
+  { filename: 'identify-f/shin.mp3', text: 'זַהִי את האות שין.', description: 'Identify-F: Shin' },
+  { filename: 'identify-f/lamed.mp3', text: 'זַהִי את האות לָמד.', description: 'Identify-F: Lamed' },
+  { filename: 'identify-f/mem.mp3', text: 'זַהִי את האות מם.', description: 'Identify-F: Mem' },
+  { filename: 'identify-f/bet.mp3', text: 'זַהִי את האות בֵית.', description: 'Identify-F: Bet' },
   // Level 2
-  { filename: 'identify-f/dalet.mp3', text: 'זהי את האות דָלת.', description: 'Identify-F: Dalet' },
-  { filename: 'identify-f/he.mp3', text: 'זהי את האות הא.', description: 'Identify-F: He' },
-  { filename: 'identify-f/yod.mp3', text: 'זהי את האות יוד.', description: 'Identify-F: Yod' },
-  { filename: 'identify-f/tav.mp3', text: 'זהי את האות תו.', description: 'Identify-F: Tav' },
-  { filename: 'identify-f/resh.mp3', text: 'זהי את האות ריש.', description: 'Identify-F: Resh' },
+  { filename: 'identify-f/dalet.mp3', text: 'זַהִי את האות דָלת.', description: 'Identify-F: Dalet' },
+  { filename: 'identify-f/he.mp3', text: 'זַהִי את האות הא.', description: 'Identify-F: He' },
+  { filename: 'identify-f/yod.mp3', text: 'זַהִי את האות יוד.', description: 'Identify-F: Yod' },
+  { filename: 'identify-f/tav.mp3', text: 'זַהִי את האות תו.', description: 'Identify-F: Tav' },
+  { filename: 'identify-f/resh.mp3', text: 'זַהִי את האות ריש.', description: 'Identify-F: Resh' },
   // Level 4
-  { filename: 'identify-f/chet.mp3', text: 'זהי את האות חית.', description: 'Identify-F: Chet' },
-  { filename: 'identify-f/kaf.mp3', text: 'זהי את האות כף.', description: 'Identify-F: Kaf' },
-  { filename: 'identify-f/nun.mp3', text: 'זהי את האות נון.', description: 'Identify-F: Nun' },
-  { filename: 'identify-f/ayin.mp3', text: 'זהי את האות עין.', description: 'Identify-F: Ayin' },
-  { filename: 'identify-f/pe.mp3', text: 'זהי את האות פא.', description: 'Identify-F: Pe' },
-  { filename: 'identify-f/gimel.mp3', text: 'זהי את האות גימל.', description: 'Identify-F: Gimel' },
-  { filename: 'identify-f/zayin.mp3', text: 'זהי את האות זין.', description: 'Identify-F: Zayin' },
-  { filename: 'identify-f/vav.mp3', text: 'זהי את האות וו.', description: 'Identify-F: Vav' },
+  { filename: 'identify-f/chet.mp3', text: 'זַהִי את האות חית.', description: 'Identify-F: Chet' },
+  { filename: 'identify-f/kaf.mp3', text: 'זַהִי את האות כף.', description: 'Identify-F: Kaf' },
+  { filename: 'identify-f/nun.mp3', text: 'זַהִי את האות נון.', description: 'Identify-F: Nun' },
+  { filename: 'identify-f/ayin.mp3', text: 'זַהִי את האות עין.', description: 'Identify-F: Ayin' },
+  { filename: 'identify-f/pe.mp3', text: 'זַהִי את האות פא.', description: 'Identify-F: Pe' },
+  { filename: 'identify-f/gimel.mp3', text: 'זַהִי את האות גימל.', description: 'Identify-F: Gimel' },
+  { filename: 'identify-f/zayin.mp3', text: 'זַהִי את האות זין.', description: 'Identify-F: Zayin' },
+  { filename: 'identify-f/vav.mp3', text: 'זַהִי את האות וו.', description: 'Identify-F: Vav' },
   // Level 6
-  { filename: 'identify-f/tet.mp3', text: 'זהי את האות טית.', description: 'Identify-F: Tet' },
-  { filename: 'identify-f/samekh.mp3', text: 'זהי את האות סָמך.', description: 'Identify-F: Samekh' },
-  { filename: 'identify-f/kuf.mp3', text: 'זהי את האות קוף.', description: 'Identify-F: Kuf' },
-  { filename: 'identify-f/tsadi.mp3', text: 'זהי את האות צדי.', description: 'Identify-F: Tsadi' },
+  { filename: 'identify-f/tet.mp3', text: 'זַהִי את האות טית.', description: 'Identify-F: Tet' },
+  { filename: 'identify-f/samekh.mp3', text: 'זַהִי את האות סָמך.', description: 'Identify-F: Samekh' },
+  { filename: 'identify-f/kuf.mp3', text: 'זַהִי את האות קוף.', description: 'Identify-F: Kuf' },
+  { filename: 'identify-f/tsadi.mp3', text: 'זַהִי את האות צדי.', description: 'Identify-F: Tsadi' },
 ];
 
 // ── API Call ─────────────────────────────────────────────────────
