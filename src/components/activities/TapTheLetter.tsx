@@ -47,14 +47,22 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
       itemCountRef.current++;
       setShuffledOptions(shuffle(currentItem.options));
       const src = currentItem.promptAudio ?? getLetterIdentifyAudio(currentItem.prompt, gender);
-      if (src) {
-        // First item: short delay. After that: longer delay so "כל הכבוד" finishes
+
+      if (identifyTimer.current) clearTimeout(identifyTimer.current);
+
+      if (itemCountRef.current === 1 && activity.instructionAudio) {
+        // First item: play instruction, then prompt after instruction finishes
+        play(activity.instructionAudio);
+        if (src) {
+          identifyTimer.current = setTimeout(() => play(src), 2500);
+        }
+      } else if (src) {
+        // Subsequent items: delay so "כל הכבוד" finishes
         const delay = itemCountRef.current > 1 ? 1800 : 400;
-        if (identifyTimer.current) clearTimeout(identifyTimer.current);
         identifyTimer.current = setTimeout(() => play(src), delay);
       }
     }
-  }, [currentItem, play, gender]);
+  }, [currentItem, play, gender, activity.instructionAudio]);
 
   const handleReplay = () => {
     if (promptAudio) {

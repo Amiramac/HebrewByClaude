@@ -146,6 +146,12 @@ const NARRATION_AUDIO: AudioEntry[] = [
   { filename: 'narration/first-vowel.mp3', text: 'היום נלמד את התנועה הראשונה! קמץ אומר אה!', description: 'First vowel intro' },
   { filename: 'narration/great-job.mp3', text: 'עשית עבודה מצוינת!', description: 'Great job' },
   { filename: 'narration/level-complete.mp3', text: 'כל הכבוד! סיימת את השלב!', description: 'Level complete' },
+  // Level 3 instruction audio
+  { filename: 'narration/find-with-kamatz.mp3', text: 'מצאו את האות עם הקמץ!', description: 'Instruction: find with kamatz' },
+  { filename: 'narration/listen-choose-syllable.mp3', text: 'הקשיבו ולחצו על הצירוף הנכון!', description: 'Instruction: listen choose syllable' },
+  { filename: 'narration/hear-find-letter.mp3', text: 'שמעו את הצליל ומצאו את האות!', description: 'Instruction: hear and find letter' },
+  { filename: 'narration/build-words.mp3', text: 'שמעו ומצאו את הצירופים!', description: 'Instruction: build words' },
+  { filename: 'narration/match-syllable-pairs.mp3', text: 'התאימו כל צירוף לצליל שלו!', description: 'Instruction: match syllable pairs' },
 ];
 
 // Per-letter wrong-answer feedback: "זו האות X, נסה שוב"

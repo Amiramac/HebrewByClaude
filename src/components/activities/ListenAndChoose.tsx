@@ -34,15 +34,29 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
   const [showStars, setShowStars] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const promptTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const itemCountRef = useRef(0);
 
   useEffect(() => {
     if (currentItem) {
+      itemCountRef.current++;
       setShuffledOptions(shuffle(currentItem.options));
-      if (currentItem.promptAudio) {
-        setTimeout(() => play(currentItem.promptAudio!), 400);
+
+      if (promptTimer.current) clearTimeout(promptTimer.current);
+
+      if (itemCountRef.current === 1 && activity.instructionAudio) {
+        // First item: play instruction, then prompt after instruction finishes
+        play(activity.instructionAudio);
+        if (currentItem.promptAudio) {
+          promptTimer.current = setTimeout(() => play(currentItem.promptAudio!), 2500);
+        }
+      } else if (currentItem.promptAudio) {
+        // Subsequent items: short delay (or longer after correct answer)
+        const delay = itemCountRef.current > 1 ? 1800 : 400;
+        promptTimer.current = setTimeout(() => play(currentItem.promptAudio!), delay);
       }
     }
-  }, [currentItem, play]);
+  }, [currentItem, play, activity.instructionAudio]);
 
   // feedbackKey changes on EVERY answer, so this always fires
   useEffect(() => {
