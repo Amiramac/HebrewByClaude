@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Activity } from '@/types/levels';
 import { useActivity } from '@/hooks/useActivity';
 import { useAudio } from '@/hooks/useAudio';
+import { useAppStore } from '@/store/appStore';
 import LetterCard from '@/components/hebrew/LetterCard';
 import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
@@ -18,6 +19,8 @@ interface ListenAndChooseProps {
 }
 
 export default function ListenAndChoose({ activity, onComplete }: ListenAndChooseProps) {
+  const { difficulty, addWordToReinforce } = useAppStore();
+
   const {
     currentItem,
     progress,
@@ -27,7 +30,7 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
     lastAnswer,
     feedbackKey,
     submitAnswer,
-  } = useActivity(activity);
+  } = useActivity(activity, addWordToReinforce);
 
   const { play, playCorrect, playEncourage } = useAudio();
   const [showEncourage, setShowEncourage] = useState(false);
@@ -36,28 +39,27 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
   const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const instructionPlayedRef = useRef(false);
 
-  // Deterministic first-item check (works in Strict Mode unlike mutable counter)
   const firstItemId = activity.items[0]?.id;
 
   useEffect(() => {
     if (!currentItem) return;
 
     setShuffledOptions(shuffle(currentItem.options));
+
+    // Easy: auto-play prompt. Medium/Hard: don't auto-play.
+    if (difficulty !== 'easy') return;
+
     const isFirstItem = currentItem.id === firstItemId;
 
     let timer: ReturnType<typeof setTimeout> | null = null;
 
     if (isFirstItem && activity.instructionAudio && !instructionPlayedRef.current) {
-      // First item with instruction: play instruction, then prompt after it finishes
       instructionPlayedRef.current = true;
       play(activity.instructionAudio);
       if (currentItem.promptAudio) {
         timer = setTimeout(() => play(currentItem.promptAudio!), 2500);
       }
     } else if (currentItem.promptAudio) {
-      // Strict Mode re-fire after instruction: keep the 2500ms delay
-      // First item without instruction: 400ms
-      // Subsequent items: 1800ms (wait for "כל הכבוד" to finish)
       const delay = isFirstItem && instructionPlayedRef.current ? 2500
         : isFirstItem ? 400
         : 1800;
@@ -67,25 +69,28 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [currentItem, play, activity.instructionAudio, firstItemId]);
+  }, [currentItem, play, activity.instructionAudio, firstItemId, difficulty]);
 
-  // feedbackKey changes on EVERY answer, so this always fires
   useEffect(() => {
     if (feedbackKey === 0) return;
 
-    if (encourageTimer.current) {
-      clearTimeout(encourageTimer.current);
-    }
+    if (encourageTimer.current) clearTimeout(encourageTimer.current);
 
     if (lastAnswerCorrect === true) {
       setShowEncourage(false);
-      playCorrect();
+      if (difficulty !== 'hard') playCorrect();
     } else if (lastAnswerCorrect === false) {
-      const feedbackSrc = lastAnswer ? getLetterFeedbackAudio(lastAnswer) : null;
-      if (feedbackSrc) {
-        play(feedbackSrc);
-      } else {
-        playEncourage();
+      if (difficulty !== 'hard') {
+        const feedbackSrc = lastAnswer ? getLetterFeedbackAudio(lastAnswer) : null;
+        if (feedbackSrc) {
+          play(feedbackSrc);
+        } else {
+          playEncourage();
+        }
+        // Medium: also replay the prompt after feedback
+        if (difficulty === 'medium' && currentItem?.promptAudio) {
+          setTimeout(() => play(currentItem.promptAudio!), 2000);
+        }
       }
       setShowEncourage(true);
       encourageTimer.current = setTimeout(() => setShowEncourage(false), 2500);
@@ -93,17 +98,14 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
   }, [feedbackKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (isComplete) {
-      setShowStars(true);
-    }
+    if (isComplete) setShowStars(true);
   }, [isComplete]);
 
   if (!currentItem) return null;
 
   const handleReplay = () => {
-    if (currentItem.promptAudio) {
-      play(currentItem.promptAudio);
-    }
+    if (difficulty === 'hard') return;
+    if (currentItem.promptAudio) play(currentItem.promptAudio);
   };
 
   return (
@@ -117,13 +119,14 @@ export default function ListenAndChoose({ activity, onComplete }: ListenAndChoos
       >
         <p className="text-xl text-gray-600 mb-4">{activity.instruction}</p>
 
-        {currentItem.promptAudio && (
+        {currentItem.promptAudio && difficulty !== 'hard' && (
           <Button onClick={handleReplay} variant="secondary" size="lg">
-            <span className="text-4xl">
-              {'\uD83D\uDD0A'}
-            </span>
+            <span className="text-4xl">{'\uD83D\uDD0A'}</span>
             <span className="mr-2">שמע שוב</span>
           </Button>
+        )}
+        {difficulty === 'hard' && (
+          <p className="text-2xl font-bold hebrew-letter">{currentItem.prompt}</p>
         )}
       </motion.div>
 

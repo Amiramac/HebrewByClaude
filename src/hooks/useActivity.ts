@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { Activity } from '@/types/levels';
+
+const SLOW_ANSWER_THRESHOLD_MS = 7000;
 
 interface ActivityState {
   currentItemIndex: number;
@@ -14,7 +16,7 @@ interface ActivityState {
   feedbackKey: number;
 }
 
-export function useActivity(activity: Activity) {
+export function useActivity(activity: Activity, onReinforceWord?: (word: string) => void) {
   const [state, setState] = useState<ActivityState>({
     currentItemIndex: 0,
     correctCount: 0,
@@ -30,9 +32,23 @@ export function useActivity(activity: Activity) {
   const stateRef = useRef(state);
   stateRef.current = state;
 
+  const onReinforceWordRef = useRef(onReinforceWord);
+  onReinforceWordRef.current = onReinforceWord;
+
   const currentItem = activity.items[state.currentItemIndex] || null;
   const totalItems = activity.items.length;
   const progress = totalItems > 0 ? state.currentItemIndex / totalItems : 0;
+
+  // 7-second slow-answer timer: resets on each new item and on any answer (feedbackKey change)
+  useEffect(() => {
+    if (!currentItem || state.isComplete) return;
+
+    const timer = setTimeout(() => {
+      onReinforceWordRef.current?.(currentItem.prompt);
+    }, SLOW_ANSWER_THRESHOLD_MS);
+
+    return () => clearTimeout(timer);
+  }, [currentItem?.id, state.feedbackKey, state.isComplete]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const submitAnswer = useCallback((answer: string) => {
     const s = stateRef.current;
@@ -44,6 +60,11 @@ export function useActivity(activity: Activity) {
     const newAttempts = s.attempts + 1;
     const newFeedbackKey = s.feedbackKey + 1;
     const isLastItem = s.currentItemIndex >= activity.items.length - 1;
+
+    // Track wrong answers for reinforcement
+    if (!isCorrect) {
+      onReinforceWordRef.current?.(item.prompt);
+    }
 
     if (isCorrect && isLastItem) {
       const accuracy = newCorrectCount / activity.items.length;

@@ -15,7 +15,7 @@ type View =
   | { screen: 'level'; levelId: number }
   | { screen: 'lesson'; levelId: number; lesson: Lesson };
 
-function WelcomeScreen({ onSelectGender }: { onSelectGender: (g: Gender) => void }) {
+function GenderScreen({ onSelectGender }: { onSelectGender: (g: Gender) => void }) {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-10 px-6">
       <motion.div
@@ -86,7 +86,7 @@ export default function Home() {
   };
 
   if (!gender) {
-    return <WelcomeScreen onSelectGender={setGender} />;
+    return <GenderScreen onSelectGender={setGender} />;
   }
 
   return (

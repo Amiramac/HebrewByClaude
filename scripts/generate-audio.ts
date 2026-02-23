@@ -155,6 +155,9 @@ const WORD_AUDIO: AudioEntry[] = [
   { filename: 'words/lechem.mp3', text: 'לחם', description: 'Word: lechem (bread)' },
   { filename: 'words/shemesh.mp3', text: 'שמש', description: 'Word: shemesh (sun)' },
   { filename: 'words/yareach.mp3', text: 'ירח', description: 'Word: yareach (moon)' },
+  // Level 7 words
+  { filename: 'words/or.mp3', text: 'אוֹר', description: 'Word: or (light)' },
+  { filename: 'words/yom.mp3', text: 'יוֹם', description: 'Word: yom (day)' },
 ];
 
 const UI_AUDIO: AudioEntry[] = [
@@ -162,6 +165,28 @@ const UI_AUDIO: AudioEntry[] = [
   { filename: 'ui/encourage.mp3', text: 'נסה שוב!', description: 'UI: try again' },
   { filename: 'ui/celebrate.mp3', text: 'מצוין! סיימת!', description: 'UI: celebration' },
   { filename: 'ui/tap.mp3', text: 'היי!', description: 'UI: tap feedback' },
+];
+
+// Level 7 — Cholam /o/ syllables
+const SYLLABLE_O_AUDIO: AudioEntry[] = [
+  { filename: 'syllables/bo.mp3', text: 'בּוֹ', description: 'Syllable bo' },
+  { filename: 'syllables/lo.mp3', text: 'לוֹ', description: 'Syllable lo' },
+  { filename: 'syllables/mo.mp3', text: 'מוֹ', description: 'Syllable mo' },
+  { filename: 'syllables/sho.mp3', text: 'שׁוֹ', description: 'Syllable sho' },
+  { filename: 'syllables/ro.mp3', text: 'רוֹ', description: 'Syllable ro' },
+  { filename: 'syllables/to.mp3', text: 'תּוֹ', description: 'Syllable to' },
+  { filename: 'syllables/do.mp3', text: 'דּוֹ', description: 'Syllable do' },
+];
+
+// Level 7 — Kubutz /u/ syllables
+const SYLLABLE_U_AUDIO: AudioEntry[] = [
+  { filename: 'syllables/bu.mp3', text: 'בֻּ', description: 'Syllable bu' },
+  { filename: 'syllables/lu.mp3', text: 'לֻ', description: 'Syllable lu' },
+  { filename: 'syllables/mu.mp3', text: 'מֻ', description: 'Syllable mu' },
+  { filename: 'syllables/shu.mp3', text: 'שֻׁ', description: 'Syllable shu' },
+  { filename: 'syllables/ru.mp3', text: 'רֻ', description: 'Syllable ru' },
+  { filename: 'syllables/tu.mp3', text: 'תֻּ', description: 'Syllable tu' },
+  { filename: 'syllables/du.mp3', text: 'דֻּ', description: 'Syllable du' },
 ];
 
 const NARRATION_AUDIO: AudioEntry[] = [
@@ -182,6 +207,10 @@ const NARRATION_AUDIO: AudioEntry[] = [
   { filename: 'narration/find-with-chirik.mp3', text: 'מצאו את האות עם החיריק!', description: 'Instruction: find with chirik' },
   { filename: 'narration/find-with-segol.mp3', text: 'מצאו את האות עם הסגול!', description: 'Instruction: find with segol' },
   { filename: 'narration/hear-find-word.mp3', text: 'שמעו את המילה ומצאו אותה!', description: 'Instruction: hear and find word' },
+  // Level 7 instruction audio
+  { filename: 'narration/find-with-tzereh.mp3', text: 'מצאו את הצירוף עם הצרה!', description: 'Instruction: find with tzereh' },
+  { filename: 'narration/find-with-cholam.mp3', text: 'מצאו את הצירוף עם החולם!', description: 'Instruction: find with cholam' },
+  { filename: 'narration/find-with-kubutz.mp3', text: 'מצאו את הצירוף עם הקובוץ!', description: 'Instruction: find with kubutz' },
 ];
 
 // Per-letter wrong-answer feedback: "זו האות X, נסה שוב"
@@ -336,6 +365,8 @@ async function main() {
     ...LETTER_AUDIO,
     ...VOWEL_AUDIO,
     ...SYLLABLE_AUDIO,
+    ...SYLLABLE_O_AUDIO,
+    ...SYLLABLE_U_AUDIO,
     ...WORD_AUDIO,
     ...UI_AUDIO,
     ...NARRATION_AUDIO,
