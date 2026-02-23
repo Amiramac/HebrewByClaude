@@ -182,53 +182,99 @@ function LevelDetail({
         </div>
       )}
 
-      {/* Lessons list */}
-      <div className="flex flex-col gap-3">
-        {level.lessons.map((lesson, index) => {
-          const result = completedLessons[lesson.id];
-          const isCompleted = !!result;
+      {/* Lessons list — category grid if lessons have categoryIcon, otherwise standard list */}
+      {level.lessons.some(l => l.categoryIcon) ? (
+        <div className="grid grid-cols-2 gap-4">
+          {level.lessons.map((lesson, index) => {
+            const result = completedLessons[lesson.id];
+            const isCompleted = !!result;
 
-          return (
-            <motion.button
-              key={lesson.id}
-              className={`w-full text-right rounded-2xl p-5 shadow-md transition-all ${
-                isCompleted
-                  ? 'bg-success/10 border-2 border-success'
-                  : 'bg-card-bg border-2 border-gray-100 hover:border-primary/30'
-              }`}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => onSelectLesson(lesson)}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-            >
-              <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${
-                  isCompleted ? 'bg-success text-white' : 'bg-gray-100 text-gray-500'
-                }`}>
-                  {isCompleted ? '\u2713' : index + 1}
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg">{lesson.titleHebrew}</h3>
-                  <p className="text-sm text-gray-500">{lesson.description}</p>
-                </div>
+            return (
+              <motion.button
+                key={lesson.id}
+                className={`relative flex flex-col items-center justify-center gap-3 rounded-3xl p-6 shadow-lg border-4 min-h-36 transition-all ${
+                  isCompleted
+                    ? 'bg-success/10 border-success'
+                    : 'bg-card-bg border-gray-100 hover:border-primary/40'
+                }`}
+                whileTap={{ scale: 0.93 }}
+                whileHover={{ scale: 1.03 }}
+                onClick={() => onSelectLesson(lesson)}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.07, type: 'spring', stiffness: 260, damping: 20 }}
+              >
+                <span className="text-5xl">{lesson.categoryIcon}</span>
+                <h3 className="font-bold text-xl text-center leading-tight">{lesson.titleHebrew}</h3>
                 {isCompleted && (
-                  <div className="flex gap-0.5">
+                  <div className="absolute top-2 left-2 flex gap-0.5">
                     {Array.from({ length: 3 }).map((_, i) => (
                       <span
                         key={i}
-                        className={`text-lg ${i < (result?.stars || 0) ? 'text-star-gold' : 'text-gray-300'}`}
+                        className={`text-sm ${i < (result?.stars || 0) ? 'text-star-gold' : 'text-gray-300'}`}
                       >
                         {'\u2605'}
                       </span>
                     ))}
                   </div>
                 )}
-              </div>
-            </motion.button>
-          );
-        })}
-      </div>
+                {isCompleted && (
+                  <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-success flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">{'\u2713'}</span>
+                  </div>
+                )}
+              </motion.button>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {level.lessons.map((lesson, index) => {
+            const result = completedLessons[lesson.id];
+            const isCompleted = !!result;
+
+            return (
+              <motion.button
+                key={lesson.id}
+                className={`w-full text-right rounded-2xl p-5 shadow-md transition-all ${
+                  isCompleted
+                    ? 'bg-success/10 border-2 border-success'
+                    : 'bg-card-bg border-2 border-gray-100 hover:border-primary/30'
+                }`}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onSelectLesson(lesson)}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${
+                    isCompleted ? 'bg-success text-white' : 'bg-gray-100 text-gray-500'
+                  }`}>
+                    {isCompleted ? '\u2713' : index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-lg">{lesson.titleHebrew}</h3>
+                    <p className="text-sm text-gray-500">{lesson.description}</p>
+                  </div>
+                  {isCompleted && (
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 3 }).map((_, i) => (
+                        <span
+                          key={i}
+                          className={`text-lg ${i < (result?.stars || 0) ? 'text-star-gold' : 'text-gray-300'}`}
+                        >
+                          {'\u2605'}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+      )}
 
       {/* Back button */}
       <div className="mt-8 text-center">

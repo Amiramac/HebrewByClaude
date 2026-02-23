@@ -42,6 +42,7 @@ export interface Lesson {
   title: string;
   titleHebrew: string;
   description: string;
+  categoryIcon?: string;
   activities: Activity[];
 }
 

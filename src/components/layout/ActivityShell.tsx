@@ -4,6 +4,7 @@ import { Activity } from '@/types/levels';
 import TapTheLetter from '@/components/activities/TapTheLetter';
 import MatchPairs from '@/components/activities/MatchPairs';
 import ListenAndChoose from '@/components/activities/ListenAndChoose';
+import WordPictureMatch from '@/components/activities/WordPictureMatch';
 
 interface ActivityShellProps {
   activity: Activity;
@@ -22,6 +23,8 @@ export default function ActivityShell({ activity, onComplete }: ActivityShellPro
     case 'build-syllable':
       // For MVP, build-syllable uses the same UI as listen-and-choose
       return <ListenAndChoose activity={activity} onComplete={onComplete} />;
+    case 'word-picture-match':
+      return <WordPictureMatch activity={activity} onComplete={onComplete} />;
     default:
       return (
         <div className="text-center p-8">
