@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useAppStore } from '@/store/appStore';
+import { useProgressStore } from '@/store/progressStore';
 import WelcomeScreen from './WelcomeScreen';
 import TimerGuard from './TimerGuard';
 import ParentDashboard from './ParentDashboard';
@@ -18,8 +19,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   const [showDashboard, setShowDashboard] = useState(false);
 
-  // Reset timer on new day (runs once on mount)
+  // Rehydrate Zustand stores from localStorage after mount.
+  // Both stores use skipHydration:true so the server and client initial renders
+  // both use default state, preventing React hydration mismatches.
   useEffect(() => {
+    useAppStore.persist.rehydrate();
+    useProgressStore.persist.rehydrate();
     resetTimerForToday();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -144,6 +144,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'hebrew-by-claude-app',
+      skipHydration: true,
     }
   )
 );

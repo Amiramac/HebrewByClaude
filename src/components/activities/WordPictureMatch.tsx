@@ -6,6 +6,7 @@ import { Activity } from '@/types/levels';
 import { useActivity } from '@/hooks/useActivity';
 import { useAudio } from '@/hooks/useAudio';
 import { useAppStore } from '@/store/appStore';
+import { useProgressStore } from '@/store/progressStore';
 import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
 import EncourageToast from '@/components/feedback/EncourageToast';
@@ -18,6 +19,7 @@ interface WordPictureMatchProps {
 
 export default function WordPictureMatch({ activity, onComplete }: WordPictureMatchProps) {
   const { addWordToReinforce } = useAppStore();
+  const { gender } = useProgressStore();
 
   const {
     currentItem,
@@ -30,54 +32,79 @@ export default function WordPictureMatch({ activity, onComplete }: WordPictureMa
     submitAnswer,
   } = useActivity(activity, addWordToReinforce);
 
-  const { play, playCorrect, playEncourage } = useAudio();
+  const { play, playWithCallback, playCorrect, playEncourage } = useAudio();
   const [showStars, setShowStars] = useState(false);
   const [showEncourage, setShowEncourage] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   const [shakenOption, setShakenOption] = useState<string | null>(null);
+  // successOption: the emoji the child just tapped correctly — shows green while audio plays
+  const [successOption, setSuccessOption] = useState<string | null>(null);
   const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Reshuffle options when item changes
+  // Reshuffle and clear visual state when the word changes
   useEffect(() => {
     if (currentItem) {
       setShuffledOptions(shuffle(currentItem.options));
       setShakenOption(null);
+      setSuccessOption(null);
     }
   }, [currentItem?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Handle feedback after each answer
+  // Wrong-answer feedback only — correct answers are fully handled in handleTap
   useEffect(() => {
-    if (feedbackKey === 0) return;
+    if (feedbackKey === 0 || lastAnswerCorrect !== false) return;
     if (encourageTimer.current) clearTimeout(encourageTimer.current);
 
-    if (lastAnswerCorrect === true) {
-      setShowEncourage(false);
-      // Play specific success sentence: "[word], קראת נכון!"
-      if (currentItem?.correctFeedbackAudio) {
-        play(currentItem.correctFeedbackAudio);
-      } else {
-        playCorrect();
-      }
-    } else if (lastAnswerCorrect === false) {
-      setShakenOption(lastAnswer ?? null);
-      // Play specific wrong-image sentence: "זה [description], נסה שוב"
-      const wrongAudio = activity.optionMeta?.[lastAnswer ?? '']?.wrongAudio;
-      if (wrongAudio) {
-        play(wrongAudio);
-      } else {
-        playEncourage();
-      }
-      setShowEncourage(true);
-      encourageTimer.current = setTimeout(() => {
-        setShowEncourage(false);
-        setShakenOption(null);
-      }, 2500);
+    setShakenOption(lastAnswer ?? null);
+    const wrongAudio = activity.optionMeta?.[lastAnswer ?? '']?.wrongAudio;
+    if (wrongAudio) {
+      play(wrongAudio);
+    } else {
+      playEncourage();
     }
+    setShowEncourage(true);
+    encourageTimer.current = setTimeout(() => {
+      setShowEncourage(false);
+      setShakenOption(null);
+    }, 2500);
   }, [feedbackKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (isComplete) setShowStars(true);
   }, [isComplete]);
+
+  const handleTap = (option: string) => {
+    // Block taps while success audio is playing or activity is done
+    if (isComplete || successOption !== null) return;
+
+    if (option === currentItem?.correct) {
+      // Phase 1: show green border immediately
+      setSuccessOption(option);
+
+      // Derive gendered audio: /audio/word-correct/ima.mp3 → ima-m.mp3 or ima-f.mp3
+      // Explicit niqqud (הִצְלַחְתָּ / הִצְלַחְתְּ) prevents ElevenLabs from guessing gender.
+      const baseAudio = currentItem.correctFeedbackAudio;
+      const genderSuffix = gender === 'girl' ? '-f' : '-m';
+      const audio = baseAudio ? baseAudio.replace('.mp3', `${genderSuffix}.mp3`) : null;
+      if (audio) {
+        // Phase 2: advance ONLY after audio finishes — screen stays on current word
+        playWithCallback(audio, () => {
+          setSuccessOption(null);
+          submitAnswer(option);
+        });
+      } else {
+        playCorrect();
+        // No audio configured — short visual pause then advance
+        setTimeout(() => {
+          setSuccessOption(null);
+          submitAnswer(option);
+        }, 800);
+      }
+    } else {
+      // Wrong tap: submit immediately (stays on same item, feedback via useEffect above)
+      submitAnswer(option);
+    }
+  };
 
   if (!currentItem) return null;
 
@@ -111,24 +138,31 @@ export default function WordPictureMatch({ activity, onComplete }: WordPictureMa
       >
         {shuffledOptions.map((option) => {
           const isShaking = shakenOption === option;
+          const isSuccess = successOption === option;
+
           return (
             <motion.button
               key={`${currentItem.id}-${option}`}
               className={`
                 aspect-square rounded-3xl bg-white shadow-lg border-4 text-6xl
-                flex items-center justify-center
-                transition-colors active:scale-95
-                ${isShaking ? 'border-red-400 bg-red-50' : 'border-gray-100 hover:border-primary/40'}
+                flex items-center justify-center transition-colors
+                ${isSuccess
+                  ? 'border-green-400 bg-green-50'
+                  : isShaking
+                    ? 'border-red-400 bg-red-50'
+                    : 'border-gray-100 hover:border-primary/40'}
               `}
               animate={
-                isShaking
-                  ? { x: [0, -12, 12, -8, 8, -4, 4, 0] }
-                  : { x: 0 }
+                isSuccess
+                  ? { scale: [1, 1.1, 1.05] }
+                  : isShaking
+                    ? { x: [0, -12, 12, -8, 8, -4, 4, 0] }
+                    : { x: 0, scale: 1 }
               }
               transition={{ duration: 0.4 }}
-              whileTap={{ scale: 0.92 }}
-              onClick={() => !isComplete && submitAnswer(option)}
-              disabled={isComplete}
+              whileTap={successOption === null ? { scale: 0.92 } : {}}
+              onClick={() => handleTap(option)}
+              disabled={isComplete || successOption !== null}
             >
               {option}
             </motion.button>

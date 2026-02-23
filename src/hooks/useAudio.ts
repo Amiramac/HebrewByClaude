@@ -46,5 +46,27 @@ export function useAudio() {
     play('/audio/ui/tap.mp3');
   }, [play]);
 
-  return { play, playCorrect, playEncourage, playCelebrate, playTap };
+  /**
+   * Play audio and invoke onEnd exactly once when it finishes.
+   * Also calls onEnd on load/play errors so the caller never gets stuck.
+   */
+  const playWithCallback = useCallback((src: string, onEnd: () => void) => {
+    if (currentRef.current) {
+      currentRef.current.stop();
+    }
+    try {
+      const howl = getOrCreateHowl(src);
+      currentRef.current = howl;
+      let called = false;
+      const done = () => { if (!called) { called = true; onEnd(); } };
+      howl.once('end', done);
+      howl.once('playerror', done);
+      howl.once('loaderror', done);
+      howl.play();
+    } catch {
+      onEnd();
+    }
+  }, []);
+
+  return { play, playWithCallback, playCorrect, playEncourage, playCelebrate, playTap };
 }

@@ -303,23 +303,43 @@ const LETTER_IDENTIFY_F_AUDIO: AudioEntry[] = [
   { filename: 'identify-f/tsadi.mp3', text: 'זַהִי את האות צדי.', description: 'Identify-F: Tsadi' },
 ];
 
-// Level 7 — Correct reading feedback: "[word], קראת נכון!"
-const WORD_CORRECT_AUDIO: AudioEntry[] = [
-  { filename: 'word-correct/ima.mp3',     text: 'אמא, קראת נכון!',   description: 'Correct: ima' },
-  { filename: 'word-correct/aba.mp3',     text: 'אבא, קראת נכון!',   description: 'Correct: aba' },
-  { filename: 'word-correct/yeled.mp3',   text: 'ילד, קראת נכון!',   description: 'Correct: yeled' },
-  { filename: 'word-correct/yalda.mp3',   text: 'ילדה, קראת נכון!',  description: 'Correct: yalda' },
-  { filename: 'word-correct/dag.mp3',     text: 'דג, קראת נכון!',    description: 'Correct: dag' },
-  { filename: 'word-correct/kelev.mp3',   text: 'כלב, קראת נכון!',   description: 'Correct: kelev' },
-  { filename: 'word-correct/chatul.mp3',  text: 'חתול, קראת נכון!',  description: 'Correct: chatul' },
-  { filename: 'word-correct/shemesh.mp3', text: 'שמש, קראת נכון!',   description: 'Correct: shemesh' },
-  { filename: 'word-correct/yareach.mp3', text: 'ירח, קראת נכון!',   description: 'Correct: yareach' },
-  { filename: 'word-correct/mayim.mp3',   text: 'מים, קראת נכון!',   description: 'Correct: mayim' },
-  { filename: 'word-correct/yad.mp3',     text: 'יד, קראת נכון!',    description: 'Correct: yad' },
-  { filename: 'word-correct/bayit.mp3',   text: 'בית, קראת נכון!',   description: 'Correct: bayit' },
-  { filename: 'word-correct/sefer.mp3',   text: 'ספר, קראת נכון!',   description: 'Correct: sefer' },
-  { filename: 'word-correct/lechem.mp3',  text: 'לחם, קראת נכון!',   description: 'Correct: lechem' },
-  { filename: 'word-correct/shalom.mp3',  text: 'שלום, קראת נכון!',  description: 'Correct: shalom' },
+// Level 7 — Correct reading feedback, masculine: "[word], הִצְלַחְתָּ!"
+// Explicit niqqud forces ElevenLabs to use the correct gendered conjugation.
+const WORD_CORRECT_M_AUDIO: AudioEntry[] = [
+  { filename: 'word-correct/ima-m.mp3',     text: 'אמא, הִצְלַחְתָּ!',   description: 'Correct-M: ima' },
+  { filename: 'word-correct/aba-m.mp3',     text: 'אבא, הִצְלַחְתָּ!',   description: 'Correct-M: aba' },
+  { filename: 'word-correct/yeled-m.mp3',   text: 'ילד, הִצְלַחְתָּ!',   description: 'Correct-M: yeled' },
+  { filename: 'word-correct/yalda-m.mp3',   text: 'ילדה, הִצְלַחְתָּ!',  description: 'Correct-M: yalda' },
+  { filename: 'word-correct/dag-m.mp3',     text: 'דג, הִצְלַחְתָּ!',    description: 'Correct-M: dag' },
+  { filename: 'word-correct/kelev-m.mp3',   text: 'כלב, הִצְלַחְתָּ!',   description: 'Correct-M: kelev' },
+  { filename: 'word-correct/chatul-m.mp3',  text: 'חתול, הִצְלַחְתָּ!',  description: 'Correct-M: chatul' },
+  { filename: 'word-correct/shemesh-m.mp3', text: 'שמש, הִצְלַחְתָּ!',   description: 'Correct-M: shemesh' },
+  { filename: 'word-correct/yareach-m.mp3', text: 'ירח, הִצְלַחְתָּ!',   description: 'Correct-M: yareach' },
+  { filename: 'word-correct/mayim-m.mp3',   text: 'מים, הִצְלַחְתָּ!',   description: 'Correct-M: mayim' },
+  { filename: 'word-correct/yad-m.mp3',     text: 'יד, הִצְלַחְתָּ!',    description: 'Correct-M: yad' },
+  { filename: 'word-correct/bayit-m.mp3',   text: 'בית, הִצְלַחְתָּ!',   description: 'Correct-M: bayit' },
+  { filename: 'word-correct/sefer-m.mp3',   text: 'ספר, הִצְלַחְתָּ!',   description: 'Correct-M: sefer' },
+  { filename: 'word-correct/lechem-m.mp3',  text: 'לחם, הִצְלַחְתָּ!',   description: 'Correct-M: lechem' },
+  { filename: 'word-correct/shalom-m.mp3',  text: 'שלום, הִצְלַחְתָּ!',  description: 'Correct-M: shalom' },
+];
+
+// Level 7 — Correct reading feedback, feminine: "[word], הִצְלַחְתְּ!"
+const WORD_CORRECT_F_AUDIO: AudioEntry[] = [
+  { filename: 'word-correct/ima-f.mp3',     text: 'אמא, הִצְלַחְתְּ!',   description: 'Correct-F: ima' },
+  { filename: 'word-correct/aba-f.mp3',     text: 'אבא, הִצְלַחְתְּ!',   description: 'Correct-F: aba' },
+  { filename: 'word-correct/yeled-f.mp3',   text: 'ילד, הִצְלַחְתְּ!',   description: 'Correct-F: yeled' },
+  { filename: 'word-correct/yalda-f.mp3',   text: 'ילדה, הִצְלַחְתְּ!',  description: 'Correct-F: yalda' },
+  { filename: 'word-correct/dag-f.mp3',     text: 'דג, הִצְלַחְתְּ!',    description: 'Correct-F: dag' },
+  { filename: 'word-correct/kelev-f.mp3',   text: 'כלב, הִצְלַחְתְּ!',   description: 'Correct-F: kelev' },
+  { filename: 'word-correct/chatul-f.mp3',  text: 'חתול, הִצְלַחְתְּ!',  description: 'Correct-F: chatul' },
+  { filename: 'word-correct/shemesh-f.mp3', text: 'שמש, הִצְלַחְתְּ!',   description: 'Correct-F: shemesh' },
+  { filename: 'word-correct/yareach-f.mp3', text: 'ירח, הִצְלַחְתְּ!',   description: 'Correct-F: yareach' },
+  { filename: 'word-correct/mayim-f.mp3',   text: 'מים, הִצְלַחְתְּ!',   description: 'Correct-F: mayim' },
+  { filename: 'word-correct/yad-f.mp3',     text: 'יד, הִצְלַחְתְּ!',    description: 'Correct-F: yad' },
+  { filename: 'word-correct/bayit-f.mp3',   text: 'בית, הִצְלַחְתְּ!',   description: 'Correct-F: bayit' },
+  { filename: 'word-correct/sefer-f.mp3',   text: 'ספר, הִצְלַחְתְּ!',   description: 'Correct-F: sefer' },
+  { filename: 'word-correct/lechem-f.mp3',  text: 'לחם, הִצְלַחְתְּ!',   description: 'Correct-F: lechem' },
+  { filename: 'word-correct/shalom-f.mp3',  text: 'שלום, הִצְלַחְתְּ!',  description: 'Correct-F: shalom' },
 ];
 
 // Level 7 — Wrong image feedback: "זה/זו [description], נסה שוב"
@@ -412,7 +432,8 @@ async function main() {
     ...LETTER_FEEDBACK_AUDIO,
     ...LETTER_IDENTIFY_AUDIO,
     ...LETTER_IDENTIFY_F_AUDIO,
-    ...WORD_CORRECT_AUDIO,
+    ...WORD_CORRECT_M_AUDIO,
+    ...WORD_CORRECT_F_AUDIO,
     ...WORD_WRONG_AUDIO,
   ];
 
