@@ -303,6 +303,45 @@ const LETTER_IDENTIFY_F_AUDIO: AudioEntry[] = [
   { filename: 'identify-f/tsadi.mp3', text: 'זַהִי את האות צדי.', description: 'Identify-F: Tsadi' },
 ];
 
+// Level 7 — Correct reading feedback: "[word], קראת נכון!"
+const WORD_CORRECT_AUDIO: AudioEntry[] = [
+  { filename: 'word-correct/ima.mp3',     text: 'אמא, קראת נכון!',   description: 'Correct: ima' },
+  { filename: 'word-correct/aba.mp3',     text: 'אבא, קראת נכון!',   description: 'Correct: aba' },
+  { filename: 'word-correct/yeled.mp3',   text: 'ילד, קראת נכון!',   description: 'Correct: yeled' },
+  { filename: 'word-correct/yalda.mp3',   text: 'ילדה, קראת נכון!',  description: 'Correct: yalda' },
+  { filename: 'word-correct/dag.mp3',     text: 'דג, קראת נכון!',    description: 'Correct: dag' },
+  { filename: 'word-correct/kelev.mp3',   text: 'כלב, קראת נכון!',   description: 'Correct: kelev' },
+  { filename: 'word-correct/chatul.mp3',  text: 'חתול, קראת נכון!',  description: 'Correct: chatul' },
+  { filename: 'word-correct/shemesh.mp3', text: 'שמש, קראת נכון!',   description: 'Correct: shemesh' },
+  { filename: 'word-correct/yareach.mp3', text: 'ירח, קראת נכון!',   description: 'Correct: yareach' },
+  { filename: 'word-correct/mayim.mp3',   text: 'מים, קראת נכון!',   description: 'Correct: mayim' },
+  { filename: 'word-correct/yad.mp3',     text: 'יד, קראת נכון!',    description: 'Correct: yad' },
+  { filename: 'word-correct/bayit.mp3',   text: 'בית, קראת נכון!',   description: 'Correct: bayit' },
+  { filename: 'word-correct/sefer.mp3',   text: 'ספר, קראת נכון!',   description: 'Correct: sefer' },
+  { filename: 'word-correct/lechem.mp3',  text: 'לחם, קראת נכון!',   description: 'Correct: lechem' },
+  { filename: 'word-correct/shalom.mp3',  text: 'שלום, קראת נכון!',  description: 'Correct: shalom' },
+];
+
+// Level 7 — Wrong image feedback: "זה/זו [description], נסה שוב"
+const WORD_WRONG_AUDIO: AudioEntry[] = [
+  { filename: 'word-wrong/ima.mp3',     text: 'זו אמא, נסה שוב',    description: 'Wrong: ima' },
+  { filename: 'word-wrong/aba.mp3',     text: 'זה אבא, נסה שוב',    description: 'Wrong: aba' },
+  { filename: 'word-wrong/yeled.mp3',   text: 'זה ילד, נסה שוב',    description: 'Wrong: yeled' },
+  { filename: 'word-wrong/yalda.mp3',   text: 'זו ילדה, נסה שוב',   description: 'Wrong: yalda' },
+  { filename: 'word-wrong/dag.mp3',     text: 'זה דג, נסה שוב',     description: 'Wrong: dag' },
+  { filename: 'word-wrong/kelev.mp3',   text: 'זה כלב, נסה שוב',    description: 'Wrong: kelev' },
+  { filename: 'word-wrong/chatul.mp3',  text: 'זה חתול, נסה שוב',   description: 'Wrong: chatul' },
+  { filename: 'word-wrong/tzipor.mp3',  text: 'זו ציפור, נסה שוב',  description: 'Wrong: tzipor' },
+  { filename: 'word-wrong/shemesh.mp3', text: 'זו שמש, נסה שוב',    description: 'Wrong: shemesh' },
+  { filename: 'word-wrong/yareach.mp3', text: 'זה ירח, נסה שוב',    description: 'Wrong: yareach' },
+  { filename: 'word-wrong/mayim.mp3',   text: 'אלה מים, נסה שוב',   description: 'Wrong: mayim' },
+  { filename: 'word-wrong/yad.mp3',     text: 'זו יד, נסה שוב',     description: 'Wrong: yad' },
+  { filename: 'word-wrong/bayit.mp3',   text: 'זה בית, נסה שוב',    description: 'Wrong: bayit' },
+  { filename: 'word-wrong/sefer.mp3',   text: 'זה ספר, נסה שוב',    description: 'Wrong: sefer' },
+  { filename: 'word-wrong/lechem.mp3',  text: 'זה לחם, נסה שוב',    description: 'Wrong: lechem' },
+  { filename: 'word-wrong/shalom.mp3',  text: 'זה שלום, נסה שוב',   description: 'Wrong: shalom' },
+];
+
 // ── API Call ─────────────────────────────────────────────────────
 
 async function generateAudio(entry: AudioEntry): Promise<boolean> {
@@ -373,6 +412,8 @@ async function main() {
     ...LETTER_FEEDBACK_AUDIO,
     ...LETTER_IDENTIFY_AUDIO,
     ...LETTER_IDENTIFY_F_AUDIO,
+    ...WORD_CORRECT_AUDIO,
+    ...WORD_WRONG_AUDIO,
   ];
 
   console.log(`\nHebrewByClaude Audio Generator`);

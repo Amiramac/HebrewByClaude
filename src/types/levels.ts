@@ -18,6 +18,11 @@ export type ActivityType =
   | 'word-picture-match'
   | 'find-the-letter';
 
+export interface OptionMeta {
+  description: string;      // Hebrew label, e.g. 'כלב'
+  wrongAudio?: string;      // "זה כלב, נסה שוב" — played when this option is tapped incorrectly
+}
+
 export interface Activity {
   id: string;
   type: ActivityType;
@@ -25,6 +30,7 @@ export interface Activity {
   instructionAudio?: string;
   items: ActivityItem[];
   maxStars: number;
+  optionMeta?: Record<string, OptionMeta>; // emoji → metadata, shared across all items in activity
 }
 
 export interface ActivityItem {
@@ -34,6 +40,7 @@ export interface ActivityItem {
   correct: string;
   options: string[];
   image?: string;
+  correctFeedbackAudio?: string; // "[word], קראת נכון!" — played after correct tap
 }
 
 export interface Lesson {

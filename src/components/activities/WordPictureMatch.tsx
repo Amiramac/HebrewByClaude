@@ -52,21 +52,26 @@ export default function WordPictureMatch({ activity, onComplete }: WordPictureMa
 
     if (lastAnswerCorrect === true) {
       setShowEncourage(false);
-      playCorrect();
-      // Play the word audio AFTER correct — reinforces silent reading
-      if (currentItem?.promptAudio) {
-        const timer = setTimeout(() => play(currentItem.promptAudio!), 600);
-        return () => clearTimeout(timer);
+      // Play specific success sentence: "[word], קראת נכון!"
+      if (currentItem?.correctFeedbackAudio) {
+        play(currentItem.correctFeedbackAudio);
+      } else {
+        playCorrect();
       }
     } else if (lastAnswerCorrect === false) {
-      // Shake the wrong card, encourage — but NO word audio
       setShakenOption(lastAnswer ?? null);
-      playEncourage();
+      // Play specific wrong-image sentence: "זה [description], נסה שוב"
+      const wrongAudio = activity.optionMeta?.[lastAnswer ?? '']?.wrongAudio;
+      if (wrongAudio) {
+        play(wrongAudio);
+      } else {
+        playEncourage();
+      }
       setShowEncourage(true);
       encourageTimer.current = setTimeout(() => {
         setShowEncourage(false);
         setShakenOption(null);
-      }, 2000);
+      }, 2500);
     }
   }, [feedbackKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
