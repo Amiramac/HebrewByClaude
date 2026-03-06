@@ -2,15 +2,17 @@
 
 import { useCallback, useRef } from 'react';
 import { Howl } from 'howler';
+import { resolveAudioUrl } from '@/lib/audioUrl';
 
 const audioCache = new Map<string, Howl>();
 
 function getOrCreateHowl(src: string): Howl {
-  if (audioCache.has(src)) {
-    return audioCache.get(src)!;
+  const url = resolveAudioUrl(src);
+  if (audioCache.has(url)) {
+    return audioCache.get(url)!;
   }
-  const howl = new Howl({ src: [src], preload: true });
-  audioCache.set(src, howl);
+  const howl = new Howl({ src: [url], preload: true });
+  audioCache.set(url, howl);
   return howl;
 }
 
