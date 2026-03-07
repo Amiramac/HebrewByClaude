@@ -9,6 +9,17 @@ import StarRating from '@/components/ui/StarRating';
 import Confetti from '@/components/feedback/Confetti';
 import { useAudio } from '@/hooks/useAudio';
 import { logLearningSession } from '@/lib/supabase';
+import VowelIntro from '@/components/activities/VowelIntro';
+
+// Map introVideo paths → animation props
+const VOWEL_INTRO_DATA: Record<string, { vowelName: string; vowelSound: string; letter: string; vowelChar: string }> = {
+  '/videos/vowels/kamatz.mp4': {
+    vowelName: 'קָמַץ',
+    vowelSound: 'אָ',
+    letter: 'א',
+    vowelChar: '\u05B8',
+  },
+};
 
 interface LessonShellProps {
   lesson: Lesson;
@@ -20,6 +31,7 @@ interface LessonShellProps {
 }
 
 export default function LessonShell({ lesson, levelNumber, levelName, levelColor, onComplete, onBack }: LessonShellProps) {
+  const [showIntro, setShowIntro] = useState(!!lesson.introVideo);
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
   const [activityStars, setActivityStars] = useState<number[]>([]);
   const [isLessonComplete, setIsLessonComplete] = useState(false);
@@ -79,8 +91,24 @@ export default function LessonShell({ lesson, levelNumber, levelName, levelColor
         <div className="w-12" />
       </div>
 
+      {/* Vowel intro animation — shown before first activity */}
+      {showIntro && lesson.introVideo && VOWEL_INTRO_DATA[lesson.introVideo] && (
+        <motion.div
+          className="flex-1 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <VowelIntro
+            videoSrc={lesson.introVideo}
+            {...VOWEL_INTRO_DATA[lesson.introVideo]}
+            onContinue={() => setShowIntro(false)}
+          />
+        </motion.div>
+      )}
+
       {/* Activity area */}
-      <div className="flex-1 flex items-center justify-center py-8">
+      {!showIntro && <div className="flex-1 flex items-center justify-center py-8">
         <AnimatePresence mode="wait">
           {currentActivity && !isLessonComplete && (
             <motion.div
@@ -118,7 +146,7 @@ export default function LessonShell({ lesson, levelNumber, levelName, levelColor
             </Button>
           </motion.div>
         )}
-      </div>
+      </div>}
 
       <Confetti show={isLessonComplete} />
     </div>

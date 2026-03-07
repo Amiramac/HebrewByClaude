@@ -51,6 +51,7 @@ export interface Lesson {
   description: string;
   categoryIcon?: string;
   activities: Activity[];
+  introVideo?: string; // e.g. '/videos/vowels/kamatz.mp4' — shown before first activity
 }
 
 export interface Level {

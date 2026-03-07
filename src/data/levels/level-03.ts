@@ -17,6 +17,7 @@ const level03: Level = {
       title: 'הכירו את קָמַץ',
       titleHebrew: 'הכירו את קָמַץ',
       description: 'הצורה הקטנה מתחת לאות אומרת "אָ"!',
+      introVideo: '/videos/vowels/kamatz.mp4',
       activities: [
         {
           id: 'l3-kamatz-find',
