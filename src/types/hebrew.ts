@@ -18,6 +18,7 @@ export interface NikkudMark {
   position: 'below' | 'above' | 'inside';
   audioFile: string;
   level: number;
+  videoSrc?: string; // e.g. '/videos/vowels/kamatz.mp4' — intro video shown before practice
 }
 
 export interface Syllable {

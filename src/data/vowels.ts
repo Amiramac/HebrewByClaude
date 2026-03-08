@@ -2,7 +2,7 @@ import { NikkudMark } from '@/types/hebrew';
 
 export const NIKKUD_MARKS: NikkudMark[] = [
   // Level 3 — The First Vowel (/a/ sound)
-  { character: '\u05B8', name: 'Kamatz', nameHebrew: 'קָמַץ', sound: 'a', position: 'below', audioFile: '/audio/vowels/kamatz.mp3', level: 3 },
+  { character: '\u05B8', name: 'Kamatz', nameHebrew: 'קָמַץ', sound: 'a', position: 'below', audioFile: '/audio/vowels/kamatz.mp3', level: 3, videoSrc: '/videos/vowels/kamatz.mp4' },
   { character: '\u05B7', name: 'Patach', nameHebrew: 'פַּתָח', sound: 'a', position: 'below', audioFile: '/audio/vowels/patach.mp3', level: 3 },
 
   // Level 5 — More Vowels
