@@ -210,3 +210,13 @@ docker run -p 3000:3000 hebrew-by-claude
 ---
 
 *HebrewByClaude — כי לכל ילד מגיע להכיר את שפת אמו.*
+
+---
+
+## 📋 Changelog
+
+### [2026-03-21] — מיזוג claude/test + כתיבת README מקיף
+- מוזג ענף `origin/claude/test` לענף הראשי — הביא רמות 7-8, AppShell עם לוח הורים, TimerGuard, תיקון Zustand hydration crash, אודיו מגדרי, ו-250+ קבצי MP3
+- נכתב README חדש מאפס: היסטוריה, פדגוגיה, קשיי פיתוח, מצב נוכחי, ארכיטקטורה
+- נוסף סקשן Changelog (המסמך הזה)
+- קבצים: `README.md`, merge commit מ-`origin/claude/test`
