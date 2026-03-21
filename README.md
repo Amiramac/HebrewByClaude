@@ -215,6 +215,13 @@ docker run -p 3000:3000 hebrew-by-claude
 
 ## 📋 Changelog
 
+### [2026-03-21] — שחזור 4 קומיטים מהשרת + מיזוג מלא
+- שוחזרו 4 קומיטים שהיו רק על השרת (Oracle) ולא הגיעו ל-GitHub
+- אנימציית הכנסת ניקוד לרמה 3 (VowelIntro → VowelVideoPlayer), עם אודיו ו-3 דוגמאות אותיות מחזוריות
+- רפקטורינג: VowelVideoPlayer גנרי המבוסס על NIKKUD_MARKS במקום hardcoded data
+- פתרון conflicts עם שינויי Supabase
+- קבצים: `src/components/layout/LessonShell.tsx`, `src/components/activities/VowelVideoPlayer.tsx`, `STATUS.md`
+
 ### [2026-03-21] — חיבור Supabase לתיעוד נתוני למידה
 - נוצר `src/lib/supabase.ts` עם client + פונקציית `logLearningSession`
 - בכל סיום פעילות נשלח רשומה ל-Supabase: רמה, סוג פעילות, משך זמן, פריטים נכונים מתוך סך הפריטים, ציון אחוזי
