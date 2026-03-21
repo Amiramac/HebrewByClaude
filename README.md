@@ -215,6 +215,13 @@ docker run -p 3000:3000 hebrew-by-claude
 
 ## 📋 Changelog
 
+### [2026-03-21] — חיבור Supabase לתיעוד נתוני למידה
+- נוצר `src/lib/supabase.ts` עם client + פונקציית `logLearningSession`
+- בכל סיום פעילות נשלח רשומה ל-Supabase: רמה, סוג פעילות, משך זמן, פריטים נכונים מתוך סך הפריטים, ציון אחוזי
+- עודכן `LessonShell` לקבל `levelNumber` + `levelName`, למדוד זמן פעילות, ולקרוא ל-`logLearningSession` בכל סיום
+- עודכן `page.tsx` להעביר את פרטי הרמה ל-`LessonShell`
+- קבצים: `src/lib/supabase.ts`, `src/components/layout/LessonShell.tsx`, `src/app/page.tsx`
+
 ### [2026-03-21] — מיזוג claude/test + כתיבת README מקיף
 - מוזג ענף `origin/claude/test` לענף הראשי — הביא רמות 7-8, AppShell עם לוח הורים, TimerGuard, תיקון Zustand hydration crash, אודיו מגדרי, ו-250+ קבצי MP3
 - נכתב README חדש מאפס: היסטוריה, פדגוגיה, קשיי פיתוח, מצב נוכחי, ארכיטקטורה

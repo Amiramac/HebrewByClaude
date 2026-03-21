@@ -128,6 +128,8 @@ export default function Home() {
         >
           <LessonShell
             lesson={view.lesson}
+            levelNumber={view.levelId}
+            levelName={getLevelById(view.levelId)?.titleHebrew}
             levelColor={getLevelById(view.levelId)?.color || '#4A90D9'}
             onComplete={(stars) => handleLessonComplete(view.levelId, view.lesson, stars)}
             onBack={() => setView({ screen: 'level', levelId: view.levelId })}

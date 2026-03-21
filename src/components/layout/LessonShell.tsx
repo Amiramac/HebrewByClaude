@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lesson } from '@/types/levels';
 import ActivityShell from './ActivityShell';
@@ -8,24 +8,43 @@ import Button from '@/components/ui/Button';
 import StarRating from '@/components/ui/StarRating';
 import Confetti from '@/components/feedback/Confetti';
 import { useAudio } from '@/hooks/useAudio';
+import { logLearningSession } from '@/lib/supabase';
 
 interface LessonShellProps {
   lesson: Lesson;
+  levelNumber: number;
+  levelName?: string;
   levelColor: string;
   onComplete: (totalStars: number) => void;
   onBack: () => void;
 }
 
-export default function LessonShell({ lesson, levelColor, onComplete, onBack }: LessonShellProps) {
+export default function LessonShell({ lesson, levelNumber, levelName, levelColor, onComplete, onBack }: LessonShellProps) {
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
   const [activityStars, setActivityStars] = useState<number[]>([]);
   const [isLessonComplete, setIsLessonComplete] = useState(false);
   const { playCelebrate } = useAudio();
+  const activityStartTime = useRef(Date.now());
 
   const currentActivity = lesson.activities[currentActivityIndex];
   const totalActivities = lesson.activities.length;
 
   const handleActivityComplete = (stars: number) => {
+    const duration = Math.round((Date.now() - activityStartTime.current) / 1000);
+    const activity = lesson.activities[currentActivityIndex];
+    const itemsTotal = activity.items?.length ?? 0;
+    const itemsCorrect = Math.round((stars / (activity.maxStars || 3)) * itemsTotal);
+
+    logLearningSession({
+      level_number: levelNumber,
+      level_name: levelName,
+      activity_type: activity.type,
+      duration_seconds: duration,
+      items_correct: itemsCorrect,
+      items_total: itemsTotal,
+    });
+
+    activityStartTime.current = Date.now();
     const newStars = [...activityStars, stars];
     setActivityStars(newStars);
 
