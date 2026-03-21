@@ -43,7 +43,7 @@ async function analyzeWithClaude(sessions, childName) {
   const avgScore = Math.round(sessions.reduce((sum, s) => sum + s.score, 0) / sessions.length);
 
   const prompt = `אתה מורה מומחה ללמידת עברית לילדים.
-${childName} למדה היום. הנה הנתונים:
+${childName} למד היום. הנה הנתונים:
 
 ${sessionsText}
 
@@ -52,7 +52,7 @@ ${sessionsText}
 מספר פעילויות: ${sessions.length}
 
 כתוב ניתוח קצר בעברית עם:
-1. במה ${childName} הצליחה היום (משפט אחד)
+1. במה ${childName} הצליח היום (משפט אחד)
 2. מה צריך תרגול נוסף (משפט אחד)
 3. המלצה ספציפית למחר (משפט אחד)
 

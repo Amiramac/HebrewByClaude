@@ -215,6 +215,10 @@ docker run -p 3000:3000 hebrew-by-claude
 
 ## 📋 Changelog
 
+### [2026-03-21] — שינוי מגדר בפרומפטים של הסוכנים
+- "למדה" → "למד", "הצליחה" → "הצליח", "חזקה" → "חזק", "בת 4" → "בן 4"
+- קבצים: `hebrew-agent/daily-report.js`, `hebrew-agent/adaptive-teacher.js`
+
 ### [2026-03-21] — שדרוג daily-report: multi-parent מטבלת Supabase
 - הסוכן שולף הורים פעילים מטבלת `parents` ושולח דוח נפרד לכל הורה
 - בוט טלגרם חדש: `@hebrew_by_claude_bot`
