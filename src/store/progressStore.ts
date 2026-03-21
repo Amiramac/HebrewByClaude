@@ -83,6 +83,7 @@ export const useProgressStore = create<ProgressStore>()(
     }),
     {
       name: 'hebrew-by-claude-progress',
+      skipHydration: true,
     }
   )
 );

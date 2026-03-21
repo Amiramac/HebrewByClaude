@@ -6,6 +6,7 @@ import { Activity } from '@/types/levels';
 import { useActivity } from '@/hooks/useActivity';
 import { useAudio } from '@/hooks/useAudio';
 import { useProgressStore } from '@/store/progressStore';
+import { useAppStore } from '@/store/appStore';
 import LetterCard from '@/components/hebrew/LetterCard';
 import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
@@ -19,6 +20,8 @@ interface TapTheLetterProps {
 }
 
 export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps) {
+  const { difficulty, addWordToReinforce } = useAppStore();
+
   const {
     currentItem,
     progress,
@@ -28,7 +31,7 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
     lastAnswer,
     feedbackKey,
     submitAnswer,
-  } = useActivity(activity);
+  } = useActivity(activity, addWordToReinforce);
 
   const { play, playCorrect, playEncourage } = useAudio();
   const { gender } = useProgressStore();
@@ -48,22 +51,22 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
     if (!currentItem) return;
 
     setShuffledOptions(shuffle(currentItem.options));
+
+    // Easy: auto-play prompt on new item. Medium/Hard: don't auto-play.
+    if (difficulty !== 'easy') return;
+
     const src = currentItem.promptAudio ?? getLetterIdentifyAudio(currentItem.prompt, gender);
     const isFirstItem = currentItem.id === firstItemId;
 
     let timer: ReturnType<typeof setTimeout> | null = null;
 
     if (isFirstItem && activity.instructionAudio && !instructionPlayedRef.current) {
-      // First item with instruction: play instruction, then prompt after it finishes
       instructionPlayedRef.current = true;
       play(activity.instructionAudio);
       if (src) {
         timer = setTimeout(() => play(src), 2500);
       }
     } else if (src) {
-      // Strict Mode re-fire after instruction: keep the 2500ms delay
-      // First item without instruction: 400ms
-      // Subsequent items: 1800ms (wait for "כל הכבוד" to finish)
       const delay = isFirstItem && instructionPlayedRef.current ? 2500
         : isFirstItem ? 400
         : 1800;
@@ -73,42 +76,46 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [currentItem, play, gender, activity.instructionAudio, firstItemId]);
+  }, [currentItem, play, gender, activity.instructionAudio, firstItemId, difficulty]);
 
   const handleReplay = () => {
-    if (promptAudio) {
-      play(promptAudio);
-    }
+    if (difficulty === 'hard') return;
+    if (promptAudio) play(promptAudio);
   };
 
-  // feedbackKey changes on EVERY answer, so this always fires
+  // feedbackKey changes on EVERY answer
   useEffect(() => {
-    if (feedbackKey === 0) return; // skip initial render
+    if (feedbackKey === 0) return;
 
-    if (encourageTimer.current) {
-      clearTimeout(encourageTimer.current);
-    }
+    if (encourageTimer.current) clearTimeout(encourageTimer.current);
 
     if (lastAnswerCorrect === true) {
       setShowEncourage(false);
-      playCorrect();
+      if (difficulty !== 'hard') playCorrect();
     } else if (lastAnswerCorrect === false) {
-      // Play "זו האות X, נסה שוב" if feedback audio exists, else generic
-      const feedbackSrc = lastAnswer ? getLetterFeedbackAudio(lastAnswer) : null;
-      if (feedbackSrc) {
-        play(feedbackSrc);
+      if (difficulty === 'hard') {
+        // Hard: visual feedback only
+        setShowEncourage(true);
+        encourageTimer.current = setTimeout(() => setShowEncourage(false), 2500);
       } else {
-        playEncourage();
+        // Easy & Medium: play feedback audio, then in Medium also replay the prompt
+        const feedbackSrc = lastAnswer ? getLetterFeedbackAudio(lastAnswer) : null;
+        if (feedbackSrc) {
+          play(feedbackSrc);
+        } else {
+          playEncourage();
+        }
+        if (difficulty === 'medium' && promptAudio) {
+          setTimeout(() => play(promptAudio), 2000);
+        }
+        setShowEncourage(true);
+        encourageTimer.current = setTimeout(() => setShowEncourage(false), 2500);
       }
-      setShowEncourage(true);
-      encourageTimer.current = setTimeout(() => setShowEncourage(false), 2500);
     }
   }, [feedbackKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (isComplete) {
-      setShowStars(true);
-    }
+    if (isComplete) setShowStars(true);
   }, [isComplete]);
 
   if (!currentItem) return null;
@@ -122,12 +129,15 @@ export default function TapTheLetter({ activity, onComplete }: TapTheLetterProps
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <Button onClick={handleReplay} variant="secondary" size="lg">
-          <span className="text-4xl">
-            {'\uD83D\uDD0A'}
-          </span>
-          <span className="mr-2">שמע שוב</span>
-        </Button>
+        {difficulty !== 'hard' && (
+          <Button onClick={handleReplay} variant="secondary" size="lg">
+            <span className="text-4xl">{'\uD83D\uDD0A'}</span>
+            <span className="mr-2">שמע שוב</span>
+          </Button>
+        )}
+        {difficulty === 'hard' && (
+          <p className="text-xl font-bold text-gray-600">{currentItem.prompt}</p>
+        )}
       </motion.div>
 
       <motion.div

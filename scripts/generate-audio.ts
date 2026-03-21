@@ -155,6 +155,9 @@ const WORD_AUDIO: AudioEntry[] = [
   { filename: 'words/lechem.mp3', text: 'לחם', description: 'Word: lechem (bread)' },
   { filename: 'words/shemesh.mp3', text: 'שמש', description: 'Word: shemesh (sun)' },
   { filename: 'words/yareach.mp3', text: 'ירח', description: 'Word: yareach (moon)' },
+  // Level 7 words
+  { filename: 'words/or.mp3', text: 'אוֹר', description: 'Word: or (light)' },
+  { filename: 'words/yom.mp3', text: 'יוֹם', description: 'Word: yom (day)' },
 ];
 
 const UI_AUDIO: AudioEntry[] = [
@@ -162,6 +165,28 @@ const UI_AUDIO: AudioEntry[] = [
   { filename: 'ui/encourage.mp3', text: 'נסה שוב!', description: 'UI: try again' },
   { filename: 'ui/celebrate.mp3', text: 'מצוין! סיימת!', description: 'UI: celebration' },
   { filename: 'ui/tap.mp3', text: 'היי!', description: 'UI: tap feedback' },
+];
+
+// Level 7 — Cholam /o/ syllables
+const SYLLABLE_O_AUDIO: AudioEntry[] = [
+  { filename: 'syllables/bo.mp3', text: 'בּוֹ', description: 'Syllable bo' },
+  { filename: 'syllables/lo.mp3', text: 'לוֹ', description: 'Syllable lo' },
+  { filename: 'syllables/mo.mp3', text: 'מוֹ', description: 'Syllable mo' },
+  { filename: 'syllables/sho.mp3', text: 'שׁוֹ', description: 'Syllable sho' },
+  { filename: 'syllables/ro.mp3', text: 'רוֹ', description: 'Syllable ro' },
+  { filename: 'syllables/to.mp3', text: 'תּוֹ', description: 'Syllable to' },
+  { filename: 'syllables/do.mp3', text: 'דּוֹ', description: 'Syllable do' },
+];
+
+// Level 7 — Kubutz /u/ syllables
+const SYLLABLE_U_AUDIO: AudioEntry[] = [
+  { filename: 'syllables/bu.mp3', text: 'בֻּ', description: 'Syllable bu' },
+  { filename: 'syllables/lu.mp3', text: 'לֻ', description: 'Syllable lu' },
+  { filename: 'syllables/mu.mp3', text: 'מֻ', description: 'Syllable mu' },
+  { filename: 'syllables/shu.mp3', text: 'שֻׁ', description: 'Syllable shu' },
+  { filename: 'syllables/ru.mp3', text: 'רֻ', description: 'Syllable ru' },
+  { filename: 'syllables/tu.mp3', text: 'תֻּ', description: 'Syllable tu' },
+  { filename: 'syllables/du.mp3', text: 'דֻּ', description: 'Syllable du' },
 ];
 
 const NARRATION_AUDIO: AudioEntry[] = [
@@ -182,6 +207,10 @@ const NARRATION_AUDIO: AudioEntry[] = [
   { filename: 'narration/find-with-chirik.mp3', text: 'מצאו את האות עם החיריק!', description: 'Instruction: find with chirik' },
   { filename: 'narration/find-with-segol.mp3', text: 'מצאו את האות עם הסגול!', description: 'Instruction: find with segol' },
   { filename: 'narration/hear-find-word.mp3', text: 'שמעו את המילה ומצאו אותה!', description: 'Instruction: hear and find word' },
+  // Level 7 instruction audio
+  { filename: 'narration/find-with-tzereh.mp3', text: 'מצאו את הצירוף עם הצרה!', description: 'Instruction: find with tzereh' },
+  { filename: 'narration/find-with-cholam.mp3', text: 'מצאו את הצירוף עם החולם!', description: 'Instruction: find with cholam' },
+  { filename: 'narration/find-with-kubutz.mp3', text: 'מצאו את הצירוף עם הקובוץ!', description: 'Instruction: find with kubutz' },
 ];
 
 // Per-letter wrong-answer feedback: "זו האות X, נסה שוב"
@@ -274,6 +303,65 @@ const LETTER_IDENTIFY_F_AUDIO: AudioEntry[] = [
   { filename: 'identify-f/tsadi.mp3', text: 'זַהִי את האות צדי.', description: 'Identify-F: Tsadi' },
 ];
 
+// Level 7 — Correct reading feedback, masculine: "[word], הִצְלַחְתָּ!"
+// Explicit niqqud forces ElevenLabs to use the correct gendered conjugation.
+const WORD_CORRECT_M_AUDIO: AudioEntry[] = [
+  { filename: 'word-correct/ima-m.mp3',     text: 'אמא, הִצְלַחְתָּ!',   description: 'Correct-M: ima' },
+  { filename: 'word-correct/aba-m.mp3',     text: 'אבא, הִצְלַחְתָּ!',   description: 'Correct-M: aba' },
+  { filename: 'word-correct/yeled-m.mp3',   text: 'ילד, הִצְלַחְתָּ!',   description: 'Correct-M: yeled' },
+  { filename: 'word-correct/yalda-m.mp3',   text: 'ילדה, הִצְלַחְתָּ!',  description: 'Correct-M: yalda' },
+  { filename: 'word-correct/dag-m.mp3',     text: 'דג, הִצְלַחְתָּ!',    description: 'Correct-M: dag' },
+  { filename: 'word-correct/kelev-m.mp3',   text: 'כלב, הִצְלַחְתָּ!',   description: 'Correct-M: kelev' },
+  { filename: 'word-correct/chatul-m.mp3',  text: 'חתול, הִצְלַחְתָּ!',  description: 'Correct-M: chatul' },
+  { filename: 'word-correct/shemesh-m.mp3', text: 'שמש, הִצְלַחְתָּ!',   description: 'Correct-M: shemesh' },
+  { filename: 'word-correct/yareach-m.mp3', text: 'ירח, הִצְלַחְתָּ!',   description: 'Correct-M: yareach' },
+  { filename: 'word-correct/mayim-m.mp3',   text: 'מים, הִצְלַחְתָּ!',   description: 'Correct-M: mayim' },
+  { filename: 'word-correct/yad-m.mp3',     text: 'יד, הִצְלַחְתָּ!',    description: 'Correct-M: yad' },
+  { filename: 'word-correct/bayit-m.mp3',   text: 'בית, הִצְלַחְתָּ!',   description: 'Correct-M: bayit' },
+  { filename: 'word-correct/sefer-m.mp3',   text: 'ספר, הִצְלַחְתָּ!',   description: 'Correct-M: sefer' },
+  { filename: 'word-correct/lechem-m.mp3',  text: 'לחם, הִצְלַחְתָּ!',   description: 'Correct-M: lechem' },
+  { filename: 'word-correct/shalom-m.mp3',  text: 'שלום, הִצְלַחְתָּ!',  description: 'Correct-M: shalom' },
+];
+
+// Level 7 — Correct reading feedback, feminine: "[word], הִצְלַחְתְּ!"
+const WORD_CORRECT_F_AUDIO: AudioEntry[] = [
+  { filename: 'word-correct/ima-f.mp3',     text: 'אמא, הִצְלַחְתְּ!',   description: 'Correct-F: ima' },
+  { filename: 'word-correct/aba-f.mp3',     text: 'אבא, הִצְלַחְתְּ!',   description: 'Correct-F: aba' },
+  { filename: 'word-correct/yeled-f.mp3',   text: 'ילד, הִצְלַחְתְּ!',   description: 'Correct-F: yeled' },
+  { filename: 'word-correct/yalda-f.mp3',   text: 'ילדה, הִצְלַחְתְּ!',  description: 'Correct-F: yalda' },
+  { filename: 'word-correct/dag-f.mp3',     text: 'דג, הִצְלַחְתְּ!',    description: 'Correct-F: dag' },
+  { filename: 'word-correct/kelev-f.mp3',   text: 'כלב, הִצְלַחְתְּ!',   description: 'Correct-F: kelev' },
+  { filename: 'word-correct/chatul-f.mp3',  text: 'חתול, הִצְלַחְתְּ!',  description: 'Correct-F: chatul' },
+  { filename: 'word-correct/shemesh-f.mp3', text: 'שמש, הִצְלַחְתְּ!',   description: 'Correct-F: shemesh' },
+  { filename: 'word-correct/yareach-f.mp3', text: 'ירח, הִצְלַחְתְּ!',   description: 'Correct-F: yareach' },
+  { filename: 'word-correct/mayim-f.mp3',   text: 'מים, הִצְלַחְתְּ!',   description: 'Correct-F: mayim' },
+  { filename: 'word-correct/yad-f.mp3',     text: 'יד, הִצְלַחְתְּ!',    description: 'Correct-F: yad' },
+  { filename: 'word-correct/bayit-f.mp3',   text: 'בית, הִצְלַחְתְּ!',   description: 'Correct-F: bayit' },
+  { filename: 'word-correct/sefer-f.mp3',   text: 'ספר, הִצְלַחְתְּ!',   description: 'Correct-F: sefer' },
+  { filename: 'word-correct/lechem-f.mp3',  text: 'לחם, הִצְלַחְתְּ!',   description: 'Correct-F: lechem' },
+  { filename: 'word-correct/shalom-f.mp3',  text: 'שלום, הִצְלַחְתְּ!',  description: 'Correct-F: shalom' },
+];
+
+// Level 7 — Wrong image feedback: "זה/זו [description], נסה שוב"
+const WORD_WRONG_AUDIO: AudioEntry[] = [
+  { filename: 'word-wrong/ima.mp3',     text: 'זו אמא, נסה שוב',    description: 'Wrong: ima' },
+  { filename: 'word-wrong/aba.mp3',     text: 'זה אבא, נסה שוב',    description: 'Wrong: aba' },
+  { filename: 'word-wrong/yeled.mp3',   text: 'זה ילד, נסה שוב',    description: 'Wrong: yeled' },
+  { filename: 'word-wrong/yalda.mp3',   text: 'זו ילדה, נסה שוב',   description: 'Wrong: yalda' },
+  { filename: 'word-wrong/dag.mp3',     text: 'זה דג, נסה שוב',     description: 'Wrong: dag' },
+  { filename: 'word-wrong/kelev.mp3',   text: 'זה כלב, נסה שוב',    description: 'Wrong: kelev' },
+  { filename: 'word-wrong/chatul.mp3',  text: 'זה חתול, נסה שוב',   description: 'Wrong: chatul' },
+  { filename: 'word-wrong/tzipor.mp3',  text: 'זו ציפור, נסה שוב',  description: 'Wrong: tzipor' },
+  { filename: 'word-wrong/shemesh.mp3', text: 'זו שמש, נסה שוב',    description: 'Wrong: shemesh' },
+  { filename: 'word-wrong/yareach.mp3', text: 'זה ירח, נסה שוב',    description: 'Wrong: yareach' },
+  { filename: 'word-wrong/mayim.mp3',   text: 'אלה מים, נסה שוב',   description: 'Wrong: mayim' },
+  { filename: 'word-wrong/yad.mp3',     text: 'זו יד, נסה שוב',     description: 'Wrong: yad' },
+  { filename: 'word-wrong/bayit.mp3',   text: 'זה בית, נסה שוב',    description: 'Wrong: bayit' },
+  { filename: 'word-wrong/sefer.mp3',   text: 'זה ספר, נסה שוב',    description: 'Wrong: sefer' },
+  { filename: 'word-wrong/lechem.mp3',  text: 'זה לחם, נסה שוב',    description: 'Wrong: lechem' },
+  { filename: 'word-wrong/shalom.mp3',  text: 'זה שלום, נסה שוב',   description: 'Wrong: shalom' },
+];
+
 // ── API Call ─────────────────────────────────────────────────────
 
 async function generateAudio(entry: AudioEntry): Promise<boolean> {
@@ -336,12 +424,17 @@ async function main() {
     ...LETTER_AUDIO,
     ...VOWEL_AUDIO,
     ...SYLLABLE_AUDIO,
+    ...SYLLABLE_O_AUDIO,
+    ...SYLLABLE_U_AUDIO,
     ...WORD_AUDIO,
     ...UI_AUDIO,
     ...NARRATION_AUDIO,
     ...LETTER_FEEDBACK_AUDIO,
     ...LETTER_IDENTIFY_AUDIO,
     ...LETTER_IDENTIFY_F_AUDIO,
+    ...WORD_CORRECT_M_AUDIO,
+    ...WORD_CORRECT_F_AUDIO,
+    ...WORD_WRONG_AUDIO,
   ];
 
   console.log(`\nHebrewByClaude Audio Generator`);

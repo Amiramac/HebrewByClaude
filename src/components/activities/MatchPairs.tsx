@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Activity } from '@/types/levels';
 import { useAudio } from '@/hooks/useAudio';
+import { useAppStore } from '@/store/appStore';
 import LetterCard from '@/components/hebrew/LetterCard';
 import ProgressBar from '@/components/ui/ProgressBar';
 import StarBurst from '@/components/feedback/StarBurst';
@@ -23,6 +24,7 @@ interface CardState {
 }
 
 export default function MatchPairs({ activity, onComplete }: MatchPairsProps) {
+  const { difficulty, addWordToReinforce } = useAppStore();
   const { playCorrect, playEncourage, playTap, playCelebrate } = useAudio();
 
   const cards = useMemo(() => {
@@ -47,16 +49,16 @@ export default function MatchPairs({ activity, onComplete }: MatchPairsProps) {
 
   useEffect(() => {
     if (isComplete) {
-      playCelebrate();
+      if (difficulty !== 'hard') playCelebrate();
       setTimeout(() => setShowStars(true), 500);
     }
-  }, [isComplete, playCelebrate]);
+  }, [isComplete, playCelebrate, difficulty]);
 
   const handleSelect = (cardId: string) => {
     const card = cardStates.find(c => c.id === cardId);
     if (!card || card.matched || card.flipped) return;
 
-    playTap();
+    if (difficulty !== 'hard') playTap();
 
     if (!selected) {
       setSelected(cardId);
@@ -73,7 +75,7 @@ export default function MatchPairs({ activity, onComplete }: MatchPairsProps) {
       );
 
       if (firstCard.pairId === card.pairId) {
-        playCorrect();
+        if (difficulty !== 'hard') playCorrect();
         setMatchCount(m => m + 1);
         setCardStates(prev =>
           prev.map(c =>
@@ -82,7 +84,9 @@ export default function MatchPairs({ activity, onComplete }: MatchPairsProps) {
         );
         setSelected(null);
       } else {
-        playEncourage();
+        if (difficulty !== 'hard') playEncourage();
+        // Track wrong match for reinforcement
+        addWordToReinforce(firstCard.character);
         setTimeout(() => {
           setCardStates(prev =>
             prev.map(c =>
