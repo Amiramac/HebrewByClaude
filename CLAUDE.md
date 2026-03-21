@@ -15,29 +15,37 @@ Hebrew literacy app for 4-year-old Maayan. Teaches reading via the Tzerufim meth
 - Activity components are generic: TapTheLetter, MatchPairs, ListenAndChoose
 - Adding a level = adding a data file + registering in `src/data/levels/index.ts`
 
-## Current State (as of Feb 2026)
-- **Levels 1-6 complete**: all 22 Hebrew letters + kamatz/chirik/segol vowels + first words
-- **3 activity types working**: TapTheLetter, MatchPairs, ListenAndChoose
-- **Planned next**: Level 7 "word-picture-match" with emoji images
-- **Levels 7-10 not built yet**: remaining vowels, words, shva, free reading
+## Current State (as of Mar 2026)
+- **Levels 1-8 complete**: all 22 letters + all vowels + first words + word-picture matching
+- **4 activity types**: TapTheLetter, MatchPairs, ListenAndChoose, WordPictureMatch
+- **AppShell**: WelcomeScreen, TimerGuard (daily limit), ParentDashboard
+- **Supabase**: learning sessions logged to `learning_sessions` table
+- **Levels 9-10 not built yet**: shva, free reading
 
-## Server Deployment (GCE)
-- VM: `dev-hebrew-app` in `europe-west1-b`, project `hebrewapp-487809`
-- External IP: `34.77.51.224`
-- Domain: `hebrew-app.live` (DNS via Squarespace)
-- Caddy reverse proxy on ports 80/443 → localhost:3000
-- Next.js production (`next start -H 0.0.0.0`) on port 3000
-- SSL via Let's Encrypt (auto-managed by Caddy)
-- GCE firewall rule `allow-http`: tcp:80,443, Apply to all, 0.0.0.0/0
+## Server Deployment (Oracle Cloud)
+- VM: Oracle Cloud, IP `151.145.86.195`, user `opc`
+- SSH: `ssh oracle` (alias in ~/.ssh/config) — has RemoteCommand for tmux, bypasses commands
+- SSH for scripting: `ssh -i ~/.ssh/ssh-key-2026-02-24.key -o RequestTTY=no opc@151.145.86.195 "cmd"`
+- Domain: `hebrew-app.live`
+- **Docker Compose** at `~/deployments/HebrewByClaude/docker-compose.yml` (NOT in git — server-only)
+  - `hebrew-prod` → port 3000 (production)
+  - `hebrew-test` → port 3001
+  - `hebrew-dev`  → port 3002
+- Audio files served from Oracle Object Storage (not from public/)
+- **Deploy command**: `cd ~/deployments/HebrewByClaude && git pull && docker compose build app-prod && docker compose up -d app-prod`
+- `docker-compose.yml` is NOT committed to git — if lost, recreate with Oracle Object Storage URL:
+  `https://objectstorage.il-jerusalem-1.oraclecloud.com/n/axnsxk4cnhih/b/hebrew-audio-files/o`
 
 ## Key Files
 - `src/types/levels.ts` — Level, Lesson, Activity, ActivityItem types
-- `src/data/levels/` — level-01.ts through level-06.ts + index.ts
+- `src/data/levels/` — level-01.ts through level-08.ts + index.ts
 - `src/data/letters.ts, vowels.ts, words.ts` — Hebrew data
-- `src/components/activities/` — TapTheLetter, MatchPairs, ListenAndChoose
+- `src/components/activities/` — TapTheLetter, MatchPairs, ListenAndChoose, WordPictureMatch, VowelVideoPlayer
+- `src/components/shell/` — AppShell, WelcomeScreen, TimerGuard
 - `src/hooks/useAudio.ts, useActivity.ts` — audio playback + activity state
-- `src/store/progressStore.ts` — Zustand progress store
+- `src/store/progressStore.ts, appStore.ts` — Zustand stores
 - `src/lib/hebrew.ts` — shuffle, stripNikkud, charToSlug, audio path helpers
+- `src/lib/supabase.ts` — Supabase client + logLearningSession()
 - `scripts/generate-audio.ts` — ElevenLabs audio generation script
 
 ## React Strict Mode Gotcha

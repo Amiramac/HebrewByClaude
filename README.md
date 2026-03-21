@@ -222,6 +222,11 @@ docker run -p 3000:3000 hebrew-by-claude
 - פתרון conflicts עם שינויי Supabase
 - קבצים: `src/components/layout/LessonShell.tsx`, `src/components/activities/VowelVideoPlayer.tsx`, `STATUS.md`
 
+### [2026-03-21] — פריסה לשרת Oracle + תיקון CLAUDE.md
+- פריסה מוצלחת לשרת Oracle Cloud (`hebrew-prod` container, port 3000)
+- עדכון CLAUDE.md: פרטי שרת נכונים (Oracle במקום GCE), פקודת deploy, אזהרה על docker-compose.yml שאינו ב-git
+- קבצים: `CLAUDE.md`
+
 ### [2026-03-21] — חיבור Supabase לתיעוד נתוני למידה
 - נוצר `src/lib/supabase.ts` עם client + פונקציית `logLearningSession`
 - בכל סיום פעילות נשלח רשומה ל-Supabase: רמה, סוג פעילות, משך זמן, פריטים נכונים מתוך סך הפריטים, ציון אחוזי
