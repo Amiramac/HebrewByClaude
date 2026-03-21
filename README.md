@@ -215,6 +215,12 @@ docker run -p 3000:3000 hebrew-by-claude
 
 ## 📋 Changelog
 
+### [2026-03-21] — סוכן דוח יומי (hebrew-agent)
+- נוצרה תיקייה `hebrew-agent/` עם `daily-report.js`
+- הסוכן שולף נתוני למידה מ-Supabase, מנתח עם Claude API, ושולח דוח לטלגרם
+- תוקן מזהה המודל ל-`claude-sonnet-4-6`
+- קבצים: `hebrew-agent/daily-report.js`, `hebrew-agent/package.json`
+
 ### [2026-03-21] — שחזור 4 קומיטים מהשרת + מיזוג מלא
 - שוחזרו 4 קומיטים שהיו רק על השרת (Oracle) ולא הגיעו ל-GitHub
 - אנימציית הכנסת ניקוד לרמה 3 (VowelIntro → VowelVideoPlayer), עם אודיו ו-3 דוגמאות אותיות מחזוריות
