@@ -215,6 +215,12 @@ docker run -p 3000:3000 hebrew-by-claude
 
 ## 📋 Changelog
 
+### [2026-03-21] — cron job לדוח יומי אוטומטי
+- נוסף cron job על שרת Oracle: כל יום בשעה 20:00 מריץ `daily-report.js`
+- הסרת API keys מהקוד — כל הסודות עברו לקובץ `.env` על השרת (לא בgit)
+- לוג ב-`/tmp/hebrew-agent.log`
+- קבצים: `hebrew-agent/.env.example`, `hebrew-agent/.gitignore`, crontab בשרת
+
 ### [2026-03-21] — סוכן דוח יומי (hebrew-agent)
 - נוצרה תיקייה `hebrew-agent/` עם `daily-report.js`
 - הסוכן שולף נתוני למידה מ-Supabase, מנתח עם Claude API, ושולח דוח לטלגרם
