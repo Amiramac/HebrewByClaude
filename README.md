@@ -215,6 +215,11 @@ docker run -p 3000:3000 hebrew-by-claude
 
 ## 📋 Changelog
 
+### [2026-03-21] — שדרוג daily-report: multi-parent מטבלת Supabase
+- הסוכן שולף הורים פעילים מטבלת `parents` ושולח דוח נפרד לכל הורה
+- בוט טלגרם חדש: `@hebrew_by_claude_bot`
+- קבצים: `hebrew-agent/daily-report.js`
+
 ### [2026-03-21] — cron job לדוח יומי אוטומטי
 - נוסף cron job על שרת Oracle: כל יום בשעה 20:00 מריץ `daily-report.js`
 - הסרת API keys מהקוד — כל הסודות עברו לקובץ `.env` על השרת (לא בgit)
