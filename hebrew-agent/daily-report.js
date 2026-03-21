@@ -33,7 +33,8 @@ async function fetchTodaySessions(childName) {
 }
 
 // ─── Step 3: ניתוח עם Claude ──────────────────────────────────────────────────
-async function analyzeWithClaude(sessions, childName) {
+async function analyzeWithClaude(sessions, childName, childGender) {
+  const isMale = childGender !== 'female';
   const sessionsText = sessions.map(s =>
     `- רמה ${s.level_number} (${s.level_name}), פעילות: ${s.activity_type}, ` +
     `זמן: ${s.duration_seconds} שניות, תוצאה: ${s.items_correct}/${s.items_total}, ציון: ${s.score}`
@@ -42,8 +43,13 @@ async function analyzeWithClaude(sessions, childName) {
   const totalMinutes = Math.round(sessions.reduce((sum, s) => sum + s.duration_seconds, 0) / 60);
   const avgScore = Math.round(sessions.reduce((sum, s) => sum + s.score, 0) / sessions.length);
 
+  const learned = isMale ? 'למד' : 'למדה';
+  const succeeded = isMale ? 'הצליח' : 'הצליחה';
+  const age = isMale ? 'בן 4' : 'בת 4';
+
   const prompt = `אתה מורה מומחה ללמידת עברית לילדים.
-${childName} למד היום. הנה הנתונים:
+${childName} ${learned} היום. הנה הנתונים:
+מגדר הילד: ${isMale ? 'זכר' : 'נקבה'} (${age})
 
 ${sessionsText}
 
@@ -52,11 +58,11 @@ ${sessionsText}
 מספר פעילויות: ${sessions.length}
 
 כתוב ניתוח קצר בעברית עם:
-1. במה ${childName} הצליח היום (משפט אחד)
+1. במה ${childName} ${succeeded} היום (משפט אחד)
 2. מה צריך תרגול נוסף (משפט אחד)
 3. המלצה ספציפית למחר (משפט אחד)
 
-תשובה קצרה ועניינית, ללא כותרות.`;
+תשובה קצרה ועניינית, ללא כותרות. השתמש בלשון ${isMale ? 'זכר' : 'נקבה'}.`;
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -122,7 +128,7 @@ async function main() {
       continue;
     }
 
-    const report = await analyzeWithClaude(sessions, parent.child_name);
+    const report = await analyzeWithClaude(sessions, parent.child_name, parent.child_gender ?? 'male');
     await sendTelegramReport(parent.telegram_chat_id, parent.child_name, report);
   }
 

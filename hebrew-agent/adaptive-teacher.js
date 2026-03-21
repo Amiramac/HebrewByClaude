@@ -25,8 +25,11 @@ async function fetchLearningHistory(childName) {
 }
 
 // ─── Step 2: ניתוח עם Claude → תוכנית מחר ────────────────────────────────────
-async function buildAdaptivePlan(sessions, childName) {
+async function buildAdaptivePlan(sessions, childName, childGender) {
   if (sessions.length === 0) return null;
+
+  const isMale = childGender !== 'female';
+  const age = isMale ? 'בן 4' : 'בת 4';
 
   // סיכום סטטיסטי לפני שליחה ל-Claude
   const byLevel = {};
@@ -42,6 +45,7 @@ async function buildAdaptivePlan(sessions, childName) {
   }).join('\n');
 
   const prompt = `אתה מורה מומחה ללמידת עברית לילדים בגיל 4.
+מגדר הילד: ${isMale ? 'זכר' : 'נקבה'} (${age}). השתמש בלשון ${isMale ? 'זכר' : 'נקבה'}.
 הנה סיכום ביצועי ${childName} ב-7 הימים האחרונים:
 
 ${levelSummary}
@@ -116,13 +120,15 @@ async function savePlan(childName, plan) {
 }
 
 // ─── Step 4: שליחת עדכון לטלגרם ───────────────────────────────────────────────
-async function notifyParent(chatId, childName, plan) {
+async function notifyParent(chatId, childName, plan, childGender) {
+  const isMale = childGender !== 'female';
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const dateStr = tomorrow.toLocaleDateString('he-IL');
 
   const weakList  = plan.weak_areas.map(w => `• ${w}`).join('\n');
   const strongList = plan.strong_areas.map(s => `• ${s}`).join('\n');
+  const strongLabel = isMale ? 'חזק ב:' : 'חזקה ב:';
 
   const message = [
     `🎯 *תוכנית למידה — ${childName}*`,
@@ -130,7 +136,7 @@ async function notifyParent(chatId, childName, plan) {
     ``,
     `📚 רמה מומלצת: *${plan.recommended_level}*`,
     ``,
-    `💪 חזק ב:`,
+    `💪 ${strongLabel}`,
     strongList,
     ``,
     `🔧 צריך תרגול:`,
@@ -170,7 +176,7 @@ async function main() {
     }
 
     console.log(`📚 נמצאו ${history.length} סשנים ב-7 ימים אחרונים`);
-    const plan = await buildAdaptivePlan(history, parent.child_name);
+    const plan = await buildAdaptivePlan(history, parent.child_name, parent.child_gender ?? 'male');
 
     if (!plan) {
       console.log(`⚠️ לא הצלחתי לבנות תוכנית עבור ${parent.child_name}`);
@@ -179,7 +185,7 @@ async function main() {
 
     console.log(`💡 תוכנית: רמה ${plan.recommended_level} — ${plan.ai_reasoning}`);
     await savePlan(parent.child_name, plan);
-    await notifyParent(parent.telegram_chat_id, parent.child_name, plan);
+    await notifyParent(parent.telegram_chat_id, parent.child_name, plan, parent.child_gender ?? 'male');
   }
 
   console.log('\n✅ סוכן המורה סיים!');

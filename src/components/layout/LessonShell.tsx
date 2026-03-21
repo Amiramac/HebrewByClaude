@@ -9,6 +9,7 @@ import StarRating from '@/components/ui/StarRating';
 import Confetti from '@/components/feedback/Confetti';
 import { useAudio } from '@/hooks/useAudio';
 import { logLearningSession } from '@/lib/supabase';
+import { useAppStore } from '@/store/appStore';
 import VowelVideoPlayer from '@/components/activities/VowelVideoPlayer';
 import { NIKKUD_MARKS } from '@/data/vowels';
 
@@ -27,6 +28,7 @@ export default function LessonShell({ lesson, levelNumber, levelName, levelColor
   const [activityStars, setActivityStars] = useState<number[]>([]);
   const [isLessonComplete, setIsLessonComplete] = useState(false);
   const { playCelebrate } = useAudio();
+  const { childName, childGender } = useAppStore();
   const activityStartTime = useRef(Date.now());
 
   const currentActivity = lesson.activities[currentActivityIndex];
@@ -39,6 +41,8 @@ export default function LessonShell({ lesson, levelNumber, levelName, levelColor
     const itemsCorrect = Math.round((stars / (activity.maxStars || 3)) * itemsTotal);
 
     logLearningSession({
+      child_name: childName,
+      child_gender: childGender,
       level_number: levelNumber,
       level_name: levelName,
       activity_type: activity.type,

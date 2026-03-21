@@ -22,7 +22,7 @@ export default function ParentDashboard({ onClose }: ParentDashboardProps) {
   const [pinError, setPin_error] = useState(false);
 
   const {
-    childName, setChildName, parentPassword, setParentPassword,
+    childName, setChildName, childGender, setChildGender, parentPassword, setParentPassword,
     timerMinutes, setTimerMinutes,
     timerRemainingSeconds, resetTimer, unlockTimer,
     difficulty, setDifficulty,
@@ -185,6 +185,28 @@ export default function ParentDashboard({ onClose }: ParentDashboardProps) {
                     </button>
                   </div>
                 )}
+                <div className="flex gap-2 mt-3">
+                  <button
+                    onClick={() => setChildGender('male')}
+                    className={`flex-1 py-2 rounded-xl text-lg font-bold border-2 transition-colors ${
+                      childGender === 'male'
+                        ? 'bg-blue-100 border-blue-400 text-blue-700'
+                        : 'bg-white border-gray-200 text-gray-400'
+                    }`}
+                  >
+                    בן 👦
+                  </button>
+                  <button
+                    onClick={() => setChildGender('female')}
+                    className={`flex-1 py-2 rounded-xl text-lg font-bold border-2 transition-colors ${
+                      childGender === 'female'
+                        ? 'bg-pink-100 border-pink-400 text-pink-700'
+                        : 'bg-white border-gray-200 text-gray-400'
+                    }`}
+                  >
+                    בת 👧
+                  </button>
+                </div>
               </Section>
 
               {/* Timer */}

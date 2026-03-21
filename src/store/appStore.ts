@@ -8,6 +8,7 @@ export type Difficulty = 'easy' | 'medium' | 'hard';
 interface AppState {
   // Child
   childName: string;
+  childGender: 'male' | 'female';
   hasSeenWelcome: boolean;
 
   // Parent settings
@@ -28,6 +29,7 @@ interface AppState {
 
   // Actions
   setChildName: (name: string) => void;
+  setChildGender: (g: 'male' | 'female') => void;
   setHasSeenWelcome: (v: boolean) => void;
   setParentPassword: (pw: string) => void;
   setTimerMinutes: (mins: number) => void;
@@ -51,6 +53,7 @@ export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       childName: '',
+      childGender: 'male' as const,
       hasSeenWelcome: false,
       parentPassword: '1234',
       timerMinutes: DEFAULT_TIMER_MINUTES,
@@ -64,6 +67,7 @@ export const useAppStore = create<AppState>()(
       lastStudyDate: '',
 
       setChildName: (name) => set({ childName: name }),
+      setChildGender: (g) => set({ childGender: g }),
       setHasSeenWelcome: (v) => set({ hasSeenWelcome: v }),
       setParentPassword: (pw) => set({ parentPassword: pw }),
 
