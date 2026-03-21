@@ -1,37 +1,212 @@
-# Hebrew by Claude - עברית עם קלוד
+# HebrewByClaude — אפליקציית האלף-בית של מעיין
 
-A Hebrew literacy app for Maayan (age 4), teaching Hebrew reading from zero knowledge to full word reading using research-backed pedagogy.
+**אפליקציית אינטרנט ללימוד קריאה בעברית לילדים בגיל טרום-בית-ספר.**
+נוצרה במיוחד עבור מעיין בת ה-4, ומשתמשת בשיטת הצירופים — הדרך המבוססת-מחקר ללמד ילדים צעירים לקרוא עברית.
 
-## Getting Started
+**כתובת האפליקציה:** [hebrew-app.live](https://hebrew-app.live)
+
+---
+
+## הרקע
+
+מעיין גדלה במשפחה דוברת עברית, ובגיל 4 הגיע הזמן להתחיל ללמוד לקרוא. החיפוש אחר אפליקציה מתאימה גילה פער: רוב הכלים הדיגיטליים ללימוד עברית מיועדים למבוגרים לומדי שפה שנייה, לא לילדים שעברית היא שפת-אמם. האפליקציות הקיימות לילדים סובלות בדרך כלל מעיצוב מיושן, חוסר עקביות פדגוגית, או הסתמכות על שיטת האיות (ב-א-ב = "בָּב") שמחקרים מראים שהיא קשה יותר מהנדרש.
+
+הפתרון: לבנות אפליקציה מאפס, שתהיה מבוססת על המחקר הטוב ביותר בתחום קריאה בעברית, ומותאמת בדיוק לילד בן 4 — כולל עיצוב, אינטראקציה, ואופן הצגת החומר.
+
+---
+
+## הגישה הפדגוגית
+
+### שיטת הצירופים (Tzerufim)
+
+האפליקציה מלמדת קריאה דרך **יחידות הברה**, לא פונמות בודדות:
+
+- **שיטה שגויה (איות):** ב + ָ + ב = "בָּב"
+- **שיטה נכונה (צירופים):** בָּ = "בָּ" כיחידה אחת
+
+ההבדל הוא קריטי. ילדים בגיל 4 מסוגלים ליצור **מודעות הברתית** בהרבה יותר קלות ממודעות פונמית. מחקרים של פייטלסון (1967) ושאר (2017) מראים שגישת הצירופים מפחיתה דרמטית את הקושי, ומאפשרת לילדים להגיע ל**רגע הראשון של "אני יכולה לקרוא!"** תוך שבועות ספורים.
+
+### עקרונות מרכזיים
+
+1. **כישורים חזותיים מנבאים הצלחה** — האפליקציה מדגישה פעילויות אבחון חזותי (Share & Levin, 1999)
+2. **תדירות אותיות חשובה** — אותיות בתדירות גבוהה (י, ו, ה, ל, מ) נלמדות ראשונות
+3. **חיבור אישי מאיץ לימוד** — האותיות מ וע מופיעות בשם "מעיין", ומשמשות עוגנים בלימוד
+4. **הפרדת זוגות מבלבלים** — לעולם לא מלמדים ד/ר, ה/ח, ו/ז באותה רמה
+5. **סדר תנועות לפי תדירות** — קמץ/פתח (/א/) ראשונים, אחר כך חיריק, סגול, ושאר התנועות
+
+---
+
+## מבנה תוכנית הלימודים
+
+| רמה | שם | תוכן | אבן דרך |
+|-----|-----|-------|---------|
+| 1 | פגישה עם האותיות | א ש ל מ ב | 5 אותיות + כיוון ימין-שמאל |
+| 2 | עוד חברות | ד ה י ת ר | 10 אותיות, הבחנה חזותית |
+| 3 | התנועה הראשונה | קמץ ָ / פתח ַ | **קריאת הברות ראשונה!** |
+| 4 | אותיות נוספות | ח כ נ ע פ ג ז ו | 18 עיצורים + הברות עם /א/ |
+| 5 | עוד תנועות | חיריק ִ / סגול ֶ | מילים ראשונות (אמא, אבא) |
+| 6 | השלמת האלף-בית | ט ס ק צ + אותיות סופיות | כל האלף-בית! |
+| 7 | מילים ותמונות | קריאת מילה → תמונה מתאימה | **מילה שלמה — בשקט!** |
+| 8 | כל התנועות | צרה ֵ / חולם ֹ / קובוץ ֻ / שורוק וּ | מערכת ניקוד מלאה |
+| 9 | השווא *(עתידי)* | שווא ְ + דגש | כללי פענוח מורכבים |
+| 10 | אני יודעת לקרוא! *(עתידי)* | משפטים וקטעים | קריאה שוטפת |
+
+---
+
+## מצב נוכחי (מרץ 2026)
+
+### מה בנוי ועובד
+
+**8 רמות** — מהיכרות ראשונה עם אותיות ועד למערכת הניקוד המלאה.
+
+**4 סוגי פעילות:**
+- `TapTheLetter` — שמע שם אות/הברה, מצא אותה על המסך
+- `MatchPairs` — זיכרון תואם: אות ↔ אות, הברה ↔ הברה
+- `ListenAndChoose` — שמע הברה, בחר את הנכונה מבין אפשרויות
+- `WordPictureMatch` — ראה מילה כתובה, הקש על האמוג'י המתאים
+
+**מעטפת האפליקציה:**
+- מסך פתיחה עם שם הילד/ה
+- מפת מסלול ויזואלית עם נעילת רמות
+- שמירת התקדמות ב-localStorage (ללא צורך בחשבון)
+- לוח הורים עם מעקב זמן לימוד + מגבלת זמן יומית
+- שינוי שם הילד/ה בלוח ההורים
+
+**מערכת האודיו:**
+- כל האותיות, ההברות, המילים, וניב הפידבק מוקלטים מראש (ElevenLabs V3, קול Arabella)
+- פידבק מגדרי — "קראת נכון!" / "קראתָ נכון!" בנוסח ייחודי לבת/לבן
+- ~250 קובצי MP3 בתיקיות `public/audio/`
+- API route `/api/tts` ל-TTS בזמן אמת כגיבוי
+
+### מה עדיין חסר
+
+- רמות 9-10 (שווא, קריאת משפטים) — לא נבנו
+- דמות מלווה עם תגובות (מתוכנן ב-MASTER_PLAN)
+- מערכת תגים ואיסוף הישגים (מתוכנן)
+- מצב לא-מקוון / PWA (מתוכנן)
+
+---
+
+## ההתפתחות — מה שלמדנו בדרך
+
+### אדריכלות: data-driven מהיום הראשון
+
+ההחלטה הארכיטקטונית המרכזית הייתה להפריד **תוכן** מ**קוד**. כל רמה היא קובץ TypeScript של נתונים בלבד (`src/data/levels/`). רכיבי הפעילות גנריים לחלוטין. הוספת רמה חדשה לא דורשת כתיבת קוד UI כלל.
+
+### קשיי האודיו
+
+**React Strict Mode:**
+Next.js מפעיל Strict Mode בפיתוח, שגורם לכל effect לרוץ פעמיים (mount → cleanup → remount). כל פעילות שהסתמכה על `ref++` לזיהוי "ריצה ראשונה" נשברה. הפתרון: השוואה דטרמיניסטית של נתונים (`currentItem.id === items[0].id`) במקום מונה.
+
+**הגייה עברית ב-TTS:**
+ElevenLabs לא תמיד הגה עברית נכון ללא הנחיה. "זַהֵה" (פועל ציווי) הוקרא כ"זַהֶה" — נתקן על ידי הוספת ניקוד מפורש בטקסט הקלט. הברות שי/די דרשו טיפול מיוחד. קבצי ניסיון הראשוניים כללו "נשימה" בתחילה ובסוף — נדרש עיבוד מחדש עם פרמטרי stability שונים.
+
+### SSR + Zustand + localStorage
+
+כשמשתמשים חוזרים (עם נתונים ב-localStorage) טענו את האפליקציה, הם קיבלו **hydration mismatch** — React זרק שגיאה קשה כי ה-SSR render ו-client render נבדלו. הפתרון: הוספת `skipHydration: true` לשני ה-Zustand stores, ו-rehydration ידני ב-`AppShell.useEffect` לאחר ה-mount.
+
+### שינוי פדגוגי: "קרא קודם, שמע אחר כך"
+
+רמה 7 עברה שינוי מהותי תוך כדי הבנייה. הגרסה הראשונה הפעילה אודיו של המילה **לפני** שהילד בחר תמונה — כלומר הילד זיהה מה ששמע, לא קרא. הגרסה הנוכחית: הילד רואה את המילה בכתב תחילה, קורא בשקט, מקיש על האמוג'י — ורק אז שומע אישור. זה ההבדל בין תרגול קריאה לבין זיהוי שמיעתי.
+
+---
+
+## ארכיטקטורה טכנית
+
+```
+src/
+├── app/
+│   ├── page.tsx              # מפת המסלול + ניווט בין רמות
+│   ├── api/tts/route.ts      # ElevenLabs proxy (TTS בזמן אמת)
+│   └── layout.tsx            # dir="rtl", פונט מערכת
+│
+├── components/
+│   ├── activities/
+│   │   ├── TapTheLetter.tsx
+│   │   ├── MatchPairs.tsx
+│   │   ├── ListenAndChoose.tsx
+│   │   └── WordPictureMatch.tsx
+│   ├── layout/
+│   │   ├── LevelMap.tsx
+│   │   ├── ActivityShell.tsx  # Router לפי סוג פעילות
+│   │   └── LevelDetail.tsx
+│   └── shell/
+│       ├── AppShell.tsx       # WelcomeScreen + TimerGuard + skipHydration
+│       ├── WelcomeScreen.tsx
+│       └── TimerGuard.tsx     # מגבלת זמן יומית
+│
+├── data/levels/
+│   ├── index.ts               # רישום כל הרמות
+│   └── level-01.ts → level-08.ts
+│
+├── hooks/
+│   ├── useAudio.ts            # ניהול השמעת אודיו (Howler.js)
+│   └── useActivity.ts         # מכונת מצב פעילות
+│
+└── store/
+    ├── progressStore.ts       # התקדמות הילד (localStorage)
+    └── appStore.ts            # שם הילד, ספירת זמן
+```
+
+**הוספת רמה חדשה דורשת:**
+1. יצירת `src/data/levels/level-XX.ts`
+2. רישום ב-`src/data/levels/index.ts`
+3. הוספת קבצי אודיו ל-`public/audio/`
+
+אין צורך לגעת בקוד UI.
+
+---
+
+## הרצה מקומית
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) on a tablet browser for the best experience.
+**יצירת קבצי אודיו חדשים:**
+```bash
+# דורש ELEVENLABS_API_KEY ב-.env.local
+npx tsx scripts/generate-audio.ts
+```
+הסקריפט מדלג על קבצים קיימים.
 
-## Architecture
+**Docker:**
+```bash
+docker build -t hebrew-by-claude .
+docker run -p 3000:3000 hebrew-by-claude
+```
 
-- **Next.js 16** + TypeScript + Tailwind CSS
-- **Framer Motion** for child-friendly animations
-- **Zustand** for progress persistence (localStorage)
-- **Howler.js** for audio playback
-- RTL-native layout with Hebrew-optimized typography
+---
 
-## Learning Levels (Phase 1 MVP)
+## פריסה בייצור
 
-1. **Meet the Letters** - First 5 letters (א שׁ ל מ ב)
-2. **More Friends** - Next 5 letters (ד ה י ת ר) + visual discrimination
-3. **The First Vowel** - Kamatz/Patach + first syllable reading
+- **שרת:** GCE VM `dev-hebrew-app`, אזור `europe-west1-b`
+- **IP:** `34.77.51.224` | **דומיין:** `hebrew-app.live`
+- **Caddy** — reverse proxy + SSL אוטומטי (Let's Encrypt)
+- **Next.js** — `next start -H 0.0.0.0` על פורט 3000
 
-See [MASTER_PLAN.md](./MASTER_PLAN.md) for the full 10-level pedagogical plan.
+---
 
-## Adding Content
+## Stack
 
-Levels are data-driven. To add a new level:
-1. Create `src/data/levels/level-XX.ts`
-2. Register it in `src/data/levels/index.ts`
-3. Add audio files to `public/audio/`
+| שכבה | טכנולוגיה |
+|------|-----------|
+| Framework | Next.js 16 + TypeScript |
+| Styling | Tailwind CSS |
+| Animation | Framer Motion |
+| Audio | Howler.js + ElevenLabs V3 |
+| State | Zustand + localStorage |
+| Deployment | GCE + Caddy + Let's Encrypt |
 
-No component changes needed.
+---
+
+## כיצד נוצרה האפליקציה
+
+האפליקציה כולה נכתבה עם [Claude Code](https://claude.ai/claude-code) — CLI של Anthropic — בשיחות מרובות עם Claude Sonnet 4.6. כל קומיט בהיסטוריית ה-git הוא שיתוף פעולה: Amiram הכתיב את הפדגוגיה, האסטרטגיה, והחלטות העיצוב — Claude כתב, ניפה באגים, ועיצב את הקוד.
+
+לתכנית הלימודים המלאה ולהנמקה הפדגוגית: [MASTER_PLAN.md](./MASTER_PLAN.md)
+
+---
+
+*HebrewByClaude — כי לכל ילד מגיע להכיר את שפת אמו.*
