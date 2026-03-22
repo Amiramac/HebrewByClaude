@@ -4,21 +4,22 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from '@/components/ui/Button';
 
-interface VowelIntroProps {
-  videoSrc: string;   // kept for future real-video support
-  vowelName: string;  // e.g. 'קָמַץ'
-  vowelSound: string; // e.g. 'אָ'
-  letter: string;     // first demonstration letter e.g. 'א'
-  vowelChar: string;  // the actual unicode vowel char
-  onContinue: () => void;
+export interface VowelExample {
+  letter: string;
+  syllable: string;
+  audio: string;
 }
 
-// Three example letters shown with kamatz
-const EXAMPLES = [
-  { letter: 'א', syllable: 'אָ', audio: '/audio/syllables/a.mp3' },
-  { letter: 'בּ', syllable: 'בָּ', audio: '/audio/syllables/ba.mp3' },
-  { letter: 'מ', syllable: 'מָ', audio: '/audio/syllables/ma.mp3' },
-];
+interface VowelIntroProps {
+  shapeName: string;                        // English: 'Kamatz', 'Patach', etc.
+  vowelName: string;                        // Hebrew: 'קָמַץ'
+  vowelSound: string;                       // Display sound: 'אָ'
+  vowelAudio: string;                       // '/audio/vowels/kamatz.mp3'
+  position: 'below' | 'above' | 'inside';  // where the mark lives relative to the letter
+  introLetter: string;                      // big letter shown in intro phase ('א' or 'ו')
+  examples: VowelExample[];                 // 3 example letters
+  onContinue: () => void;
+}
 
 function playAudio(src: string) {
   try {
@@ -30,50 +31,158 @@ function playAudio(src: string) {
   }
 }
 
-// SVG drawing of kamatz diacritic: horizontal bar + short vertical stem below center
-function KamatzShape({ visible, scale = 1 }: { visible: boolean; scale?: number }) {
-  const w = 72 * scale;
-  const h = 28 * scale;
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.svg
-          key="kamatz"
-          width={w} height={h}
-          viewBox="0 0 72 28"
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          style={{ overflow: 'visible' }}
-        >
-          <motion.rect
-            x="4" y="4" width="64" height="10" rx="5"
-            fill="#E53E3E"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            style={{ transformOrigin: 'center' }}
-          />
-          <motion.rect
-            x="31" y="14" width="10" height="12" rx="4"
-            fill="#E53E3E"
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ duration: 0.3, delay: 0.35, ease: 'easeOut' }}
-            style={{ transformOrigin: 'top center' }}
-          />
-        </motion.svg>
-      )}
-    </AnimatePresence>
-  );
+// ─── SVG vowel mark shapes ────────────────────────────────────────────────────
+
+function VowelShape({ shapeName, visible, scale = 1 }: { shapeName: string; visible: boolean; scale?: number }) {
+  const color = '#E53E3E';
+
+  if (!visible) return null;
+
+  // Kamatz — horizontal bar + vertical stub below center
+  if (shapeName === 'Kamatz') {
+    const w = 72 * scale, h = 28 * scale;
+    return (
+      <motion.svg width={w} height={h} viewBox="0 0 72 28"
+        initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }} style={{ overflow: 'visible' }}>
+        <motion.rect x="4" y="4" width="64" height="10" rx="5" fill={color}
+          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }} style={{ transformOrigin: 'center' }} />
+        <motion.rect x="31" y="14" width="10" height="12" rx="4" fill={color}
+          initial={{ scaleY: 0 }} animate={{ scaleY: 1 }}
+          transition={{ duration: 0.3, delay: 0.35, ease: 'easeOut' }} style={{ transformOrigin: 'top center' }} />
+      </motion.svg>
+    );
+  }
+
+  // Patach — horizontal bar only (no stem)
+  if (shapeName === 'Patach') {
+    const w = 72 * scale, h = 18 * scale;
+    return (
+      <motion.svg width={w} height={h} viewBox="0 0 72 18"
+        initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}>
+        <motion.rect x="4" y="4" width="64" height="10" rx="5" fill={color}
+          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }} style={{ transformOrigin: 'center' }} />
+      </motion.svg>
+    );
+  }
+
+  // Chirik — single dot below
+  if (shapeName === 'Chirik') {
+    const s = 28 * scale;
+    return (
+      <motion.svg width={s} height={s} viewBox="0 0 28 28">
+        <motion.circle cx="14" cy="14" r="9" fill={color}
+          initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+          style={{ transformOrigin: '14px 14px' }} />
+      </motion.svg>
+    );
+  }
+
+  // Segol — triangle of 3 dots: 2 on bottom, 1 on top center
+  if (shapeName === 'Segol') {
+    const w = 72 * scale, h = 40 * scale;
+    const dots = [
+      { cx: 12, cy: 30, delay: 0 },
+      { cx: 60, cy: 30, delay: 0.1 },
+      { cx: 36, cy: 8,  delay: 0.2 },
+    ];
+    return (
+      <motion.svg width={w} height={h} viewBox="0 0 72 40">
+        {dots.map(({ cx, cy, delay }) => (
+          <motion.circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="9" fill={color}
+            initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 18, delay }}
+            style={{ transformOrigin: `${cx}px ${cy}px` }} />
+        ))}
+      </motion.svg>
+    );
+  }
+
+  // Tzereh — two dots side by side
+  if (shapeName === 'Tzereh') {
+    const w = 72 * scale, h = 28 * scale;
+    return (
+      <motion.svg width={w} height={h} viewBox="0 0 72 28">
+        {[{ cx: 20, delay: 0 }, { cx: 52, delay: 0.15 }].map(({ cx, delay }) => (
+          <motion.circle key={cx} cx={cx} cy="14" r="9" fill={color}
+            initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 18, delay }}
+            style={{ transformOrigin: `${cx}px 14px` }} />
+        ))}
+      </motion.svg>
+    );
+  }
+
+  // Cholam — single dot (goes above the letter)
+  if (shapeName === 'Cholam') {
+    const s = 28 * scale;
+    return (
+      <motion.svg width={s} height={s} viewBox="0 0 28 28">
+        <motion.circle cx="14" cy="14" r="9" fill={color}
+          initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+          style={{ transformOrigin: '14px 14px' }} />
+      </motion.svg>
+    );
+  }
+
+  // Kubutz — three diagonal dots (bottom-left to top-right)
+  if (shapeName === 'Kubutz') {
+    const w = 72 * scale, h = 40 * scale;
+    const dots = [
+      { cx: 16, cy: 32, delay: 0 },
+      { cx: 36, cy: 20, delay: 0.1 },
+      { cx: 56, cy: 8,  delay: 0.2 },
+    ];
+    return (
+      <motion.svg width={w} height={h} viewBox="0 0 72 40">
+        {dots.map(({ cx, cy, delay }) => (
+          <motion.circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="8" fill={color}
+            initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 18, delay }}
+            style={{ transformOrigin: `${cx}px ${cy}px` }} />
+        ))}
+      </motion.svg>
+    );
+  }
+
+  // Shuruk — single dot (lives inside the ו)
+  if (shapeName === 'Shuruk') {
+    const s = 28 * scale;
+    return (
+      <motion.svg width={s} height={s} viewBox="0 0 28 28">
+        <motion.circle cx="14" cy="14" r="9" fill={color}
+          initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+          style={{ transformOrigin: '14px 14px' }} />
+      </motion.svg>
+    );
+  }
+
+  return null;
 }
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 type Phase = 'letter' | 'vowel' | 'label' | 'examples' | 'done';
 
-export default function VowelIntro({ vowelName, vowelSound, onContinue }: VowelIntroProps) {
+export default function VowelIntro({
+  shapeName,
+  vowelName,
+  vowelSound,
+  vowelAudio,
+  position,
+  introLetter,
+  examples,
+  onContinue,
+}: VowelIntroProps) {
   const [phase, setPhase] = useState<Phase>('letter');
   const [exampleIndex, setExampleIndex] = useState(0);
-  const [showExampleKamatz, setShowExampleKamatz] = useState(false);
+  const [showExampleMark, setShowExampleMark] = useState(false);
   const started = useRef(false);
 
   // Main intro sequence
@@ -81,33 +190,31 @@ export default function VowelIntro({ vowelName, vowelSound, onContinue }: VowelI
     if (started.current) return;
     started.current = true;
 
-    // letter appears → kamatz draws in → label fades → transition to examples
     const t1 = setTimeout(() => setPhase('vowel'), 800);
     const t2 = setTimeout(() => {
-      playAudio('/audio/vowels/kamatz.mp3');
+      playAudio(vowelAudio);
       setPhase('label');
     }, 1600);
     const t3 = setTimeout(() => {
       setPhase('examples');
       setExampleIndex(0);
-      setShowExampleKamatz(false);
+      setShowExampleMark(false);
     }, 3200);
 
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, []);
+  }, [vowelAudio]);
 
   // Cycle through examples with audio
   useEffect(() => {
     if (phase !== 'examples') return;
 
-    const ex = EXAMPLES[exampleIndex];
-    setShowExampleKamatz(false);
+    const ex = examples[exampleIndex];
+    setShowExampleMark(false);
 
-    // letter appears → kamatz draws → play syllable audio → next example
-    const t1 = setTimeout(() => setShowExampleKamatz(true), 400);
+    const t1 = setTimeout(() => setShowExampleMark(true), 400);
     const t2 = setTimeout(() => playAudio(ex.audio), 900);
     const t3 = setTimeout(() => {
-      if (exampleIndex < EXAMPLES.length - 1) {
+      if (exampleIndex < examples.length - 1) {
         setExampleIndex(i => i + 1);
       } else {
         setPhase('done');
@@ -115,20 +222,26 @@ export default function VowelIntro({ vowelName, vowelSound, onContinue }: VowelI
     }, 2200);
 
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [phase, exampleIndex]);
+  }, [phase, exampleIndex, examples]);
 
-  const currentExample = EXAMPLES[exampleIndex];
+  const currentExample = examples[exampleIndex];
+  const markVisible = phase !== 'letter';
 
   return (
     <div className="flex flex-col items-center justify-center gap-6 px-6 py-8 min-h-[60vh]">
 
-      {/* ── Intro phase: single big א ── */}
+      {/* ── Intro phase: big letter with vowel mark ── */}
       {(phase === 'letter' || phase === 'vowel' || phase === 'label') && (
         <motion.div
           className="flex flex-col items-center gap-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
+          {/* Cholam dot goes ABOVE the letter */}
+          {position === 'above' && (
+            <VowelShape shapeName={shapeName} visible={markVisible} />
+          )}
+
           <motion.div
             className="text-[120px] font-bold text-gray-800 leading-none select-none"
             style={{ fontFamily: 'serif' }}
@@ -136,10 +249,13 @@ export default function VowelIntro({ vowelName, vowelSound, onContinue }: VowelI
             animate={{ opacity: 1, scale: 1 }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
           >
-            א
+            {introLetter}
           </motion.div>
 
-          <KamatzShape visible={phase !== 'letter'} />
+          {/* All other vowels go below (or inside) the letter */}
+          {position !== 'above' && (
+            <VowelShape shapeName={shapeName} visible={markVisible} />
+          )}
 
           <AnimatePresence>
             {phase === 'label' && (
@@ -162,7 +278,6 @@ export default function VowelIntro({ vowelName, vowelSound, onContinue }: VowelI
       {/* ── Examples phase: 3 letters cycling ── */}
       {(phase === 'examples' || phase === 'done') && (
         <div className="flex flex-col items-center gap-6 w-full">
-          {/* Section title */}
           <motion.p
             className="text-xl text-gray-500 font-medium"
             initial={{ opacity: 0 }}
@@ -171,11 +286,12 @@ export default function VowelIntro({ vowelName, vowelSound, onContinue }: VowelI
             :לדוגמה
           </motion.p>
 
-          {/* All 3 examples shown as a row; active one is highlighted */}
           <div className="flex gap-6 justify-center items-end" dir="rtl">
-            {EXAMPLES.map((ex, i) => {
+            {examples.map((ex, i) => {
               const isActive = phase === 'examples' && i === exampleIndex;
               const isDone = phase === 'done' || i < exampleIndex;
+              const showMark = isDone || (isActive && showExampleMark);
+
               return (
                 <motion.div
                   key={ex.letter}
@@ -185,13 +301,23 @@ export default function VowelIntro({ vowelName, vowelSound, onContinue }: VowelI
                   animate={{ scale: isActive ? 1.1 : 1 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 22 }}
                 >
+                  {/* Cholam goes above */}
+                  {position === 'above' && (
+                    <VowelShape shapeName={shapeName} visible={showMark} scale={0.85} />
+                  )}
+
                   <span
                     className="font-bold text-gray-800 leading-none select-none"
                     style={{ fontFamily: 'serif', fontSize: '72px' }}
                   >
                     {ex.letter}
                   </span>
-                  <KamatzShape visible={isDone || (isActive && showExampleKamatz)} scale={0.85} />
+
+                  {/* All others go below */}
+                  {position !== 'above' && (
+                    <VowelShape shapeName={shapeName} visible={showMark} scale={0.85} />
+                  )}
+
                   <AnimatePresence>
                     {(isDone || isActive) && (
                       <motion.span

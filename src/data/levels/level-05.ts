@@ -19,6 +19,7 @@ const level05: Level = {
       title: 'הכירו את חִירִיק',
       titleHebrew: 'הכירו את חִירִיק',
       description: 'הנקודה הקטנה מתחת לאות אומרת "אִי"!',
+      introVowel: 'Chirik',
       activities: [
         {
           id: 'l5-chirik-find',
@@ -64,6 +65,7 @@ const level05: Level = {
       title: 'הכירו את סֶגוֹל',
       titleHebrew: 'הכירו את סֶגוֹל',
       description: 'שלוש נקודות מתחת לאות אומרות "אֶ"!',
+      introVowel: 'Segol',
       activities: [
         {
           id: 'l5-segol-find',

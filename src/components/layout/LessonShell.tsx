@@ -23,7 +23,7 @@ interface LessonShellProps {
 }
 
 export default function LessonShell({ lesson, levelNumber, levelName, levelColor, onComplete, onBack }: LessonShellProps) {
-  const [showIntro, setShowIntro] = useState(!!lesson.introVideo);
+  const [showIntro, setShowIntro] = useState(!!(lesson.introVowel || lesson.introVideo));
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
   const [activityStars, setActivityStars] = useState<number[]>([]);
   const [isLessonComplete, setIsLessonComplete] = useState(false);
@@ -86,9 +86,11 @@ export default function LessonShell({ lesson, levelNumber, levelName, levelColor
         <div className="w-12" />
       </div>
 
-      {/* Vowel intro video — shown before first activity when lesson.introVideo is set */}
-      {showIntro && lesson.introVideo && (() => {
-        const vowel = NIKKUD_MARKS.find(v => v.videoSrc === lesson.introVideo);
+      {/* Vowel intro — shown before first activity when introVowel or introVideo is set */}
+      {showIntro && (() => {
+        const vowel = lesson.introVowel
+          ? NIKKUD_MARKS.find(v => v.name === lesson.introVowel)
+          : NIKKUD_MARKS.find(v => v.videoSrc === lesson.introVideo);
         if (!vowel) return null;
         return <VowelVideoPlayer vowel={vowel} onContinue={() => setShowIntro(false)} />;
       })()}

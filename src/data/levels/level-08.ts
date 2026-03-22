@@ -24,6 +24,7 @@ const level08: Level = {
       title: 'הכירו את צֵרֵה',
       titleHebrew: 'הכירו את צֵרֵה',
       description: 'שתי נקודות עם קו — גם אומר "אֵ"!',
+      introVowel: 'Tzereh',
       activities: [
         {
           // Hear /e/, visually identify the tzereh mark (vs segol/chirik/kamatz)
@@ -128,6 +129,7 @@ const level08: Level = {
       title: 'הכירו את חוֹלָם',
       titleHebrew: 'הכירו את חוֹלָם',
       description: 'נקודה מעל האות אומרת "אוֹ"!',
+      introVowel: 'Cholam',
       activities: [
         {
           id: 'l7-cholam-find',
@@ -220,9 +222,10 @@ const level08: Level = {
     {
       id: 'l7-intro-kubutz',
       type: 'vowel-intro',
-      title: 'קֻבּוּץ וְשׁוּרוּק',
-      titleHebrew: 'קֻבּוּץ וְשׁוּרוּק',
-      description: 'שלוש נקודות מתחת, או נקודה בתוך ו — שניהם אומרים "אוּ"!',
+      title: 'הכירו את קֻבּוּץ',
+      titleHebrew: 'הכירו את קֻבּוּץ',
+      description: 'שלוש נקודות מתחת לאות אומרות "אוּ"!',
+      introVowel: 'Kubutz',
       activities: [
         {
           id: 'l7-kubutz-find',
@@ -304,6 +307,48 @@ const level08: Level = {
               promptAudio: '/audio/syllables/ru.mp3',
               correct: '\u05E8\u05BB',
               options: ['\u05E8\u05B8', '\u05E8\u05B9', '\u05E8\u05BB', '\u05E8\u05B4'],
+            },
+          ],
+          maxStars: 3,
+        },
+      ],
+    },
+
+    // ── Shuruk (וּ /u/) ──────────────────────────────────────────
+    {
+      id: 'l7-intro-shuruk',
+      type: 'vowel-intro',
+      title: 'הכירו את שׁוּרוּק',
+      titleHebrew: 'הכירו את שׁוּרוּק',
+      description: 'נקודה בתוך ו — גם אומרת "אוּ"!',
+      introVowel: 'Shuruk',
+      activities: [
+        {
+          id: 'l7-shuruk-find',
+          type: 'find-the-letter',
+          instruction: 'מצאו את הצירוף עם השורוק!',
+          instructionAudio: '/audio/narration/find-with-shuruk.mp3',
+          items: [
+            {
+              id: 'sh1',
+              prompt: '\u05DC\u05D5\u05BC',
+              promptAudio: '/audio/syllables/lu.mp3',
+              correct: '\u05DC\u05D5\u05BC',
+              options: ['\u05DC\u05D5\u05BC', '\u05DC\u05BB', '\u05DC\u05B9', '\u05DC\u05B8'],
+            },
+            {
+              id: 'sh2',
+              prompt: '\u05DE\u05D5\u05BC',
+              promptAudio: '/audio/syllables/mu.mp3',
+              correct: '\u05DE\u05D5\u05BC',
+              options: ['\u05DE\u05BB', '\u05DE\u05D5\u05BC', '\u05DE\u05B9', '\u05DE\u05B8'],
+            },
+            {
+              id: 'sh3',
+              prompt: '\u05E8\u05D5\u05BC',
+              promptAudio: '/audio/syllables/ru.mp3',
+              correct: '\u05E8\u05D5\u05BC',
+              options: ['\u05E8\u05B8', '\u05E8\u05B9', '\u05E8\u05BB', '\u05E8\u05D5\u05BC'],
             },
           ],
           maxStars: 3,

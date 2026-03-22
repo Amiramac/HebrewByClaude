@@ -4,10 +4,11 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NikkudMark } from '@/types/hebrew';
 import Button from '@/components/ui/Button';
-import VowelIntro from './VowelIntro';
+import VowelIntro, { VowelExample } from './VowelIntro';
 
-// Example letters shown in the fallback animation, keyed by vowel name
-const VOWEL_EXAMPLES: Record<string, { letter: string; syllable: string; audio: string }[]> = {
+// ─── Data for each vowel's animated intro ─────────────────────────────────────
+
+const VOWEL_EXAMPLES: Record<string, VowelExample[]> = {
   Kamatz: [
     { letter: 'א', syllable: 'אָ', audio: '/audio/syllables/a.mp3' },
     { letter: 'בּ', syllable: 'בָּ', audio: '/audio/syllables/ba.mp3' },
@@ -23,7 +24,51 @@ const VOWEL_EXAMPLES: Record<string, { letter: string; syllable: string; audio: 
     { letter: 'בּ', syllable: 'בִּ', audio: '/audio/syllables/bi.mp3' },
     { letter: 'ל', syllable: 'לִ', audio: '/audio/syllables/li.mp3' },
   ],
+  Segol: [
+    { letter: 'ב', syllable: 'בֶ', audio: '/audio/syllables/be.mp3' },
+    { letter: 'מ', syllable: 'מֶ', audio: '/audio/syllables/me.mp3' },
+    { letter: 'ר', syllable: 'רֶ', audio: '/audio/syllables/re.mp3' },
+  ],
+  Tzereh: [
+    { letter: 'ל', syllable: 'לֵ', audio: '/audio/syllables/le.mp3' },
+    { letter: 'ד', syllable: 'דֵ', audio: '/audio/syllables/de.mp3' },
+    { letter: 'ר', syllable: 'רֵ', audio: '/audio/syllables/re.mp3' },
+  ],
+  Cholam: [
+    { letter: 'מ', syllable: 'מוֹ', audio: '/audio/syllables/mo.mp3' },
+    { letter: 'בּ', syllable: 'בּוֹ', audio: '/audio/syllables/bo.mp3' },
+    { letter: 'ל', syllable: 'לוֹ', audio: '/audio/syllables/lo.mp3' },
+  ],
+  Kubutz: [
+    { letter: 'מ', syllable: 'מֻ', audio: '/audio/syllables/mu.mp3' },
+    { letter: 'בּ', syllable: 'בֻּ', audio: '/audio/syllables/bu.mp3' },
+    { letter: 'ל', syllable: 'לֻ', audio: '/audio/syllables/lu.mp3' },
+  ],
+  Shuruk: [
+    { letter: 'מ', syllable: 'מוּ', audio: '/audio/syllables/mu.mp3' },
+    { letter: 'בּ', syllable: 'בּוּ', audio: '/audio/syllables/bu.mp3' },
+    { letter: 'ל', syllable: 'לוּ', audio: '/audio/syllables/lu.mp3' },
+  ],
 };
+
+// Display sound shown as "= אָ" in the intro label
+const VOWEL_DISPLAY_SOUND: Record<string, string> = {
+  Kamatz: 'אָ',
+  Patach: 'אַ',
+  Chirik: 'אִ',
+  Segol:  'אֶ',
+  Tzereh: 'אֵ',
+  Cholam: 'אוֹ',
+  Kubutz: 'אֻ',
+  Shuruk: 'אוּ',
+};
+
+// The big letter shown in the intro phase
+const VOWEL_INTRO_LETTER: Record<string, string> = {
+  Shuruk: 'ו',   // Shuruk lives on a Vav
+};
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 interface VowelVideoPlayerProps {
   vowel: NikkudMark;
@@ -42,13 +87,16 @@ export default function VowelVideoPlayer({ vowel, onContinue }: VowelVideoPlayer
 
   // If no videoSrc, go straight to animation
   if (!vowel.videoSrc || videoFailed) {
+    const examples = VOWEL_EXAMPLES[vowel.name] ?? VOWEL_EXAMPLES.Kamatz;
     return (
       <VowelIntro
-        videoSrc=""
+        shapeName={vowel.name}
         vowelName={vowel.nameHebrew}
-        vowelSound={vowel.sound === 'a' ? 'אָ' : vowel.nameHebrew}
-        letter="א"
-        vowelChar={vowel.character}
+        vowelSound={VOWEL_DISPLAY_SOUND[vowel.name] ?? vowel.nameHebrew}
+        vowelAudio={vowel.audioFile}
+        position={vowel.position}
+        introLetter={VOWEL_INTRO_LETTER[vowel.name] ?? 'א'}
+        examples={examples}
         onContinue={onContinue}
       />
     );
@@ -75,11 +123,11 @@ export default function VowelVideoPlayer({ vowel, onContinue }: VowelVideoPlayer
       >
         <div className="bg-black/50 rounded-2xl px-6 py-2 text-center">
           <p className="text-white text-2xl font-bold">{vowel.nameHebrew}</p>
-          <p className="text-white/70 text-lg">= {vowel.sound === 'a' ? 'אָ' : vowel.nameHebrew}</p>
+          <p className="text-white/70 text-lg">= {VOWEL_DISPLAY_SOUND[vowel.name] ?? vowel.nameHebrew}</p>
         </div>
       </motion.div>
 
-      {/* Skip button — always visible, top-left corner */}
+      {/* Skip button — always visible */}
       <button
         onClick={onContinue}
         className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 text-white
@@ -88,7 +136,7 @@ export default function VowelVideoPlayer({ vowel, onContinue }: VowelVideoPlayer
         דלג ◀
       </button>
 
-      {/* Start button — appears when video ends */}
+      {/* Continue button — appears when video ends */}
       <AnimatePresence>
         {videoEnded && (
           <motion.div

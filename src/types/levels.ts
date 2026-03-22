@@ -51,7 +51,8 @@ export interface Lesson {
   description: string;
   categoryIcon?: string;
   activities: Activity[];
-  introVideo?: string; // e.g. '/videos/vowels/kamatz.mp4' — shown before first activity
+  introVideo?: string;  // e.g. '/videos/vowels/kamatz.mp4' — shown before first activity (legacy)
+  introVowel?: string;  // English vowel name e.g. 'Patach' — triggers animated vowel intro
 }
 
 export interface Level {

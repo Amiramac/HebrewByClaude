@@ -17,6 +17,7 @@ const level03: Level = {
       title: 'הכירו את קָמַץ',
       titleHebrew: 'הכירו את קָמַץ',
       description: 'הצורה הקטנה מתחת לאות אומרת "אָ"!',
+      introVowel: 'Kamatz',
       introVideo: '/videos/vowels/kamatz.mp4',
       activities: [
         {
@@ -28,6 +29,28 @@ const level03: Level = {
             { id: 'k1', prompt: '\u05D1\u05BC\u05B8', promptAudio: '/audio/syllables/ba.mp3', correct: '\u05D1\u05BC\u05B8', options: ['\u05D1\u05BC\u05B8', '\u05D1', '\u05E9\u05C1', '\u05DC'] },
             { id: 'k2', prompt: '\u05DE\u05B8', promptAudio: '/audio/syllables/ma.mp3', correct: '\u05DE\u05B8', options: ['\u05DE', '\u05DE\u05B8', '\u05D1', '\u05D0'] },
             { id: 'k3', prompt: '\u05DC\u05B8', promptAudio: '/audio/syllables/la.mp3', correct: '\u05DC\u05B8', options: ['\u05DC', '\u05E9\u05C1', '\u05DC\u05B8', '\u05DE'] },
+          ],
+          maxStars: 3,
+        },
+      ],
+    },
+    {
+      id: 'l3-intro-patach',
+      type: 'vowel-intro',
+      title: 'הכירו את פַּתָח',
+      titleHebrew: 'הכירו את פַּתָח',
+      description: 'הקו הדק מתחת לאות — גם אומר "אַ"!',
+      introVowel: 'Patach',
+      activities: [
+        {
+          id: 'l3-patach-find',
+          type: 'find-the-letter',
+          instruction: 'מצאו את האות עם הפתח!',
+          instructionAudio: '/audio/narration/find-with-patach.mp3',
+          items: [
+            { id: 'pa1', prompt: '\u05E9\u05C1\u05B7', promptAudio: '/audio/syllables/sha.mp3', correct: '\u05E9\u05C1\u05B7', options: ['\u05E9\u05C1\u05B7', '\u05E9\u05C1\u05B8', '\u05E9\u05C1', '\u05DC'] },
+            { id: 'pa2', prompt: '\u05D3\u05B7', promptAudio: '/audio/syllables/da.mp3', correct: '\u05D3\u05B7', options: ['\u05D3', '\u05D3\u05B7', '\u05DE', '\u05D0'] },
+            { id: 'pa3', prompt: '\u05E8\u05B7', promptAudio: '/audio/syllables/ra.mp3', correct: '\u05E8\u05B7', options: ['\u05E8', '\u05E9\u05C1', '\u05E8\u05B7', '\u05DE'] },
           ],
           maxStars: 3,
         },
