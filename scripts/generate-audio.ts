@@ -158,6 +158,26 @@ const WORD_AUDIO: AudioEntry[] = [
   // Level 7 words
   { filename: 'words/or.mp3', text: 'אוֹר', description: 'Word: or (light)' },
   { filename: 'words/yom.mp3', text: 'יוֹם', description: 'Word: yom (day)' },
+  // Level 7 Phase 2 — Food
+  { filename: 'words/tapuach.mp3', text: 'תַּפּוּחַ', description: 'Word: tapuach (apple)' },
+  { filename: 'words/beytza.mp3',  text: 'בֵּיצָה',  description: 'Word: beytza (egg)' },
+  { filename: 'words/chalav.mp3',  text: 'חָלָב',    description: 'Word: chalav (milk)' },
+  { filename: 'words/uga.mp3',     text: 'עוּגָה',    description: 'Word: uga (cake)' },
+  // Level 7 Phase 2 — Body
+  { filename: 'words/ayin.mp3',    text: 'עַיִן',    description: 'Word: ayin (eye)' },
+  { filename: 'words/ozen.mp3',    text: 'אֹזֶן',    description: 'Word: ozen (ear)' },
+  { filename: 'words/regel.mp3',   text: 'רֶגֶל',    description: 'Word: regel (foot)' },
+  { filename: 'words/lev.mp3',     text: 'לֵב',      description: 'Word: lev (heart)' },
+  // Level 7 Phase 2 — Colors
+  { filename: 'words/adom.mp3',    text: 'אָדֹם',    description: 'Word: adom (red)' },
+  { filename: 'words/kachol.mp3',  text: 'כָּחֹל',   description: 'Word: kachol (blue)' },
+  { filename: 'words/yarok.mp3',   text: 'יָרֹק',    description: 'Word: yarok (green)' },
+  { filename: 'words/tzahov.mp3',  text: 'צָהֹב',    description: 'Word: tzahov (yellow)' },
+  // Level 7 Phase 2 — Toys
+  { filename: 'words/kadur.mp3',   text: 'כַּדּוּר',  description: 'Word: kadur (ball)' },
+  { filename: 'words/buba.mp3',    text: 'בֻּבָּה',   description: 'Word: buba (doll)' },
+  { filename: 'words/rechev.mp3',  text: 'רֶכֶב',    description: 'Word: rechev (car)' },
+  { filename: 'words/sus.mp3',     text: 'סוּס',     description: 'Word: sus (horse)' },
 ];
 
 const UI_AUDIO: AudioEntry[] = [
@@ -321,6 +341,23 @@ const WORD_CORRECT_M_AUDIO: AudioEntry[] = [
   { filename: 'word-correct/sefer-m.mp3',   text: 'ספר, הִצְלַחְתָּ!',   description: 'Correct-M: sefer' },
   { filename: 'word-correct/lechem-m.mp3',  text: 'לחם, הִצְלַחְתָּ!',   description: 'Correct-M: lechem' },
   { filename: 'word-correct/shalom-m.mp3',  text: 'שלום, הִצְלַחְתָּ!',  description: 'Correct-M: shalom' },
+  // Phase 2
+  { filename: 'word-correct/tapuach-m.mp3', text: 'תפוח, הִצְלַחְתָּ!',  description: 'Correct-M: tapuach' },
+  { filename: 'word-correct/beytza-m.mp3',  text: 'ביצה, הִצְלַחְתָּ!',  description: 'Correct-M: beytza' },
+  { filename: 'word-correct/chalav-m.mp3',  text: 'חלב, הִצְלַחְתָּ!',   description: 'Correct-M: chalav' },
+  { filename: 'word-correct/uga-m.mp3',     text: 'עוגה, הִצְלַחְתָּ!',  description: 'Correct-M: uga' },
+  { filename: 'word-correct/ayin-m.mp3',    text: 'עין, הִצְלַחְתָּ!',   description: 'Correct-M: ayin' },
+  { filename: 'word-correct/ozen-m.mp3',    text: 'אוזן, הִצְלַחְתָּ!',  description: 'Correct-M: ozen' },
+  { filename: 'word-correct/regel-m.mp3',   text: 'רגל, הִצְלַחְתָּ!',   description: 'Correct-M: regel' },
+  { filename: 'word-correct/lev-m.mp3',     text: 'לב, הִצְלַחְתָּ!',    description: 'Correct-M: lev' },
+  { filename: 'word-correct/adom-m.mp3',    text: 'אדום, הִצְלַחְתָּ!',  description: 'Correct-M: adom' },
+  { filename: 'word-correct/kachol-m.mp3',  text: 'כחול, הִצְלַחְתָּ!',  description: 'Correct-M: kachol' },
+  { filename: 'word-correct/yarok-m.mp3',   text: 'ירוק, הִצְלַחְתָּ!',  description: 'Correct-M: yarok' },
+  { filename: 'word-correct/tzahov-m.mp3',  text: 'צהוב, הִצְלַחְתָּ!',  description: 'Correct-M: tzahov' },
+  { filename: 'word-correct/kadur-m.mp3',   text: 'כדור, הִצְלַחְתָּ!',  description: 'Correct-M: kadur' },
+  { filename: 'word-correct/buba-m.mp3',    text: 'בובה, הִצְלַחְתָּ!',  description: 'Correct-M: buba' },
+  { filename: 'word-correct/rechev-m.mp3',  text: 'רכב, הִצְלַחְתָּ!',   description: 'Correct-M: rechev' },
+  { filename: 'word-correct/sus-m.mp3',     text: 'סוס, הִצְלַחְתָּ!',   description: 'Correct-M: sus' },
 ];
 
 // Level 7 — Correct reading feedback, feminine: "[word], הִצְלַחְתְּ!"
@@ -340,6 +377,23 @@ const WORD_CORRECT_F_AUDIO: AudioEntry[] = [
   { filename: 'word-correct/sefer-f.mp3',   text: 'ספר, הִצְלַחְתְּ!',   description: 'Correct-F: sefer' },
   { filename: 'word-correct/lechem-f.mp3',  text: 'לחם, הִצְלַחְתְּ!',   description: 'Correct-F: lechem' },
   { filename: 'word-correct/shalom-f.mp3',  text: 'שלום, הִצְלַחְתְּ!',  description: 'Correct-F: shalom' },
+  // Phase 2
+  { filename: 'word-correct/tapuach-f.mp3', text: 'תפוח, הִצְלַחְתְּ!',  description: 'Correct-F: tapuach' },
+  { filename: 'word-correct/beytza-f.mp3',  text: 'ביצה, הִצְלַחְתְּ!',  description: 'Correct-F: beytza' },
+  { filename: 'word-correct/chalav-f.mp3',  text: 'חלב, הִצְלַחְתְּ!',   description: 'Correct-F: chalav' },
+  { filename: 'word-correct/uga-f.mp3',     text: 'עוגה, הִצְלַחְתְּ!',  description: 'Correct-F: uga' },
+  { filename: 'word-correct/ayin-f.mp3',    text: 'עין, הִצְלַחְתְּ!',   description: 'Correct-F: ayin' },
+  { filename: 'word-correct/ozen-f.mp3',    text: 'אוזן, הִצְלַחְתְּ!',  description: 'Correct-F: ozen' },
+  { filename: 'word-correct/regel-f.mp3',   text: 'רגל, הִצְלַחְתְּ!',   description: 'Correct-F: regel' },
+  { filename: 'word-correct/lev-f.mp3',     text: 'לב, הִצְלַחְתְּ!',    description: 'Correct-F: lev' },
+  { filename: 'word-correct/adom-f.mp3',    text: 'אדום, הִצְלַחְתְּ!',  description: 'Correct-F: adom' },
+  { filename: 'word-correct/kachol-f.mp3',  text: 'כחול, הִצְלַחְתְּ!',  description: 'Correct-F: kachol' },
+  { filename: 'word-correct/yarok-f.mp3',   text: 'ירוק, הִצְלַחְתְּ!',  description: 'Correct-F: yarok' },
+  { filename: 'word-correct/tzahov-f.mp3',  text: 'צהוב, הִצְלַחְתְּ!',  description: 'Correct-F: tzahov' },
+  { filename: 'word-correct/kadur-f.mp3',   text: 'כדור, הִצְלַחְתְּ!',  description: 'Correct-F: kadur' },
+  { filename: 'word-correct/buba-f.mp3',    text: 'בובה, הִצְלַחְתְּ!',  description: 'Correct-F: buba' },
+  { filename: 'word-correct/rechev-f.mp3',  text: 'רכב, הִצְלַחְתְּ!',   description: 'Correct-F: rechev' },
+  { filename: 'word-correct/sus-f.mp3',     text: 'סוס, הִצְלַחְתְּ!',   description: 'Correct-F: sus' },
 ];
 
 // Level 7 — Wrong image feedback: "זה/זו [description], נסה שוב"
@@ -360,6 +414,23 @@ const WORD_WRONG_AUDIO: AudioEntry[] = [
   { filename: 'word-wrong/sefer.mp3',   text: 'זה ספר, נסה שוב',    description: 'Wrong: sefer' },
   { filename: 'word-wrong/lechem.mp3',  text: 'זה לחם, נסה שוב',    description: 'Wrong: lechem' },
   { filename: 'word-wrong/shalom.mp3',  text: 'זה שלום, נסה שוב',   description: 'Wrong: shalom' },
+  // Phase 2
+  { filename: 'word-wrong/tapuach.mp3',  text: 'זה תפוח, נסה שוב',   description: 'Wrong: tapuach' },
+  { filename: 'word-wrong/beytza.mp3',   text: 'זו ביצה, נסה שוב',   description: 'Wrong: beytza' },
+  { filename: 'word-wrong/chalav.mp3',   text: 'זה חלב, נסה שוב',    description: 'Wrong: chalav' },
+  { filename: 'word-wrong/uga.mp3',      text: 'זו עוגה, נסה שוב',   description: 'Wrong: uga' },
+  { filename: 'word-wrong/ayin.mp3',     text: 'זו עין, נסה שוב',    description: 'Wrong: ayin' },
+  { filename: 'word-wrong/ozen.mp3',     text: 'זו אוזן, נסה שוב',   description: 'Wrong: ozen' },
+  { filename: 'word-wrong/regel.mp3',    text: 'זו רגל, נסה שוב',    description: 'Wrong: regel' },
+  { filename: 'word-wrong/lev.mp3',      text: 'זה לב, נסה שוב',     description: 'Wrong: lev' },
+  { filename: 'word-wrong/adom.mp3',     text: 'זה אדום, נסה שוב',   description: 'Wrong: adom' },
+  { filename: 'word-wrong/kachol.mp3',   text: 'זה כחול, נסה שוב',   description: 'Wrong: kachol' },
+  { filename: 'word-wrong/yarok.mp3',    text: 'זה ירוק, נסה שוב',   description: 'Wrong: yarok' },
+  { filename: 'word-wrong/tzahov.mp3',   text: 'זה צהוב, נסה שוב',   description: 'Wrong: tzahov' },
+  { filename: 'word-wrong/kadur.mp3',    text: 'זה כדור, נסה שוב',   description: 'Wrong: kadur' },
+  { filename: 'word-wrong/buba.mp3',     text: 'זו בובה, נסה שוב',   description: 'Wrong: buba' },
+  { filename: 'word-wrong/rechev.mp3',   text: 'זה רכב, נסה שוב',    description: 'Wrong: rechev' },
+  { filename: 'word-wrong/sus.mp3',      text: 'זה סוס, נסה שוב',    description: 'Wrong: sus' },
 ];
 
 // ── API Call ─────────────────────────────────────────────────────
