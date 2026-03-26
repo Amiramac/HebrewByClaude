@@ -8,7 +8,7 @@ import { useAppStore } from '@/store/appStore';
 export default function WelcomeScreen() {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
-  const { setChildName, setHasSeenWelcome, resetTimerForToday, childGender, setChildGender } = useAppStore();
+  const { setChildName, setHasSeenWelcome, resetTimerForToday } = useAppStore();
 
   const handleStart = async () => {
     const trimmed = name.trim();
@@ -71,29 +71,6 @@ export default function WelcomeScreen() {
             border-4 border-purple-300 bg-white shadow-lg outline-none
             focus:border-purple-500 transition-colors placeholder:text-gray-300"
         />
-
-        <div className="flex gap-3 w-full">
-          <button
-            onClick={() => setChildGender('male')}
-            className={`flex-1 py-3 rounded-2xl text-xl font-bold border-4 transition-colors ${
-              childGender === 'male'
-                ? 'bg-blue-100 border-blue-400 text-blue-700'
-                : 'bg-white border-gray-200 text-gray-400'
-            }`}
-          >
-            בן 👦
-          </button>
-          <button
-            onClick={() => setChildGender('female')}
-            className={`flex-1 py-3 rounded-2xl text-xl font-bold border-4 transition-colors ${
-              childGender === 'female'
-                ? 'bg-pink-100 border-pink-400 text-pink-700'
-                : 'bg-white border-gray-200 text-gray-400'
-            }`}
-          >
-            בת 👧
-          </button>
-        </div>
 
         <motion.button
           onClick={handleStart}
